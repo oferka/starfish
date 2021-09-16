@@ -34,3 +34,13 @@ info:
     name: starfish
     description: This is the starfish application
     version: 0.0.1
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.data.convert.CustomConversions: ERROR
+    org.springframework.data.elasticsearch.support.VersionInfo: ERROR
+    org.elasticsearch.client: TRACE
+    org.apache.http: INFO
+    org.ok.milki: INFO
