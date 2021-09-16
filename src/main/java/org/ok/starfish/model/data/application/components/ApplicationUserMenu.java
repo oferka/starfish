@@ -1,4 +1,4 @@
 package org.ok.starfish.model.data.application.components;
 
-public class ApplicationUserMenu {
+public class ApplicationUserMenu extends ApplicationComponent {
 }

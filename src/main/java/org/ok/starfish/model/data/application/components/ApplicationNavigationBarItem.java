@@ -1,4 +1,4 @@
 package org.ok.starfish.model.data.application.components;
 
-public class ApplicationNavigationBarItem {
+public class ApplicationNavigationBarItem extends ApplicationComponent {
 }

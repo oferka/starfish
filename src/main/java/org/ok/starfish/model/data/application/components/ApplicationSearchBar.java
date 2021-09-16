@@ -1,4 +1,4 @@
 package org.ok.starfish.model.data.application.components;
 
-public class ApplicationSearchBar {
+public class ApplicationSearchBar extends ApplicationComponent {
 }
