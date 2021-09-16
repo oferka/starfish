@@ -1,4 +1,4 @@
-package org.ok.starfish.model.data.application.components;
+package org.ok.starfish.model.application.components;
 
 public class ApplicationNavigationBar extends ApplicationComponent {
 }
