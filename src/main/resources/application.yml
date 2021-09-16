@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: "starfish"
+
+server:
+  port: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      status:
+        http-mapping:
+          down: 500
+          out_of_service: 503
+          warning: 500
+    shutdown:
+      enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+## Configuring info endpoint
+info:
+  app:
+    name: starfish
+    description: This is the starfish application
+    version: 0.0.1
