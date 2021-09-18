@@ -15,9 +15,9 @@ public interface ApplicationCategoryService {
 
     ApplicationCategory save(ApplicationCategory applicationCategory);
 
-    ApplicationCategory update(String id, ApplicationCategory applicationCategory);
+    Iterable<ApplicationCategory> saveAll(Iterable<ApplicationCategory> applicationCategories);
 
-    Iterable<ApplicationCategory> save(Iterable<ApplicationCategory> applicationCategories);
+    ApplicationCategory update(String id, ApplicationCategory applicationCategory);
 
     void deleteById(String id);
 

@@ -2,7 +2,6 @@ package org.ok.starfish.data.service.application;
 
 import org.ok.starfish.data.repository.es.application.ApplicationCategoryElasticsearchRepository;
 import org.ok.starfish.model.application.ApplicationCategory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,17 +37,17 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
+    public Iterable<ApplicationCategory> saveAll(Iterable<ApplicationCategory> applicationCategories) {
+        return applicationCategoryElasticsearchRepository.saveAll(applicationCategories);
+    }
+
+    @Override
     public ApplicationCategory update(String id, ApplicationCategory applicationCategory) {
         ApplicationCategory result = null;
         if(existsById(id)) {
             result = save(applicationCategory);
         }
         return result;
-    }
-
-    @Override
-    public Iterable<ApplicationCategory> save(Iterable<ApplicationCategory> applicationCategories) {
-        return applicationCategoryElasticsearchRepository.saveAll(applicationCategories);
     }
 
     @Override
