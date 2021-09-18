@@ -85,12 +85,11 @@ public class ApplicationCategoryController {
             @ApiResponse(responseCode = "400", description = "Failed to update an application category with specified id", content = @Content) })
     @PutMapping("/{id}")
     public ResponseEntity<ApplicationCategory> update(@Parameter(description = "The id of the application category to be updated") @PathVariable("id") String id, @Parameter(description = "Application category to be updated") @RequestBody ApplicationCategory applicationCategory) {
-        boolean isPresent = applicationCategoryService.existsById(id);
-        if (!isPresent) {
-            return ResponseEntity.notFound().build();
+        ApplicationCategory updated = applicationCategoryService.update(id, applicationCategory);
+        if(updated != null) {
+            ResponseEntity.ok(updated);
         }
-        ApplicationCategory updated = applicationCategoryService.save(applicationCategory);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.notFound().build();
     }
 
     @Operation(summary = "Return the number of existing application categories")
