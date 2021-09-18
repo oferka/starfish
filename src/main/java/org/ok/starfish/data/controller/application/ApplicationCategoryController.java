@@ -87,7 +87,7 @@ public class ApplicationCategoryController {
     public ResponseEntity<ApplicationCategory> update(@Parameter(description = "The id of the application category to be updated") @PathVariable("id") String id, @Parameter(description = "Application category to be updated") @RequestBody ApplicationCategory applicationCategory) {
         ApplicationCategory updated = applicationCategoryService.update(id, applicationCategory);
         if(updated != null) {
-            ResponseEntity.ok(updated);
+            return ResponseEntity.ok(updated);
         }
         return ResponseEntity.notFound().build();
     }
