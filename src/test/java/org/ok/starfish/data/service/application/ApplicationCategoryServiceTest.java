@@ -38,12 +38,12 @@ public class ApplicationCategoryServiceTest {
     @Test
     public void shouldFindById() {
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-        Iterable<ApplicationCategory> savedItems = applicationCategoryElasticsearchRepository.saveAll(items);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         String id = items.get(0).getId();
         Optional<ApplicationCategory> found = applicationCategoryService.findById(id);
         assertTrue(found.isPresent());
         assertEquals(id, found.get().getId());
-        applicationCategoryElasticsearchRepository.deleteAll(savedItems);
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 
     @Test
@@ -52,6 +52,14 @@ public class ApplicationCategoryServiceTest {
         ApplicationCategory saved = applicationCategoryService.save(item);
         assertEquals(saved, item);
         applicationCategoryElasticsearchRepository.delete(item);
+    }
+
+    @Test
+    public void shouldSaveAll() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        Iterable<ApplicationCategory> saved = applicationCategoryService.saveAll(items);
+        assertNotNull(saved);
+        applicationCategoryElasticsearchRepository.deleteAll(items);
     }
 
     @Test
@@ -67,9 +75,9 @@ public class ApplicationCategoryServiceTest {
     @Test
     void shouldCount() {
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-        Iterable<ApplicationCategory> savedItems = applicationCategoryElasticsearchRepository.saveAll(items);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         long count = applicationCategoryService.count();
         assertEquals(count, items.size());
-        applicationCategoryElasticsearchRepository.deleteAll(savedItems);
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 }
