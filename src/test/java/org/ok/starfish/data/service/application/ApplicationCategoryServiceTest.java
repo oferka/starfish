@@ -70,6 +70,26 @@ public class ApplicationCategoryServiceTest {
     }
 
     @Test
+    public void shouldUpdate() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        ApplicationCategory item = items.get(0);
+        Optional<ApplicationCategory> updated = applicationCategoryService.update(item.getId(), item);
+        assertTrue(updated.isPresent());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotUpdate() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        ApplicationCategory item = items.get(0);
+        Optional<ApplicationCategory> updated = applicationCategoryService.update(getNonExistingId(), item);
+        assertTrue(updated.isEmpty());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
     public void shouldDeleteById() {
         ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
         ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
@@ -77,6 +97,11 @@ public class ApplicationCategoryServiceTest {
         applicationCategoryService.deleteById(id);
         boolean exists = applicationCategoryElasticsearchRepository.existsById(id);
         assertFalse(exists);
+    }
+
+    @Test
+    public void shouldNotDeleteById() {
+        applicationCategoryService.deleteById(getNonExistingId());
     }
 
     @Test
