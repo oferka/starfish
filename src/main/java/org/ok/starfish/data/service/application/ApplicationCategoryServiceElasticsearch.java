@@ -43,10 +43,10 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
-    public ApplicationCategory update(@NotNull String id, @NotNull ApplicationCategory applicationCategory) {
-        ApplicationCategory result = null;
+    public Optional<ApplicationCategory> update(@NotNull String id, @NotNull ApplicationCategory applicationCategory) {
+        Optional<ApplicationCategory> result = Optional.empty();
         if(existsById(id)) {
-            result = save(applicationCategory);
+            result = Optional.of(save(applicationCategory));
         }
         return result;
     }
