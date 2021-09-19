@@ -2,24 +2,25 @@ package org.ok.starfish.data.service.application;
 
 import org.ok.starfish.model.application.ApplicationCategory;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
 public interface ApplicationCategoryService {
 
-    List<ApplicationCategory> findAll();
+    @NotNull List<ApplicationCategory> findAll();
 
-    Optional<ApplicationCategory> findById(String id);
+    @NotNull Optional<ApplicationCategory> findById(@NotNull String id);
 
     long count();
 
-    ApplicationCategory save(ApplicationCategory applicationCategory);
+    @NotNull ApplicationCategory save(@NotNull ApplicationCategory applicationCategory);
 
-    Iterable<ApplicationCategory> saveAll(Iterable<ApplicationCategory> applicationCategories);
+    @NotNull Iterable<ApplicationCategory> saveAll(@NotNull Iterable<ApplicationCategory> applicationCategories);
 
-    ApplicationCategory update(String id, ApplicationCategory applicationCategory);
+    ApplicationCategory update(@NotNull String id, @NotNull ApplicationCategory applicationCategory);
 
-    void deleteById(String id);
+    void deleteById(@NotNull String id);
 
-    boolean existsById(String id);
+    boolean existsById(@NotNull String id);
 }

@@ -8,6 +8,8 @@ import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 
+import javax.validation.constraints.NotNull;
+
 @Configuration
 public class ElasticsearchConfiguration extends AbstractElasticsearchConfiguration {
 
@@ -19,7 +21,7 @@ public class ElasticsearchConfiguration extends AbstractElasticsearchConfigurati
 
     @Override
     @Bean
-    public RestHighLevelClient elasticsearchClient() {
+    public @NotNull RestHighLevelClient elasticsearchClient() {
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(elasticsearchRestHighLevelClientConfiguration.getConnectTo())
                 .build();

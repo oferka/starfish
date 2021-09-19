@@ -4,6 +4,7 @@ import org.ok.starfish.data.repository.es.application.ApplicationCategoryElastic
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,12 +15,12 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
 
     private final ApplicationCategoryElasticsearchRepository applicationCategoryElasticsearchRepository;
 
-    public ApplicationCategoryServiceElasticsearch(ApplicationCategoryElasticsearchRepository applicationCategoryElasticsearchRepository) {
+    public ApplicationCategoryServiceElasticsearch(@NotNull ApplicationCategoryElasticsearchRepository applicationCategoryElasticsearchRepository) {
         this.applicationCategoryElasticsearchRepository = applicationCategoryElasticsearchRepository;
     }
 
     @Override
-    public List<ApplicationCategory> findAll() {
+    public @NotNull List<ApplicationCategory> findAll() {
         Iterable<ApplicationCategory> applicationCategories = applicationCategoryElasticsearchRepository.findAll();
         return StreamSupport
                 .stream(applicationCategories.spliterator(), false)
@@ -27,22 +28,22 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
-    public Optional<ApplicationCategory> findById(String id) {
+    public @NotNull Optional<ApplicationCategory> findById(@NotNull String id) {
         return applicationCategoryElasticsearchRepository.findById(id);
     }
 
     @Override
-    public ApplicationCategory save(ApplicationCategory applicationCategory) {
+    public @NotNull ApplicationCategory save(@NotNull ApplicationCategory applicationCategory) {
         return applicationCategoryElasticsearchRepository.save(applicationCategory);
     }
 
     @Override
-    public Iterable<ApplicationCategory> saveAll(Iterable<ApplicationCategory> applicationCategories) {
+    public @NotNull Iterable<ApplicationCategory> saveAll(@NotNull Iterable<ApplicationCategory> applicationCategories) {
         return applicationCategoryElasticsearchRepository.saveAll(applicationCategories);
     }
 
     @Override
-    public ApplicationCategory update(String id, ApplicationCategory applicationCategory) {
+    public ApplicationCategory update(@NotNull String id, @NotNull ApplicationCategory applicationCategory) {
         ApplicationCategory result = null;
         if(existsById(id)) {
             result = save(applicationCategory);
@@ -51,12 +52,12 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(@NotNull String id) {
         applicationCategoryElasticsearchRepository.deleteById(id);
     }
 
     @Override
-    public boolean existsById(String id) {
+    public boolean existsById(@NotNull String id) {
         return applicationCategoryElasticsearchRepository.existsById(id);
     }
 
