@@ -7,6 +7,7 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,12 @@ public class ApplicationCategoryServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<ApplicationCategory> found = applicationCategoryService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldSave() {
         ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
         ApplicationCategory saved = applicationCategoryService.save(item);
@@ -79,5 +86,9 @@ public class ApplicationCategoryServiceTest {
         long count = applicationCategoryService.count();
         assertEquals(count, items.size());
         applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    private @NotNull String getNonExistingId() {
+        return "No Such ID";
     }
 }
