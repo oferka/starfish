@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,12 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
         ApplicationCategory foundItem = foundItemOptional.get();
         assertEquals(item.getId(), foundItem.getId());
         applicationCategoryElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemById() {
+        Optional<ApplicationCategory> foundItemOptional = applicationCategoryElasticsearchRepository.findById(getNonExistingId());
+        assertTrue(foundItemOptional.isEmpty());
     }
 
     @Test
@@ -107,6 +114,12 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldNotExistById() {
+        boolean exists = applicationCategoryElasticsearchRepository.existsById(getNonExistingId());
+        assertFalse(exists);
+    }
+
+    @Test
     void shouldCount() {
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
@@ -134,6 +147,11 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldNotDeleteById() {
+        applicationCategoryElasticsearchRepository.deleteById(getNonExistingId());
+    }
+
+    @Test
     void shouldDeleteItems() {
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
@@ -152,5 +170,9 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
         applicationCategoryElasticsearchRepository.deleteAll();
         long count = applicationCategoryElasticsearchRepository.count();
         assertEquals(0, count);
+    }
+
+    private @NotNull String getNonExistingId() {
+        return "No Such ID";
     }
 }
