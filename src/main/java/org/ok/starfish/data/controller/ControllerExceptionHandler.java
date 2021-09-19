@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason=INVALID_REQUEST_ARGUMENT_REASON)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
+    public @NotNull Map<String, String> handleValidationExceptions(@NotNull MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
@@ -31,7 +32,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ConversionFailedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleConversion(RuntimeException exception) {
+    public @NotNull ResponseEntity<String> handleConversion(@NotNull RuntimeException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
