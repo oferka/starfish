@@ -19,6 +19,7 @@
         <springdoc-openapi-ui.version>1.5.10</springdoc-openapi-ui.version>
         <springdoc-openapi-data-rest.version>1.5.10</springdoc-openapi-data-rest.version>
         <javafaker.version>1.0.2</javafaker.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
     <dependencies>
         <dependency>
@@ -77,6 +78,11 @@
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>${javafaker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
     </dependencies>
     <build>

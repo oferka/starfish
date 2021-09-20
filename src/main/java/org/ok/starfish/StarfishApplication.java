@@ -1,5 +1,6 @@
 package org.ok.starfish;
 
+import org.ok.starfish.data.content.loader.ContentLoader;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +14,7 @@ public class StarfishApplication {
     }
 
     @Bean
-    public CommandLineRunner runJob() {
-        return args -> {
-
-        };
+    public CommandLineRunner loadContent(ContentLoader contentLoader) {
+        return args -> contentLoader.load();
     }
 }
