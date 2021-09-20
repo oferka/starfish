@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.application;
+package org.ok.starfish.data.content.provider.application;
 
 import org.ok.starfish.model.application.ApplicationCategory;
 
