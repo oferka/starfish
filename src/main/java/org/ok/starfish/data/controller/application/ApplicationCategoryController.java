@@ -20,8 +20,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import static org.ok.starfish.data.controller.Paths.APPLICATION_CATEGORY_PATH;
-import static org.ok.starfish.data.controller.Paths.COUNT_PATH;
+import static org.ok.starfish.data.controller.Paths.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
@@ -53,6 +52,17 @@ public class ApplicationCategoryController {
     @GetMapping(value = "{id}")
     public @NotNull ResponseEntity<ApplicationCategory> findById(@Parameter(description = "The id of the application category to be found") @PathVariable("id") @NotNull String id) {
         Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findById(id);
+        return applicationCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @Operation(summary = "Find a random application category")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Random application category successfully found", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ApplicationCategory.class))}),
+            @ApiResponse(responseCode = "404", description = "Random application category was not found", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Failed to find a random application category", content = @Content) })
+    @GetMapping(path = RANDOM_PATH)
+    public @NotNull ResponseEntity<ApplicationCategory> findRandom() {
+        Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
         return applicationCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

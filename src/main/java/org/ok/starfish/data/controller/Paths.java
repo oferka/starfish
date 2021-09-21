@@ -6,5 +6,7 @@ public interface Paths {
 
     String COUNT_PATH = "/count";
 
+    String RANDOM_PATH = "/random";
+
     String APPLICATION_CATEGORY_PATH = BASE_PATH + "/applicationCategory";
 }
