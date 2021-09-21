@@ -121,10 +121,11 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldCount() {
+        long countBefore = applicationCategoryElasticsearchRepository.count();
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-        long count = applicationCategoryElasticsearchRepository.count();
-        assertEquals(count, numberOfItems);
+        long countAfter = applicationCategoryElasticsearchRepository.count();
+        assertEquals(countAfter, countBefore + numberOfItems);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 
@@ -153,22 +154,13 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldDeleteItems() {
+        long countBefore = applicationCategoryElasticsearchRepository.count();
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         int numberOfItemsToDelete = 3;
         applicationCategoryElasticsearchRepository.deleteAll(items.subList(0, numberOfItemsToDelete));
-        long count = applicationCategoryElasticsearchRepository.count();
-        assertEquals((numberOfItems-numberOfItemsToDelete), count);
+        long countAfter = applicationCategoryElasticsearchRepository.count();
+        assertEquals((countBefore + numberOfItems - numberOfItemsToDelete), countAfter);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    void shouldDeleteAllItems() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-        assertNotNull(saved);
-        applicationCategoryElasticsearchRepository.deleteAll();
-        long count = applicationCategoryElasticsearchRepository.count();
-        assertEquals(0, count);
     }
 }

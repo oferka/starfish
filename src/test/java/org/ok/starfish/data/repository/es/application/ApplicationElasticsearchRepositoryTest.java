@@ -154,14 +154,4 @@ public class ApplicationElasticsearchRepositoryTest {
 //        assertEquals((numberOfItems-numberOfItemsToDelete), count);
 //        applicationCategoryElasticsearchRepository.deleteAll(saved);
 //    }
-//
-//    @Test
-//    void shouldDeleteAllItems() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        assertNotNull(saved);
-//        applicationCategoryElasticsearchRepository.deleteAll();
-//        long count = applicationCategoryElasticsearchRepository.count();
-//        assertEquals(0, count);
-//    }
 }
