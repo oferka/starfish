@@ -37,7 +37,7 @@ public class MockSampleApplicationProvider implements SampleApplicationProvider 
 
     private @NotNull Application getItem(int itemNumber) {
         Application result = new Application(getUniqueId(), getRandomApplicationName(), sampleApplicationCategoryProvider.getItem());
-        log.info("Application {} created: {}", itemNumber+1, result);
+        log.info("Application {} created: {}", itemNumber, result);
         return result;
     }
 

@@ -48,6 +48,15 @@ public class ApplicationCategoryServiceTest {
     }
 
     @Test
+    public void shouldFindRandom() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        Optional<ApplicationCategory> found = applicationCategoryService.findRandom();
+        assertTrue(found.isPresent());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
     public void shouldNotFindById() {
         Optional<ApplicationCategory> found = applicationCategoryService.findById(getNonExistingId());
         assertTrue(found.isEmpty());

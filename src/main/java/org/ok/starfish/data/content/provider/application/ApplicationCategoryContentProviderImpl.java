@@ -15,9 +15,11 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
     @Override
     public List<ApplicationCategory> get() {
         return asList(
-            getApplicationCategory("1"),
-            getApplicationCategory("2"),
-            getApplicationCategory("3")
+            getApplicationCategory("Application Category 1"),
+            getApplicationCategory("Application Category 2"),
+            getApplicationCategory("Application Category 3"),
+            getApplicationCategory("Application Category 4"),
+            getApplicationCategory("Application Category 5")
         );
     }
 

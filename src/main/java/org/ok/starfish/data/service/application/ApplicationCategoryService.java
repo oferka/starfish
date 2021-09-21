@@ -12,6 +12,8 @@ public interface ApplicationCategoryService {
 
     @NotNull Optional<ApplicationCategory> findById(@NotNull String id);
 
+    @NotNull Optional<ApplicationCategory> findRandom();
+
     long count();
 
     @NotNull ApplicationCategory save(@NotNull ApplicationCategory applicationCategory);

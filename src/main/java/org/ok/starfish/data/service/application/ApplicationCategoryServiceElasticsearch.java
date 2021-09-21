@@ -1,5 +1,6 @@
 package org.ok.starfish.data.service.application;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.ok.starfish.data.repository.es.application.ApplicationCategoryElasticsearchRepository;
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
@@ -21,15 +22,25 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
 
     @Override
     public @NotNull List<ApplicationCategory> findAll() {
-        Iterable<ApplicationCategory> applicationCategories = applicationCategoryElasticsearchRepository.findAll();
+        Iterable<ApplicationCategory> items = applicationCategoryElasticsearchRepository.findAll();
         return StreamSupport
-                .stream(applicationCategories.spliterator(), false)
+                .stream(items.spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
     public @NotNull Optional<ApplicationCategory> findById(@NotNull String id) {
         return applicationCategoryElasticsearchRepository.findById(id);
+    }
+
+    @Override
+    public Optional<ApplicationCategory> findRandom() {
+        List<ApplicationCategory> items = findAll();
+        if(items.isEmpty()) {
+            return Optional.empty();
+        }
+        ApplicationCategory item = items.get(RandomUtils.nextInt(0, items.size()));
+        return Optional.of(item);
     }
 
     @Override

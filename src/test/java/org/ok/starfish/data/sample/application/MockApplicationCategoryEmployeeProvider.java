@@ -31,7 +31,7 @@ public class MockApplicationCategoryEmployeeProvider implements SampleApplicatio
 
     private @NotNull ApplicationCategory getItem(int itemNumber) {
         ApplicationCategory result = new ApplicationCategory(getUniqueId(), getRandomApplicationCategoryName());
-        log.info("Application category {} created: {}", itemNumber+1, result);
+        log.info("Application category {} created: {}", itemNumber, result);
         return result;
     }
 
