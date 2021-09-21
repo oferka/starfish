@@ -28,7 +28,14 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
                 getApplication("Application 2"),
                 getApplication("Application 3"),
                 getApplication("Application 4"),
-                getApplication("Application 5")
+                getApplication("Application 5"),
+                getApplication("Application 6"),
+                getApplication("Application 7"),
+                getApplication("Application 8"),
+                getApplication("Application 9"),
+                getApplication("Application 10"),
+                getApplication("Application 11"),
+                getApplication("Application 12")
         );
     }
 
