@@ -115,10 +115,11 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     void shouldCount() {
+        long countBefore = applicationCategoryElasticsearchRepository.count();
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-        long count = applicationCategoryService.count();
-        assertEquals(count, items.size());
+        long countAfter = applicationCategoryService.count();
+        assertEquals(countBefore + numberOfItems, countAfter);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 }
