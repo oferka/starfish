@@ -5,8 +5,15 @@ import org.ok.starfish.data.sample.application.SampleApplicationProvider;
 import org.ok.starfish.model.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
 
 @SpringBootTest
 public class ApplicationElasticsearchRepositoryTest {
@@ -27,131 +34,133 @@ public class ApplicationElasticsearchRepositoryTest {
         applicationElasticsearchRepository.delete(saved);
     }
 
-//    @Test
-//    void shouldSaveItems() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        assertNotNull(saved);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldFindItemById() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-//        Optional<ApplicationCategory> foundItemOptional = applicationCategoryElasticsearchRepository.findById(item.getId());
-//        assertTrue(foundItemOptional.isPresent());
-//        ApplicationCategory foundItem = foundItemOptional.get();
-//        assertEquals(item.getId(), foundItem.getId());
-//        applicationCategoryElasticsearchRepository.delete(saved);
-//    }
-//
-//    @Test
-//    void shouldNotFindItemById() {
-//        Optional<ApplicationCategory> foundItemOptional = applicationCategoryElasticsearchRepository.findById(getNonExistingId());
-//        assertTrue(foundItemOptional.isEmpty());
-//    }
-//
-//    @Test
-//    void shouldFindAllItems() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll();
-//        assertNotNull(found);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldFindAllItemsSortedByName() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
-//        assertNotNull(found);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldFindAllItemsSortedById() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-//        assertNotNull(found);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldFindAllItemsPaged() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        Page<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(PageRequest.of(0, 4));
-//        assertNotNull(found);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldFindAllItemsPagedAndSorted() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        Page<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(PageRequest.of(0, 4, Sort.by(Sort.Direction.ASC, "name")));
-//        assertNotNull(found);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldExistById() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-//        boolean exists = applicationCategoryElasticsearchRepository.existsById(saved.getId());
-//        assertTrue(exists);
-//        applicationCategoryElasticsearchRepository.delete(saved);
-//    }
-//
-//    @Test
-//    void shouldNotExistById() {
-//        boolean exists = applicationCategoryElasticsearchRepository.existsById(getNonExistingId());
-//        assertFalse(exists);
-//    }
-//
-//    @Test
-//    void shouldCount() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        long count = applicationCategoryElasticsearchRepository.count();
-//        assertEquals(count, numberOfItems);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    void shouldDeleteItem() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-//        applicationCategoryElasticsearchRepository.delete(item);
-//        boolean exists = applicationCategoryElasticsearchRepository.existsById(saved.getId());
-//        assertFalse(exists);
-//    }
-//
-//    @Test
-//    void shouldDeleteById() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-//        applicationCategoryElasticsearchRepository.deleteById(item.getId());
-//        boolean exists = applicationCategoryElasticsearchRepository.existsById(saved.getId());
-//        assertFalse(exists);
-//    }
-//
-//    @Test
-//    void shouldNotDeleteById() {
-//        applicationCategoryElasticsearchRepository.deleteById(getNonExistingId());
-//    }
-//
-//    @Test
-//    void shouldDeleteItems() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        int numberOfItemsToDelete = 3;
-//        applicationCategoryElasticsearchRepository.deleteAll(items.subList(0, numberOfItemsToDelete));
-//        long count = applicationCategoryElasticsearchRepository.count();
-//        assertEquals((numberOfItems-numberOfItemsToDelete), count);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
+    @Test
+    void shouldSaveItems() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        assertNotNull(saved);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldFindItemById() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findById(item.getId());
+        assertTrue(foundItemOptional.isPresent());
+        Application foundItem = foundItemOptional.get();
+        assertEquals(item.getId(), foundItem.getId());
+        applicationElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemById() {
+        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findById(getNonExistingId());
+        assertTrue(foundItemOptional.isEmpty());
+    }
+
+    @Test
+    void shouldFindAllItems() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Iterable<Application> found = applicationElasticsearchRepository.findAll();
+        assertNotNull(found);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldFindAllItemsSortedByName() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Iterable<Application> found = applicationElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+        assertNotNull(found);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldFindAllItemsSortedById() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Iterable<Application> found = applicationElasticsearchRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        assertNotNull(found);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldFindAllItemsPaged() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Page<Application> found = applicationElasticsearchRepository.findAll(PageRequest.of(0, 4));
+        assertNotNull(found);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldFindAllItemsPagedAndSorted() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Page<Application> found = applicationElasticsearchRepository.findAll(PageRequest.of(0, 4, Sort.by(Sort.Direction.ASC, "name")));
+        assertNotNull(found);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldExistById() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        boolean exists = applicationElasticsearchRepository.existsById(saved.getId());
+        assertTrue(exists);
+        applicationElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotExistById() {
+        boolean exists = applicationElasticsearchRepository.existsById(getNonExistingId());
+        assertFalse(exists);
+    }
+
+    @Test
+    void shouldCount() {
+        long countBefore = applicationElasticsearchRepository.count();
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        long countAfter = applicationElasticsearchRepository.count();
+        assertEquals(countAfter, countBefore + numberOfItems);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    void shouldDeleteItem() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        applicationElasticsearchRepository.delete(item);
+        boolean exists = applicationElasticsearchRepository.existsById(saved.getId());
+        assertFalse(exists);
+    }
+
+    @Test
+    void shouldDeleteById() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        applicationElasticsearchRepository.deleteById(item.getId());
+        boolean exists = applicationElasticsearchRepository.existsById(saved.getId());
+        assertFalse(exists);
+    }
+
+    @Test
+    void shouldNotDeleteById() {
+        applicationElasticsearchRepository.deleteById(getNonExistingId());
+    }
+
+    @Test
+    void shouldDeleteItems() {
+        long countBefore = applicationElasticsearchRepository.count();
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        int numberOfItemsToDelete = 3;
+        applicationElasticsearchRepository.deleteAll(items.subList(0, numberOfItemsToDelete));
+        long countAfter = applicationElasticsearchRepository.count();
+        assertEquals((countBefore + numberOfItems - numberOfItemsToDelete), countAfter);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
 }
