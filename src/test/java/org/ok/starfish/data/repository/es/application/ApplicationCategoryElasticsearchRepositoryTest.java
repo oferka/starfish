@@ -9,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
 
 @SpringBootTest
 public class ApplicationCategoryElasticsearchRepositoryTest {
@@ -170,9 +170,5 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
         applicationCategoryElasticsearchRepository.deleteAll();
         long count = applicationCategoryElasticsearchRepository.count();
         assertEquals(0, count);
-    }
-
-    private @NotNull String getNonExistingId() {
-        return "No Such ID";
     }
 }

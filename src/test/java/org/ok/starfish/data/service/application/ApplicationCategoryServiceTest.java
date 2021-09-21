@@ -7,11 +7,11 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
 
 @SpringBootTest
 public class ApplicationCategoryServiceTest {
@@ -111,9 +111,5 @@ public class ApplicationCategoryServiceTest {
         long count = applicationCategoryService.count();
         assertEquals(count, items.size());
         applicationCategoryElasticsearchRepository.deleteAll(saved);
-    }
-
-    private @NotNull String getNonExistingId() {
-        return "No Such ID";
     }
 }

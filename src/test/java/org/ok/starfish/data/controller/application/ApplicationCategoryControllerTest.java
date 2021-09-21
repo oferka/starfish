@@ -15,13 +15,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
 import static java.lang.String.format;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
 import static org.ok.starfish.data.controller.Paths.APPLICATION_CATEGORY_PATH;
 import static org.ok.starfish.data.controller.Paths.COUNT_PATH;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -176,9 +176,5 @@ public class ApplicationCategoryControllerTest {
                 .andReturn();
         assertNotNull(mvcResult);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
-    }
-
-    private @NotNull String getNonExistingId() {
-        return "No Such ID";
     }
 }

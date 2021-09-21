@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
+import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
 @Slf4j
@@ -29,9 +30,8 @@ public class MockApplicationCategoryEmployeeProvider implements SampleApplicatio
     }
 
     private @NotNull ApplicationCategory getItem(int itemNumber) {
-        String id = UUID.randomUUID().toString();
-        ApplicationCategory result = new ApplicationCategory(id, getRandomApplicationCategoryName());
-        log.info(result.toString());
+        ApplicationCategory result = new ApplicationCategory(getUniqueId(), getRandomApplicationCategoryName());
+        log.info("Application category {} created: {}", itemNumber+1, result);
         return result;
     }
 
