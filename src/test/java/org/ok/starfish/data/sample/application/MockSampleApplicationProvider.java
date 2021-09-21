@@ -2,12 +2,15 @@ package org.ok.starfish.data.sample.application;
 
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
+import org.ok.starfish.data.service.application.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
+import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
@@ -15,10 +18,10 @@ import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 @Slf4j
 public class MockSampleApplicationProvider implements SampleApplicationProvider {
 
-    private final SampleApplicationCategoryProvider sampleApplicationCategoryProvider;
+    private final ApplicationCategoryService applicationCategoryService;
 
-    public MockSampleApplicationProvider(SampleApplicationCategoryProvider sampleApplicationCategoryProvider) {
-        this.sampleApplicationCategoryProvider = sampleApplicationCategoryProvider;
+    public MockSampleApplicationProvider(ApplicationCategoryService applicationCategoryService) {
+        this.applicationCategoryService = applicationCategoryService;
     }
 
     @Override
@@ -36,9 +39,13 @@ public class MockSampleApplicationProvider implements SampleApplicationProvider 
     }
 
     private @NotNull Application getItem(int itemNumber) {
-        Application result = new Application(getUniqueId(), getRandomApplicationName(), sampleApplicationCategoryProvider.getItem());
-        log.info("Application {} created: {}", itemNumber, result);
-        return result;
+        Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
+        if(applicationCategory.isPresent()) {
+            Application result = new Application(getUniqueId(), getRandomApplicationName(), applicationCategory.get());
+            log.info("Application {} created: {}", itemNumber, result);
+            return result;
+        }
+        throw new RuntimeException("Failed to create application. Could not find a valid application category");
     }
 
     private @NotNull String getRandomApplicationName() {
