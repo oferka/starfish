@@ -40,8 +40,8 @@ public class ApplicationCategoryController {
             @ApiResponse(responseCode = "400", description = "Failed to find application categories", content = @Content) }
     )
     public @NotNull ResponseEntity<List<ApplicationCategory>> findAll() {
-        List<ApplicationCategory> allItems = applicationCategoryService.findAll();
-        return ResponseEntity.ok(allItems);
+        List<ApplicationCategory> items = applicationCategoryService.findAll();
+        return ResponseEntity.ok(items);
     }
 
     @Operation(summary = "Find an application category by id")
@@ -51,8 +51,8 @@ public class ApplicationCategoryController {
             @ApiResponse(responseCode = "400", description = "Failed to find application category by id", content = @Content) })
     @GetMapping(value = "{id}")
     public @NotNull ResponseEntity<ApplicationCategory> findById(@Parameter(description = "The id of the application category to be found") @PathVariable("id") @NotNull String id) {
-        Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findById(id);
-        return applicationCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<ApplicationCategory> item = applicationCategoryService.findById(id);
+        return item.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Find a random application category")
@@ -62,8 +62,8 @@ public class ApplicationCategoryController {
             @ApiResponse(responseCode = "400", description = "Failed to find a random application category", content = @Content) })
     @GetMapping(path = RANDOM_PATH)
     public @NotNull ResponseEntity<ApplicationCategory> findRandom() {
-        Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
-        return applicationCategory.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<ApplicationCategory> item = applicationCategoryService.findRandom();
+        return item.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Operation(summary = "Create an application category")
@@ -102,7 +102,7 @@ public class ApplicationCategoryController {
 
     @Operation(summary = "Return the number of existing application categories")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Application category counted successfully", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class))}),
+            @ApiResponse(responseCode = "200", description = "Application categories counted successfully", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Long.class))}),
             @ApiResponse(responseCode = "400", description = "Failed to count application categories", content = @Content) })
     @GetMapping(path = COUNT_PATH)
     public @NotNull ResponseEntity<Long> count() {

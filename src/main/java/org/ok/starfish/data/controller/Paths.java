@@ -9,4 +9,6 @@ public interface Paths {
     String RANDOM_PATH = "/random";
 
     String APPLICATION_CATEGORY_PATH = BASE_PATH + "/applicationCategory";
+
+    String APPLICATION_PATH = BASE_PATH + "/application";
 }
