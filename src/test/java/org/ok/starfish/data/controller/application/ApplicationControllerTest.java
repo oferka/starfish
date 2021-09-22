@@ -25,7 +25,6 @@ import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
 import static org.ok.starfish.data.controller.Paths.APPLICATION_PATH;
 import static org.ok.starfish.data.controller.Paths.COUNT_PATH;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
