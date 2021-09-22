@@ -1,5 +1,7 @@
 package org.ok.starfish.data.repository.es.application;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.data.sample.application.SampleApplicationCategoryProvider;
 import org.ok.starfish.model.application.ApplicationCategory;
@@ -24,7 +26,20 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     @Autowired
     private SampleApplicationCategoryProvider sampleApplicationCategoryProvider;
 
-    private final int numberOfItems = 10;
+    private long contentCountBefore;
+
+    private final int numberOfItemsToLoad = 10;
+
+    @BeforeEach
+    void captureContentStatus() {
+        contentCountBefore = applicationCategoryElasticsearchRepository.count();
+    }
+
+    @AfterEach
+    void verifyContentStatusNotChanged() {
+        long contentCountAfter = applicationCategoryElasticsearchRepository.count();
+        assertEquals(contentCountBefore, contentCountAfter);
+    }
 
     @Test
     void shouldSaveItem() {
@@ -36,7 +51,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldSaveItems() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         assertNotNull(saved);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
@@ -61,7 +76,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldFindAllItems() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll();
         assertNotNull(found);
@@ -70,7 +85,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldFindAllItemsSortedByName() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
         assertNotNull(found);
@@ -79,7 +94,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldFindAllItemsSortedById() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Iterable<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         assertNotNull(found);
@@ -88,7 +103,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldFindAllItemsPaged() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Page<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(PageRequest.of(0, 4));
         assertNotNull(found);
@@ -97,7 +112,7 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
 
     @Test
     void shouldFindAllItemsPagedAndSorted() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Page<ApplicationCategory> found = applicationCategoryElasticsearchRepository.findAll(PageRequest.of(0, 4, Sort.by(Sort.Direction.ASC, "name")));
         assertNotNull(found);
@@ -122,10 +137,10 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     @Test
     void shouldCount() {
         long countBefore = applicationCategoryElasticsearchRepository.count();
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         long countAfter = applicationCategoryElasticsearchRepository.count();
-        assertEquals(countAfter, countBefore + numberOfItems);
+        assertEquals(countAfter, countBefore + numberOfItemsToLoad);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 
@@ -155,12 +170,12 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     @Test
     void shouldDeleteItems() {
         long countBefore = applicationCategoryElasticsearchRepository.count();
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         int numberOfItemsToDelete = 3;
         applicationCategoryElasticsearchRepository.deleteAll(items.subList(0, numberOfItemsToDelete));
         long countAfter = applicationCategoryElasticsearchRepository.count();
-        assertEquals((countBefore + numberOfItems - numberOfItemsToDelete), countAfter);
+        assertEquals((countBefore + numberOfItemsToLoad - numberOfItemsToDelete), countAfter);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 }
