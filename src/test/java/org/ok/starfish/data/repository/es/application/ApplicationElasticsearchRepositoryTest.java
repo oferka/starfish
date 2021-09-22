@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.getNonExistingName;
 
 @SpringBootTest
 public class ApplicationElasticsearchRepositoryTest {
@@ -71,6 +72,23 @@ public class ApplicationElasticsearchRepositoryTest {
     @Test
     void shouldNotFindItemById() {
         Optional<Application> foundItemOptional = applicationElasticsearchRepository.findById(getNonExistingId());
+        assertTrue(foundItemOptional.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByName() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findByName(item.getName());
+        assertTrue(foundItemOptional.isPresent());
+        Application foundItem = foundItemOptional.get();
+        assertEquals(item.getId(), foundItem.getId());
+        applicationElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByName() {
+        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findByName(getNonExistingName());
         assertTrue(foundItemOptional.isEmpty());
     }
 

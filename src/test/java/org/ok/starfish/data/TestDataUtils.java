@@ -12,4 +12,8 @@ public class TestDataUtils {
     public static @NotNull String getNonExistingId() {
         return "No Such ID";
     }
+
+    public static @NotNull String getNonExistingName() {
+        return "No Such Name";
+    }
 }
