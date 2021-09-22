@@ -34,6 +34,11 @@ public class ApplicationServiceElasticsearch implements ApplicationService {
     }
 
     @Override
+    public @NotNull Optional<Application> findByName(@NotNull String name) {
+        return applicationElasticsearchRepository.findByName(name);
+    }
+
+    @Override
     public Optional<Application> findRandom() {
         List<Application> items = findAll();
         if(items.isEmpty()) {

@@ -34,6 +34,11 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
+    public @NotNull Optional<ApplicationCategory> findByName(@NotNull String name) {
+        return applicationCategoryElasticsearchRepository.findByName(name);
+    }
+
+    @Override
     public Optional<ApplicationCategory> findRandom() {
         List<ApplicationCategory> items = findAll();
         if(items.isEmpty()) {
