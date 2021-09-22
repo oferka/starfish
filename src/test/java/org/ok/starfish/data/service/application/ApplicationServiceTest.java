@@ -77,49 +77,49 @@ public class ApplicationServiceTest {
         assertNotNull(saved);
         applicationElasticsearchRepository.deleteAll(items);
     }
-//
-//    @Test
-//    public void shouldUpdate() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        ApplicationCategory item = items.get(0);
-//        Optional<ApplicationCategory> updated = applicationCategoryService.update(item.getId(), item);
-//        assertTrue(updated.isPresent());
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    public void shouldNotUpdate() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        ApplicationCategory item = items.get(0);
-//        Optional<ApplicationCategory> updated = applicationCategoryService.update(getNonExistingId(), item);
-//        assertTrue(updated.isEmpty());
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
-//
-//    @Test
-//    public void shouldDeleteById() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-//        String id = saved.getId();
-//        applicationCategoryService.deleteById(id);
-//        boolean exists = applicationCategoryElasticsearchRepository.existsById(id);
-//        assertFalse(exists);
-//    }
-//
-//    @Test
-//    public void shouldNotDeleteById() {
-//        applicationCategoryService.deleteById(getNonExistingId());
-//    }
-//
-//    @Test
-//    void shouldCount() {
-//        long countBefore = applicationCategoryElasticsearchRepository.count();
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
-//        long countAfter = applicationCategoryService.count();
-//        assertEquals(countBefore + numberOfItems, countAfter);
-//        applicationCategoryElasticsearchRepository.deleteAll(saved);
-//    }
+
+    @Test
+    public void shouldUpdate() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Application item = items.get(0);
+        Optional<Application> updated = applicationService.update(item.getId(), item);
+        assertTrue(updated.isPresent());
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotUpdate() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        Application item = items.get(0);
+        Optional<Application> updated = applicationService.update(getNonExistingId(), item);
+        assertTrue(updated.isEmpty());
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldDeleteById() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationElasticsearchRepository.save(item);
+        String id = saved.getId();
+        applicationService.deleteById(id);
+        boolean exists = applicationElasticsearchRepository.existsById(id);
+        assertFalse(exists);
+    }
+
+    @Test
+    public void shouldNotDeleteById() {
+        applicationService.deleteById(getNonExistingId());
+    }
+
+    @Test
+    void shouldCount() {
+        long countBefore = applicationElasticsearchRepository.count();
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        long countAfter = applicationService.count();
+        assertEquals(countBefore + numberOfItems, countAfter);
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
 }
