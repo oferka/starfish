@@ -1,6 +1,7 @@
 package org.ok.starfish.data.controller.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.StarfishApplication;
@@ -40,7 +41,20 @@ public class ApplicationCategoryControllerTest {
     @Autowired
     private SampleApplicationCategoryProvider sampleApplicationCategoryProvider;
 
-    private final int numberOfItems = 10;
+    private long contentCountBefore;
+
+    private final int numberOfItemsToLoad = 10;
+
+    @BeforeEach
+    void captureContentStatus() {
+        contentCountBefore = applicationCategoryElasticsearchRepository.count();
+    }
+
+    @AfterEach
+    void verifyContentStatusNotChanged() {
+        long contentCountAfter = applicationCategoryElasticsearchRepository.count();
+        assertEquals(contentCountBefore, contentCountAfter);
+    }
 
     @BeforeEach
     public void setup(WebApplicationContext webApplicationContext) {
@@ -49,7 +63,7 @@ public class ApplicationCategoryControllerTest {
 
     @Test
     public void shouldFindAll() throws Exception {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         MvcResult mvcResult = mvc.perform(get(format("/%s", APPLICATION_CATEGORY_PATH))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +78,7 @@ public class ApplicationCategoryControllerTest {
 
     @Test
     public void shouldFindById() throws Exception {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         String id = items.get(0).getId();
         MvcResult mvcResult = mvc.perform(get(format("/%s/{id}", APPLICATION_CATEGORY_PATH), id)
@@ -166,7 +180,7 @@ public class ApplicationCategoryControllerTest {
 
     @Test
     public void shouldCount() throws Exception {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         MvcResult mvcResult = mvc.perform(get(format("/%s/%s", APPLICATION_CATEGORY_PATH, COUNT_PATH))
                         .contentType(MediaType.APPLICATION_JSON)

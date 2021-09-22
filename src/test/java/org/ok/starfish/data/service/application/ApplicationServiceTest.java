@@ -1,5 +1,7 @@
 package org.ok.starfish.data.service.application;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.data.repository.es.application.ApplicationElasticsearchRepository;
 import org.ok.starfish.data.sample.application.SampleApplicationProvider;
@@ -25,11 +27,24 @@ public class ApplicationServiceTest {
     @Autowired
     private SampleApplicationProvider sampleApplicationProvider;
 
-    private final int numberOfItems = 10;
+    private long contentCountBefore;
+
+    private final int numberOfItemsToLoad = 10;
+
+    @BeforeEach
+    void captureContentStatus() {
+        contentCountBefore = applicationElasticsearchRepository.count();
+    }
+
+    @AfterEach
+    void verifyContentStatusNotChanged() {
+        long contentCountAfter = applicationElasticsearchRepository.count();
+        assertEquals(contentCountBefore, contentCountAfter);
+    }
 
     @Test
     public void shouldFindAll() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> savedItems = applicationElasticsearchRepository.saveAll(items);
         List<Application> foundItems = applicationService.findAll();
         assertNotNull(foundItems);
@@ -38,7 +53,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldFindById() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         String id = items.get(0).getId();
         Optional<Application> found = applicationService.findById(id);
@@ -49,7 +64,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldFindRandom() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         Optional<Application> found = applicationService.findRandom();
         assertTrue(found.isPresent());
@@ -72,7 +87,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldSaveAll() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationService.saveAll(items);
         assertNotNull(saved);
         applicationElasticsearchRepository.deleteAll(items);
@@ -80,7 +95,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldUpdate() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         Application item = items.get(0);
         Optional<Application> updated = applicationService.update(item.getId(), item);
@@ -90,7 +105,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldNotUpdate() {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         Application item = items.get(0);
         Optional<Application> updated = applicationService.update(getNonExistingId(), item);
@@ -116,10 +131,10 @@ public class ApplicationServiceTest {
     @Test
     void shouldCount() {
         long countBefore = applicationElasticsearchRepository.count();
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         long countAfter = applicationService.count();
-        assertEquals(countBefore + numberOfItems, countAfter);
+        assertEquals(countBefore + numberOfItemsToLoad, countAfter);
         applicationElasticsearchRepository.deleteAll(saved);
     }
 }

@@ -1,5 +1,7 @@
 package org.ok.starfish.data.service.application;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.data.repository.es.application.ApplicationCategoryElasticsearchRepository;
 import org.ok.starfish.data.sample.application.SampleApplicationCategoryProvider;
@@ -25,11 +27,24 @@ public class ApplicationCategoryServiceTest {
     @Autowired
     private SampleApplicationCategoryProvider sampleApplicationCategoryProvider;
 
-    private final int numberOfItems = 10;
+    private long contentCountBefore;
+
+    private final int numberOfItemsToLoad = 10;
+
+    @BeforeEach
+    void captureContentStatus() {
+        contentCountBefore = applicationCategoryElasticsearchRepository.count();
+    }
+
+    @AfterEach
+    void verifyContentStatusNotChanged() {
+        long contentCountAfter = applicationCategoryElasticsearchRepository.count();
+        assertEquals(contentCountBefore, contentCountAfter);
+    }
 
     @Test
     public void shouldFindAll() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> savedItems = applicationCategoryElasticsearchRepository.saveAll(items);
         List<ApplicationCategory> foundItems = applicationCategoryService.findAll();
         assertNotNull(foundItems);
@@ -38,7 +53,7 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     public void shouldFindById() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         String id = items.get(0).getId();
         Optional<ApplicationCategory> found = applicationCategoryService.findById(id);
@@ -49,7 +64,7 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     public void shouldFindRandom() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Optional<ApplicationCategory> found = applicationCategoryService.findRandom();
         assertTrue(found.isPresent());
@@ -72,7 +87,7 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     public void shouldSaveAll() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryService.saveAll(items);
         assertNotNull(saved);
         applicationCategoryElasticsearchRepository.deleteAll(items);
@@ -80,7 +95,7 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     public void shouldUpdate() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         ApplicationCategory item = items.get(0);
         Optional<ApplicationCategory> updated = applicationCategoryService.update(item.getId(), item);
@@ -90,7 +105,7 @@ public class ApplicationCategoryServiceTest {
 
     @Test
     public void shouldNotUpdate() {
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         ApplicationCategory item = items.get(0);
         Optional<ApplicationCategory> updated = applicationCategoryService.update(getNonExistingId(), item);
@@ -116,10 +131,10 @@ public class ApplicationCategoryServiceTest {
     @Test
     void shouldCount() {
         long countBefore = applicationCategoryElasticsearchRepository.count();
-        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         long countAfter = applicationCategoryService.count();
-        assertEquals(countBefore + numberOfItems, countAfter);
+        assertEquals(countBefore + numberOfItemsToLoad, countAfter);
         applicationCategoryElasticsearchRepository.deleteAll(saved);
     }
 }

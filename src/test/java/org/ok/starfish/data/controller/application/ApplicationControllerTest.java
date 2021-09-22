@@ -1,6 +1,7 @@
 package org.ok.starfish.data.controller.application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.StarfishApplication;
@@ -40,7 +41,20 @@ public class ApplicationControllerTest {
     @Autowired
     private SampleApplicationProvider sampleApplicationProvider;
 
-    private final int numberOfItems = 10;
+    private long contentCountBefore;
+
+    private final int numberOfItemsToLoad = 10;
+
+    @BeforeEach
+    void captureContentStatus() {
+        contentCountBefore = applicationElasticsearchRepository.count();
+    }
+
+    @AfterEach
+    void verifyContentStatusNotChanged() {
+        long contentCountAfter = applicationElasticsearchRepository.count();
+        assertEquals(contentCountBefore, contentCountAfter);
+    }
 
     @BeforeEach
     public void setup(WebApplicationContext webApplicationContext) {
@@ -49,7 +63,7 @@ public class ApplicationControllerTest {
 
     @Test
     public void shouldFindAll() throws Exception {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         MvcResult mvcResult = mvc.perform(get(format("/%s", APPLICATION_PATH))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +78,7 @@ public class ApplicationControllerTest {
 
     @Test
     public void shouldFindById() throws Exception {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         String id = items.get(0).getId();
         MvcResult mvcResult = mvc.perform(get(format("/%s/{id}", APPLICATION_PATH), id)
@@ -166,7 +180,7 @@ public class ApplicationControllerTest {
 
     @Test
     public void shouldCount() throws Exception {
-        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         MvcResult mvcResult = mvc.perform(get(format("/%s/%s", APPLICATION_PATH, COUNT_PATH))
                         .contentType(MediaType.APPLICATION_JSON)
