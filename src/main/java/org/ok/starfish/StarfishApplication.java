@@ -14,7 +14,7 @@ public class StarfishApplication {
     }
 
     @Bean
-    public CommandLineRunner loadContent(ContentLoader contentLoader) {
-        return args -> contentLoader.load();
+    public CommandLineRunner ensureContentLoaded(ContentLoader contentLoader) {
+        return args -> contentLoader.ensureContentLoaded();
     }
 }

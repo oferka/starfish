@@ -6,5 +6,5 @@ import javax.validation.constraints.NotNull;
 
 public interface ApplicationCategoryContentLoader {
 
-    @NotNull Iterable<ApplicationCategory> load();
+    @NotNull Iterable<ApplicationCategory> ensureContentLoaded();
 }

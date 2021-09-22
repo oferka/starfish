@@ -20,7 +20,7 @@ public class ApplicationCategoryContentLoaderImpl implements ApplicationCategory
     }
 
     @Override
-    public @NotNull Iterable<ApplicationCategory> load() {
+    public @NotNull Iterable<ApplicationCategory> ensureContentLoaded() {
         List<ApplicationCategory> content = applicationCategoryContentProvider.get();
         return applicationCategoryService.saveAll(content);
     }

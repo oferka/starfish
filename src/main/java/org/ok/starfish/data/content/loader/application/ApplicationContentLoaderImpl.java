@@ -20,7 +20,7 @@ public class ApplicationContentLoaderImpl implements ApplicationContentLoader {
     }
 
     @Override
-    public @NotNull Iterable<Application> load() {
+    public @NotNull Iterable<Application> ensureContentLoaded() {
         List<Application> content = applicationContentProvider.get();
         return applicationService.saveAll(content);
     }

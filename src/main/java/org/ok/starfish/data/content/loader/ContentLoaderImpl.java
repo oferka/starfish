@@ -21,10 +21,10 @@ public class ContentLoaderImpl implements ContentLoader {
     }
 
     @Override
-    public void load() {
-        Iterable<ApplicationCategory> applicationCategories = applicationCategoryContentLoader.load();
-        log.info("Loaded {} application categories", IterableUtils.size(applicationCategories));
-        Iterable<Application> applications = applicationContentLoader.load();
-        log.info("Loaded {} applications", IterableUtils.size(applications));
+    public void ensureContentLoaded() {
+        Iterable<ApplicationCategory> applicationCategories = applicationCategoryContentLoader.ensureContentLoaded();
+        log.info("{} application categories are loaded", IterableUtils.size(applicationCategories));
+        Iterable<Application> applications = applicationContentLoader.ensureContentLoaded();
+        log.info("{} applications are loaded", IterableUtils.size(applications));
     }
 }
