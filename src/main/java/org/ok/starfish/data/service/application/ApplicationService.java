@@ -25,4 +25,6 @@ public interface ApplicationService {
     void deleteById(@NotNull String id);
 
     boolean existsById(@NotNull String id);
+
+    boolean exists(@NotNull @NotNull Application application);
 }

@@ -68,12 +68,18 @@ public class ApplicationCategoryServiceElasticsearch implements ApplicationCateg
     }
 
     @Override
+    public long count() {
+        return applicationCategoryElasticsearchRepository.count();
+    }
+
+    @Override
     public boolean existsById(@NotNull String id) {
         return applicationCategoryElasticsearchRepository.existsById(id);
     }
 
     @Override
-    public long count() {
-        return applicationCategoryElasticsearchRepository.count();
+    public boolean exists(@NotNull @NotNull ApplicationCategory applicationCategory) {
+        Optional<ApplicationCategory> optionalApplicationCategory = applicationCategoryElasticsearchRepository.findByName(applicationCategory.getName());
+        return optionalApplicationCategory.isPresent();
     }
 }

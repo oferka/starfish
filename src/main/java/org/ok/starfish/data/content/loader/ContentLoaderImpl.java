@@ -1,7 +1,6 @@
 package org.ok.starfish.data.content.loader;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.IterableUtils;
 import org.ok.starfish.data.content.loader.application.ApplicationCategoryContentLoader;
 import org.ok.starfish.data.content.loader.application.ApplicationContentLoader;
 import org.ok.starfish.model.application.Application;
@@ -23,8 +22,6 @@ public class ContentLoaderImpl implements ContentLoader {
     @Override
     public void ensureContentLoaded() {
         Iterable<ApplicationCategory> applicationCategories = applicationCategoryContentLoader.ensureContentLoaded();
-        log.info("{} application categories are loaded", IterableUtils.size(applicationCategories));
         Iterable<Application> applications = applicationContentLoader.ensureContentLoaded();
-        log.info("{} applications are loaded", IterableUtils.size(applications));
     }
 }

@@ -1,5 +1,6 @@
 package org.ok.starfish.data.content.provider.application;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
@@ -10,17 +11,20 @@ import java.util.UUID;
 import static java.util.Arrays.asList;
 
 @Service
+@Slf4j
 public class ApplicationCategoryContentProviderImpl implements ApplicationCategoryContentProvider {
 
     @Override
     public List<ApplicationCategory> get() {
-        return asList(
+        List<ApplicationCategory> result =  asList(
             getApplicationCategory("Application Category 1"),
             getApplicationCategory("Application Category 2"),
             getApplicationCategory("Application Category 3"),
             getApplicationCategory("Application Category 4"),
             getApplicationCategory("Application Category 5")
         );
+        log.info("{} application categories provided", result.size());
+        return result;
     }
 
     private @NotNull ApplicationCategory getApplicationCategory(@NotNull String name) {

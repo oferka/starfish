@@ -25,4 +25,6 @@ public interface ApplicationCategoryService {
     void deleteById(@NotNull String id);
 
     boolean existsById(@NotNull String id);
+
+    boolean exists(@NotNull ApplicationCategory applicationCategory);
 }

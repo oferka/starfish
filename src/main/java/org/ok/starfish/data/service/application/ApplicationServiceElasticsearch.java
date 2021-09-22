@@ -68,12 +68,18 @@ public class ApplicationServiceElasticsearch implements ApplicationService {
     }
 
     @Override
+    public long count() {
+        return applicationElasticsearchRepository.count();
+    }
+
+    @Override
     public boolean existsById(@NotNull String id) {
         return applicationElasticsearchRepository.existsById(id);
     }
 
     @Override
-    public long count() {
-        return applicationElasticsearchRepository.count();
+    public boolean exists(@NotNull Application application) {
+        Optional<Application> optionalApplication = applicationElasticsearchRepository.findByName(application.getName());
+        return optionalApplication.isPresent();
     }
 }
