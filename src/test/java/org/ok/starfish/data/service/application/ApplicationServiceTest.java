@@ -61,22 +61,22 @@ public class ApplicationServiceTest {
         Optional<Application> found = applicationService.findById(getNonExistingId());
         assertTrue(found.isEmpty());
     }
-//
-//    @Test
-//    public void shouldSave() {
-//        ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
-//        ApplicationCategory saved = applicationCategoryService.save(item);
-//        assertEquals(saved, item);
-//        applicationCategoryElasticsearchRepository.delete(item);
-//    }
-//
-//    @Test
-//    public void shouldSaveAll() {
-//        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItems);
-//        Iterable<ApplicationCategory> saved = applicationCategoryService.saveAll(items);
-//        assertNotNull(saved);
-//        applicationCategoryElasticsearchRepository.deleteAll(items);
-//    }
+
+    @Test
+    public void shouldSave() {
+        Application item = sampleApplicationProvider.getItem();
+        Application saved = applicationService.save(item);
+        assertEquals(saved, item);
+        applicationElasticsearchRepository.delete(item);
+    }
+
+    @Test
+    public void shouldSaveAll() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItems);
+        Iterable<Application> saved = applicationService.saveAll(items);
+        assertNotNull(saved);
+        applicationElasticsearchRepository.deleteAll(items);
+    }
 //
 //    @Test
 //    public void shouldUpdate() {
