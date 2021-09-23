@@ -23,6 +23,10 @@ management:
     shutdown:
       enabled: true
   health:
+    applicationCategoryContent:
+      enabled: true
+    applicationContent:
+      enabled: true
     livenessstate:
       enabled: true
     readinessstate:
