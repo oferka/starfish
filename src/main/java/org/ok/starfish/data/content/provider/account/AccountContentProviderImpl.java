@@ -26,7 +26,7 @@ public class AccountContentProviderImpl implements AccountContentProvider {
                 getAccount("Account 7"),
                 getAccount("Account 8"),
                 getAccount("Account 9"),
-                getAccount("Account  10")
+                getAccount("Account 10")
         );
         log.info("{} accounts provided", result.size());
         return result;

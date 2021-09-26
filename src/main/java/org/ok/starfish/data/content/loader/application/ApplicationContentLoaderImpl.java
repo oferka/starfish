@@ -31,9 +31,9 @@ public class ApplicationContentLoaderImpl implements ApplicationContentLoader {
         Iterable<Application> unloadedContent = applicationContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<Application> saved = applicationService.saveAll(unloadedContent);
-            log.info("{} application saved", IterableUtils.size(saved));
+            log.info("{} applications saved", IterableUtils.size(saved));
         }
-        log.info("{} application ensured loaded", content.size());
+        log.info("{} applications ensured loaded", content.size());
         return content;
     }
 }

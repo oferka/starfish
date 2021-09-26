@@ -42,9 +42,7 @@ public class UserContentProviderImpl implements UserContentProvider {
                 getUser("User 14"),
                 getUser("User 15"),
                 getUser("User 16"),
-                getUser("User 17"),
-                getUser("User 18"),
-                getUser("User 19")
+                getUser("User 17")
         );
         log.info("{} users provided", result.size());
         return result;
