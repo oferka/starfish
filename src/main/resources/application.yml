@@ -31,6 +31,8 @@ management:
       enabled: true
     userContent:
       enabled: true
+    deviceContent:
+      enabled: true
     livenessstate:
       enabled: true
     readinessstate:
