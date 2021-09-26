@@ -11,4 +11,6 @@ public interface Paths {
     String APPLICATION_CATEGORY_PATH = BASE_PATH + "/applicationCategory";
 
     String APPLICATION_PATH = BASE_PATH + "/application";
+
+    String ACCOUNT_PATH = BASE_PATH + "/account";
 }
