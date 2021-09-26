@@ -67,7 +67,7 @@ public class UserController {
         return item.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Create an user")
+    @Operation(summary = "Create a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created successfully", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))}),
             @ApiResponse(responseCode = "400", description = "Failed to create a user", content = @Content) })
