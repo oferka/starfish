@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class ApplicationServiceElasticsearch implements ApplicationService {
+public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationElasticsearchRepository applicationElasticsearchRepository;
 
-    public ApplicationServiceElasticsearch(@NotNull ApplicationElasticsearchRepository applicationElasticsearchRepository) {
+    public ApplicationServiceImpl(@NotNull ApplicationElasticsearchRepository applicationElasticsearchRepository) {
         this.applicationElasticsearchRepository = applicationElasticsearchRepository;
     }
 

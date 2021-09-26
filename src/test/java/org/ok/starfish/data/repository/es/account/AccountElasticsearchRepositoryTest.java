@@ -29,7 +29,7 @@ public class AccountElasticsearchRepositoryTest {
 
     private long contentCountBefore;
 
-    private final int numberOfItemsToLoad = 10;
+    private final int numberOfItemsToLoad = 18;
 
     @BeforeEach
     void captureContentStatus() {
