@@ -5,10 +5,12 @@ import org.apache.commons.collections4.IterableUtils;
 import org.ok.starfish.data.content.loader.account.AccountContentLoader;
 import org.ok.starfish.data.content.loader.application.ApplicationCategoryContentLoader;
 import org.ok.starfish.data.content.loader.application.ApplicationContentLoader;
+import org.ok.starfish.data.content.loader.user.DeviceContentLoader;
 import org.ok.starfish.data.content.loader.user.UserContentLoader;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.application.Application;
 import org.ok.starfish.model.application.ApplicationCategory;
+import org.ok.starfish.model.user.Device;
 import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,14 @@ public class ContentLoaderImpl implements ContentLoader {
     private final ApplicationContentLoader applicationContentLoader;
     private final AccountContentLoader accountContentLoader;
     private final UserContentLoader userContentLoader;
+    private final DeviceContentLoader deviceContentLoader;
 
-    public ContentLoaderImpl(ApplicationCategoryContentLoader applicationCategoryContentLoader, ApplicationContentLoader applicationContentLoader, AccountContentLoader accountContentLoader, UserContentLoader userContentLoader) {
+    public ContentLoaderImpl(ApplicationCategoryContentLoader applicationCategoryContentLoader, ApplicationContentLoader applicationContentLoader, AccountContentLoader accountContentLoader, UserContentLoader userContentLoader, DeviceContentLoader deviceContentLoader) {
         this.applicationCategoryContentLoader = applicationCategoryContentLoader;
         this.applicationContentLoader = applicationContentLoader;
         this.accountContentLoader = accountContentLoader;
         this.userContentLoader = userContentLoader;
+        this.deviceContentLoader = deviceContentLoader;
     }
 
     @Override
@@ -34,6 +38,7 @@ public class ContentLoaderImpl implements ContentLoader {
         Iterable<Application> applications = applicationContentLoader.ensureContentLoaded();
         Iterable<Account> accounts = accountContentLoader.ensureContentLoaded();
         Iterable<User> users = userContentLoader.ensureContentLoaded();
-        log.info("{} content entities ensured loaded", IterableUtils.size(applicationCategories) + IterableUtils.size(applications) + IterableUtils.size(accounts) + IterableUtils.size(users));
+        Iterable<Device> devices = deviceContentLoader.ensureContentLoaded();
+        log.info("{} content entities ensured loaded", IterableUtils.size(applicationCategories) + IterableUtils.size(applications) + IterableUtils.size(accounts) + IterableUtils.size(users) + IterableUtils.size(devices));
     }
 }
