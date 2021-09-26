@@ -13,7 +13,7 @@ import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
 @Slf4j
-public class MockApplicationCategoryEmployeeProvider implements SampleApplicationCategoryProvider {
+public class MockApplicationCategoryProvider implements SampleApplicationCategoryProvider {
 
     @Override
     public @NotNull ApplicationCategory getItem() {
