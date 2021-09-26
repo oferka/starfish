@@ -2,7 +2,6 @@ package org.ok.starfish.data.content.provider.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.service.user.UserService;
-import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.Device;
 import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
