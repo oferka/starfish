@@ -27,6 +27,8 @@ management:
       enabled: true
     applicationContent:
       enabled: true
+    accountContent:
+      enabled: true
     livenessstate:
       enabled: true
     readinessstate:
