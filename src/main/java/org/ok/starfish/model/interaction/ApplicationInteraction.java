@@ -1,4 +1,4 @@
 package org.ok.starfish.model.interaction;
 
-public class Interaction {
+public class ApplicationInteraction {
 }
