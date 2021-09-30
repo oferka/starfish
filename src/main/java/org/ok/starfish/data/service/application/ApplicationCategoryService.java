@@ -3,6 +3,7 @@ package org.ok.starfish.data.service.application;
 import org.ok.starfish.model.application.ApplicationCategory;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ public interface ApplicationCategoryService {
     @NotNull Optional<ApplicationCategory> findById(@NotNull String id);
 
     @NotNull List<ApplicationCategory> findByName(@NotNull String name);
+
+    @NotNull List<ApplicationCategory> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 
     @NotNull Optional<ApplicationCategory> findRandom();
 

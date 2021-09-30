@@ -9,11 +9,12 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class ApplicationCategoryServiceTest {
@@ -63,18 +64,51 @@ public class ApplicationCategoryServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<ApplicationCategory> found = applicationCategoryService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByName() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        String name = items.get(0).getName();
+        List<ApplicationCategory> found = applicationCategoryService.findByName(name);
+        assertFalse(found.isEmpty());
+        assertEquals(name, found.get(0).getName());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByName() {
+        List<ApplicationCategory> found = applicationCategoryService.findByName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCreatedDate() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        ZonedDateTime createdDate = items.get(0).getCreatedDate();
+        List<ApplicationCategory> found = applicationCategoryService.findByCreatedDate(createdDate);
+        assertFalse(found.isEmpty());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCreatedDate() {
+        List<ApplicationCategory> found = applicationCategoryService.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindRandom() {
         List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
         Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
         Optional<ApplicationCategory> found = applicationCategoryService.findRandom();
         assertTrue(found.isPresent());
         applicationCategoryElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    public void shouldNotFindById() {
-        Optional<ApplicationCategory> found = applicationCategoryService.findById(getNonExistingId());
-        assertTrue(found.isEmpty());
     }
 
     @Test
