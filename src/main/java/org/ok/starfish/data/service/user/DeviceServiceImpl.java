@@ -6,6 +6,7 @@ import org.ok.starfish.model.user.Device;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,11 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public @NotNull List<Device> findByName(@NotNull String name) {
         return deviceElasticsearchRepository.findByName(name);
+    }
+
+    @Override
+    public List<Device> findByCreatedDate(ZonedDateTime createdDate) {
+        return deviceElasticsearchRepository.findByCreatedDate(createdDate);
     }
 
     @Override

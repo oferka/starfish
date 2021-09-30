@@ -6,6 +6,7 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public @NotNull List<User> findByName(@NotNull String name) {
         return userElasticsearchRepository.findByName(name);
+    }
+
+    @Override
+    public List<User> findByCreatedDate(ZonedDateTime createdDate) {
+        return userElasticsearchRepository.findByCreatedDate(createdDate);
     }
 
     @Override

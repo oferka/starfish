@@ -3,6 +3,7 @@ package org.ok.starfish.data.service.user;
 import org.ok.starfish.model.user.User;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ public interface UserService {
     @NotNull Optional<User> findById(@NotNull String id);
 
     @NotNull List<User> findByName(@NotNull String name);
+
+    @NotNull List<User> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 
     @NotNull Optional<User> findRandom();
 

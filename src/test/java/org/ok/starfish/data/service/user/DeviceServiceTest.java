@@ -9,11 +9,12 @@ import org.ok.starfish.model.user.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class DeviceServiceTest {
@@ -63,18 +64,51 @@ public class DeviceServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<Device> found = deviceService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByName() {
+        List<Device> items = sampleDeviceProvider.getItems(numberOfItemsToLoad);
+        Iterable<Device> saved = deviceElasticsearchRepository.saveAll(items);
+        String name = items.get(0).getName();
+        List<Device> found = deviceService.findByName(name);
+        assertFalse(found.isEmpty());
+        assertEquals(name, found.get(0).getName());
+        deviceElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByName() {
+        List<Device> found = deviceService.findByName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCreatedDate() {
+        List<Device> items = sampleDeviceProvider.getItems(numberOfItemsToLoad);
+        Iterable<Device> saved = deviceElasticsearchRepository.saveAll(items);
+        ZonedDateTime createdDate = items.get(0).getCreatedDate();
+        List<Device> found = deviceService.findByCreatedDate(createdDate);
+        assertFalse(found.isEmpty());
+        deviceElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCreatedDate() {
+        List<Device> found = deviceService.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindRandom() {
         List<Device> items = sampleDeviceProvider.getItems(numberOfItemsToLoad);
         Iterable<Device> saved = deviceElasticsearchRepository.saveAll(items);
         Optional<Device> found = deviceService.findRandom();
         assertTrue(found.isPresent());
         deviceElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    public void shouldNotFindById() {
-        Optional<Device> found = deviceService.findById(getNonExistingId());
-        assertTrue(found.isEmpty());
     }
 
     @Test

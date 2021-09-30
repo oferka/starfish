@@ -3,6 +3,7 @@ package org.ok.starfish.data.service.user;
 import org.ok.starfish.model.user.Device;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ public interface DeviceService {
     @NotNull Optional<Device> findById(@NotNull String id);
 
     @NotNull List<Device> findByName(@NotNull String name);
+
+    @NotNull List<Device> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 
     @NotNull Optional<Device> findRandom();
 

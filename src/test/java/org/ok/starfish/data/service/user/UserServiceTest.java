@@ -9,11 +9,12 @@ import org.ok.starfish.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class UserServiceTest {
@@ -63,18 +64,51 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<User> found = userService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByName() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String name = items.get(0).getName();
+        List<User> found = userService.findByName(name);
+        assertFalse(found.isEmpty());
+        assertEquals(name, found.get(0).getName());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByName() {
+        List<User> found = userService.findByName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCreatedDate() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        ZonedDateTime createdDate = items.get(0).getCreatedDate();
+        List<User> found = userService.findByCreatedDate(createdDate);
+        assertFalse(found.isEmpty());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCreatedDate() {
+        List<User> found = userService.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindRandom() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
         Optional<User> found = userService.findRandom();
         assertTrue(found.isPresent());
         userElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    public void shouldNotFindById() {
-        Optional<User> found = userService.findById(getNonExistingId());
-        assertTrue(found.isEmpty());
     }
 
     @Test
