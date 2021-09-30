@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingName;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class AccountElasticsearchRepositoryTest {
@@ -89,6 +88,23 @@ public class AccountElasticsearchRepositoryTest {
     @Test
     void shouldNotFindItemByName() {
         Optional<Account> foundItemOptional = accountElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItemOptional.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByCreatedDate() {
+        Account item = sampleAccountProvider.getItem();
+        Account saved = accountElasticsearchRepository.save(item);
+        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByCreatedDate(item.getCreatedDate());
+        assertTrue(foundItemOptional.isPresent());
+        Account foundItem = foundItemOptional.get();
+        assertEquals(item.getId(), foundItem.getId());
+        accountElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByCreatedDate() {
+        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
         assertTrue(foundItemOptional.isEmpty());
     }
 

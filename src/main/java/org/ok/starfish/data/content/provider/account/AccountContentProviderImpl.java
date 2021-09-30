@@ -5,9 +5,11 @@ import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 
+import static java.time.ZonedDateTime.now;
 import static java.util.Arrays.asList;
 
 @Service
@@ -34,6 +36,6 @@ public class AccountContentProviderImpl implements AccountContentProvider {
 
     private @NotNull Account getAccount(@NotNull String name) {
         String id = UUID.randomUUID().toString();
-        return new Account(id, name);
+        return new Account(id, name, now(ZoneOffset.UTC));
     }
 }

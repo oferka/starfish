@@ -6,9 +6,11 @@ import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
@@ -30,7 +32,7 @@ public class MockAccountProvider implements SampleAccountProvider {
     }
 
     private @NotNull Account getItem(int itemNumber) {
-        Account result = new Account(getUniqueId(), getRandomAccountName());
+        Account result = new Account(getUniqueId(), getRandomAccountName(), now(ZoneOffset.UTC));
         log.info("Account {} created: {}", itemNumber, result);
         return result;
     }
