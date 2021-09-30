@@ -9,11 +9,12 @@ import org.ok.starfish.model.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class AccountServiceTest {
@@ -63,18 +64,51 @@ public class AccountServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<Account> found = accountService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByName() {
+        List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
+        Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
+        String name = items.get(0).getName();
+        List<Account> found = accountService.findByName(name);
+        assertFalse(found.isEmpty());
+        assertEquals(name, found.get(0).getName());
+        accountElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByName() {
+        List<Account> found = accountService.findByName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCreatedDate() {
+        List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
+        Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
+        ZonedDateTime createdDate = items.get(0).getCreatedDate();
+        List<Account> found = accountService.findByCreatedDate(createdDate);
+        assertFalse(found.isEmpty());
+        accountElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCreatedDate() {
+        List<Account> found = accountService.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindRandom() {
         List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
         Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
         Optional<Account> found = accountService.findRandom();
         assertTrue(found.isPresent());
         accountElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    public void shouldNotFindById() {
-        Optional<Account> found = accountService.findById(getNonExistingId());
-        assertTrue(found.isEmpty());
     }
 
     @Test

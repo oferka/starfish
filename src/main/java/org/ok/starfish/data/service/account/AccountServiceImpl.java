@@ -6,6 +6,7 @@ import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public @NotNull List<Account> findByName(@NotNull String name) {
         return accountElasticsearchRepository.findByName(name);
+    }
+
+    @Override
+    public List<Account> findByCreatedDate(ZonedDateTime createdDate) {
+        return accountElasticsearchRepository.findByCreatedDate(createdDate);
     }
 
     @Override
