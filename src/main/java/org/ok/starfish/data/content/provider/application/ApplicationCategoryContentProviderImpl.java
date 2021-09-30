@@ -5,9 +5,11 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 
+import static java.time.ZonedDateTime.now;
 import static java.util.Arrays.asList;
 
 @Service
@@ -29,6 +31,6 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
 
     private @NotNull ApplicationCategory getApplicationCategory(@NotNull String name) {
         String id = UUID.randomUUID().toString();
-        return new ApplicationCategory(id, name);
+        return new ApplicationCategory(id, name, now(ZoneOffset.UTC));
     }
 }

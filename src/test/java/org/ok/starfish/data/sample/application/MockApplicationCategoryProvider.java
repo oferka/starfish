@@ -6,9 +6,11 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
@@ -30,7 +32,7 @@ public class MockApplicationCategoryProvider implements SampleApplicationCategor
     }
 
     private @NotNull ApplicationCategory getItem(int itemNumber) {
-        ApplicationCategory result = new ApplicationCategory(getUniqueId(), getRandomApplicationCategoryName());
+        ApplicationCategory result = new ApplicationCategory(getUniqueId(), getRandomApplicationCategoryName(), now(ZoneOffset.UTC));
         log.info("Application category {} created: {}", itemNumber, result);
         return result;
     }
