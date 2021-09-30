@@ -34,7 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public @NotNull Optional<Device> findByName(@NotNull String name) {
+    public @NotNull List<Device> findByName(@NotNull String name) {
         return deviceElasticsearchRepository.findByName(name);
     }
 
@@ -84,7 +84,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public boolean exists(@NotNull Device device) {
-        Optional<Device> optionalDevice = deviceElasticsearchRepository.findByName(device.getName());
-        return optionalDevice.isPresent();
+        List<Device> devices = deviceElasticsearchRepository.findByName(device.getName());
+        return (!devices.isEmpty());
     }
 }

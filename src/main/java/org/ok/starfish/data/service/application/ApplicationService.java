@@ -12,7 +12,7 @@ public interface ApplicationService {
 
     @NotNull Optional<Application> findById(@NotNull String id);
 
-    @NotNull Optional<Application> findByName(@NotNull String name);
+    @NotNull List<Application> findByName(@NotNull String name);
 
     @NotNull Optional<Application> findRandom();
 

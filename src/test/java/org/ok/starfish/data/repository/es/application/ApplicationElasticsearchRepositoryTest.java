@@ -79,17 +79,17 @@ public class ApplicationElasticsearchRepositoryTest {
     void shouldFindItemByName() {
         Application item = sampleApplicationProvider.getItem();
         Application saved = applicationElasticsearchRepository.save(item);
-        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findByName(item.getName());
-        assertTrue(foundItemOptional.isPresent());
-        Application foundItem = foundItemOptional.get();
+        List<Application> foundItems = applicationElasticsearchRepository.findByName(item.getName());
+        assertFalse(foundItems.isEmpty());
+        Application foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         applicationElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByName() {
-        Optional<Application> foundItemOptional = applicationElasticsearchRepository.findByName(getNonExistingName());
-        assertTrue(foundItemOptional.isEmpty());
+        List<Application> foundItems = applicationElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test

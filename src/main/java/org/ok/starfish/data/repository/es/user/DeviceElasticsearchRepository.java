@@ -4,10 +4,10 @@ import org.ok.starfish.model.user.Device;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface DeviceElasticsearchRepository extends ElasticsearchRepository<Device, String> {
 
-    Optional<Device> findByName(String name);
+    List<Device> findByName(String name);
 }

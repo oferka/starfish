@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public @NotNull Optional<User> findByName(@NotNull String name) {
+    public @NotNull List<User> findByName(@NotNull String name) {
         return userElasticsearchRepository.findByName(name);
     }
 
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean exists(@NotNull User user) {
-        Optional<User> optionalUser = userElasticsearchRepository.findByName(user.getName());
-        return optionalUser.isPresent();
+        List<User> users = userElasticsearchRepository.findByName(user.getName());
+        return (!users.isEmpty());
     }
 }

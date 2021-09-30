@@ -34,7 +34,7 @@ public class ApplicationCategoryServiceImpl implements ApplicationCategoryServic
     }
 
     @Override
-    public @NotNull Optional<ApplicationCategory> findByName(@NotNull String name) {
+    public @NotNull List<ApplicationCategory> findByName(@NotNull String name) {
         return applicationCategoryElasticsearchRepository.findByName(name);
     }
 
@@ -84,7 +84,7 @@ public class ApplicationCategoryServiceImpl implements ApplicationCategoryServic
 
     @Override
     public boolean exists(@NotNull @NotNull ApplicationCategory applicationCategory) {
-        Optional<ApplicationCategory> optionalApplicationCategory = applicationCategoryElasticsearchRepository.findByName(applicationCategory.getName());
-        return optionalApplicationCategory.isPresent();
+        List<ApplicationCategory> applicationCategories = applicationCategoryElasticsearchRepository.findByName(applicationCategory.getName());
+        return !applicationCategories.isEmpty();
     }
 }

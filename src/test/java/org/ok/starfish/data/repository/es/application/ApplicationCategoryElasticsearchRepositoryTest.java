@@ -79,17 +79,17 @@ public class ApplicationCategoryElasticsearchRepositoryTest {
     void shouldFindItemByName() {
         ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
         ApplicationCategory saved = applicationCategoryElasticsearchRepository.save(item);
-        Optional<ApplicationCategory> foundItemOptional = applicationCategoryElasticsearchRepository.findByName(item.getName());
-        assertTrue(foundItemOptional.isPresent());
-        ApplicationCategory foundItem = foundItemOptional.get();
+        List<ApplicationCategory> foundItems = applicationCategoryElasticsearchRepository.findByName(item.getName());
+        assertFalse(foundItems.isEmpty());
+        ApplicationCategory foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         applicationCategoryElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByName() {
-        Optional<ApplicationCategory> foundItemOptional = applicationCategoryElasticsearchRepository.findByName(getNonExistingName());
-        assertTrue(foundItemOptional.isEmpty());
+        List<ApplicationCategory> foundItems = applicationCategoryElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test

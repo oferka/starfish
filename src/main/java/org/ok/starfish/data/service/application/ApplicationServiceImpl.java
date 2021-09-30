@@ -34,7 +34,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public @NotNull Optional<Application> findByName(@NotNull String name) {
+    public @NotNull List<Application> findByName(@NotNull String name) {
         return applicationElasticsearchRepository.findByName(name);
     }
 
@@ -84,7 +84,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public boolean exists(@NotNull Application application) {
-        Optional<Application> optionalApplication = applicationElasticsearchRepository.findByName(application.getName());
-        return optionalApplication.isPresent();
+        List<Application> applications = applicationElasticsearchRepository.findByName(application.getName());
+        return !applications.isEmpty();
     }
 }

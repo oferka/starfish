@@ -79,17 +79,17 @@ public class DeviceElasticsearchRepositoryTest {
     void shouldFindItemByName() {
         Device item = sampleDeviceProvider.getItem();
         Device saved = deviceElasticsearchRepository.save(item);
-        Optional<Device> foundItemOptional = deviceElasticsearchRepository.findByName(item.getName());
-        assertTrue(foundItemOptional.isPresent());
-        Device foundItem = foundItemOptional.get();
+        List<Device> foundItems = deviceElasticsearchRepository.findByName(item.getName());
+        assertFalse(foundItems.isEmpty());
+        Device foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         deviceElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByName() {
-        Optional<Device> foundItemOptional = deviceElasticsearchRepository.findByName(getNonExistingName());
-        assertTrue(foundItemOptional.isEmpty());
+        List<Device> foundItems = deviceElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test

@@ -12,7 +12,7 @@ public interface DeviceService {
 
     @NotNull Optional<Device> findById(@NotNull String id);
 
-    @NotNull Optional<Device> findByName(@NotNull String name);
+    @NotNull List<Device> findByName(@NotNull String name);
 
     @NotNull Optional<Device> findRandom();
 

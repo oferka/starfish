@@ -12,7 +12,7 @@ public interface UserService {
 
     @NotNull Optional<User> findById(@NotNull String id);
 
-    @NotNull Optional<User> findByName(@NotNull String name);
+    @NotNull List<User> findByName(@NotNull String name);
 
     @NotNull Optional<User> findRandom();
 

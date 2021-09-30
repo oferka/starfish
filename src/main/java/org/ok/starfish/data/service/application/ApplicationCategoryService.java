@@ -12,7 +12,7 @@ public interface ApplicationCategoryService {
 
     @NotNull Optional<ApplicationCategory> findById(@NotNull String id);
 
-    @NotNull Optional<ApplicationCategory> findByName(@NotNull String name);
+    @NotNull List<ApplicationCategory> findByName(@NotNull String name);
 
     @NotNull Optional<ApplicationCategory> findRandom();
 

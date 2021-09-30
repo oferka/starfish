@@ -78,34 +78,34 @@ public class AccountElasticsearchRepositoryTest {
     void shouldFindItemByName() {
         Account item = sampleAccountProvider.getItem();
         Account saved = accountElasticsearchRepository.save(item);
-        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByName(item.getName());
-        assertTrue(foundItemOptional.isPresent());
-        Account foundItem = foundItemOptional.get();
+        List<Account> foundItems = accountElasticsearchRepository.findByName(item.getName());
+        assertFalse(foundItems.isEmpty());
+        Account foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         accountElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByName() {
-        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByName(getNonExistingName());
-        assertTrue(foundItemOptional.isEmpty());
+        List<Account> foundItems = accountElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test
     void shouldFindItemByCreatedDate() {
         Account item = sampleAccountProvider.getItem();
         Account saved = accountElasticsearchRepository.save(item);
-        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByCreatedDate(item.getCreatedDate());
-        assertTrue(foundItemOptional.isPresent());
-        Account foundItem = foundItemOptional.get();
+        List<Account> foundItems = accountElasticsearchRepository.findByCreatedDate(item.getCreatedDate());
+        assertFalse(foundItems.isEmpty());
+        Account foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         accountElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByCreatedDate() {
-        Optional<Account> foundItemOptional = accountElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
-        assertTrue(foundItemOptional.isEmpty());
+        List<Account> foundItems = accountElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test

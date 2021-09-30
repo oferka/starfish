@@ -79,17 +79,17 @@ public class UserElasticsearchRepositoryTest {
     void shouldFindItemByName() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);
-        Optional<User> foundItemOptional = userElasticsearchRepository.findByName(item.getName());
-        assertTrue(foundItemOptional.isPresent());
-        User foundItem = foundItemOptional.get();
+        List<User> foundItems = userElasticsearchRepository.findByName(item.getName());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
         userElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByName() {
-        Optional<User> foundItemOptional = userElasticsearchRepository.findByName(getNonExistingName());
-        assertTrue(foundItemOptional.isEmpty());
+        List<User> foundItems = userElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
     }
 
     @Test

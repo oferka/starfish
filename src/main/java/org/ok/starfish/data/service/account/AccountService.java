@@ -12,7 +12,7 @@ public interface AccountService {
 
     @NotNull Optional<Account> findById(@NotNull String id);
 
-    @NotNull Optional<Account> findByName(@NotNull String name);
+    @NotNull List<Account> findByName(@NotNull String name);
 
     @NotNull Optional<Account> findRandom();
 

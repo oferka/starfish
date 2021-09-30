@@ -5,12 +5,12 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface AccountElasticsearchRepository extends ElasticsearchRepository<Account, String> {
 
-    Optional<Account> findByName(String name);
+    List<Account> findByName(String name);
 
-    Optional<Account> findByCreatedDate(ZonedDateTime createdDate);
+    List<Account> findByCreatedDate(ZonedDateTime createdDate);
 }

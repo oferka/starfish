@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public @NotNull Optional<Account> findByName(@NotNull String name) {
+    public @NotNull List<Account> findByName(@NotNull String name) {
         return accountElasticsearchRepository.findByName(name);
     }
 
@@ -84,7 +84,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean exists(@NotNull @NotNull Account account) {
-        Optional<Account> optionalAccount = accountElasticsearchRepository.findByName(account.getName());
-        return optionalAccount.isPresent();
+        List<Account> accounts = accountElasticsearchRepository.findByName(account.getName());
+        return (!accounts.isEmpty());
     }
 }
