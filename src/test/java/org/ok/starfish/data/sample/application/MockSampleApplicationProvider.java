@@ -8,10 +8,12 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
@@ -41,7 +43,7 @@ public class MockSampleApplicationProvider implements SampleApplicationProvider 
     private @NotNull Application getItem(int itemNumber) {
         Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
         if(applicationCategory.isPresent()) {
-            Application result = new Application(getUniqueId(), getRandomApplicationName(), applicationCategory.get());
+            Application result = new Application(getUniqueId(), getRandomApplicationName(), now(ZoneOffset.UTC), applicationCategory.get());
             log.info("Application {} created: {}", itemNumber, result);
             return result;
         }
