@@ -9,11 +9,12 @@ import org.ok.starfish.model.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.ok.starfish.data.TestDataUtils.getNonExistingId;
+import static org.ok.starfish.data.TestDataUtils.*;
 
 @SpringBootTest
 public class ApplicationServiceTest {
@@ -63,18 +64,51 @@ public class ApplicationServiceTest {
     }
 
     @Test
+    public void shouldNotFindById() {
+        Optional<Application> found = applicationService.findById(getNonExistingId());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByName() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        String name = items.get(0).getName();
+        List<Application> found = applicationService.findByName(name);
+        assertFalse(found.isEmpty());
+        assertEquals(name, found.get(0).getName());
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByName() {
+        List<Application> found = applicationService.findByName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCreatedDate() {
+        List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
+        Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
+        ZonedDateTime createdDate = items.get(0).getCreatedDate();
+        List<Application> found = applicationService.findByCreatedDate(createdDate);
+        assertFalse(found.isEmpty());
+        applicationElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCreatedDate() {
+        List<Application> found = applicationService.findByCreatedDate(getNonExistingCreatedDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindRandom() {
         List<Application> items = sampleApplicationProvider.getItems(numberOfItemsToLoad);
         Iterable<Application> saved = applicationElasticsearchRepository.saveAll(items);
         Optional<Application> found = applicationService.findRandom();
         assertTrue(found.isPresent());
         applicationElasticsearchRepository.deleteAll(saved);
-    }
-
-    @Test
-    public void shouldNotFindById() {
-        Optional<Application> found = applicationService.findById(getNonExistingId());
-        assertTrue(found.isEmpty());
     }
 
     @Test

@@ -6,6 +6,7 @@ import org.ok.starfish.model.application.Application;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,6 +37,11 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public @NotNull List<Application> findByName(@NotNull String name) {
         return applicationElasticsearchRepository.findByName(name);
+    }
+
+    @Override
+    public List<Application> findByCreatedDate(ZonedDateTime createdDate) {
+        return applicationElasticsearchRepository.findByCreatedDate(createdDate);
     }
 
     @Override
