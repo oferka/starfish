@@ -8,10 +8,12 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
@@ -41,7 +43,7 @@ public class MockSampleDeviceProvider implements SampleDeviceProvider {
     private @NotNull Device getItem(int itemNumber) {
         Optional<User> user = userService.findRandom();
         if(user.isPresent()) {
-            Device result = new Device(getUniqueId(), getRandomDeviceName(), user.get());
+            Device result = new Device(getUniqueId(), getRandomDeviceName(), now(ZoneOffset.UTC), user.get());
             log.info("Device {} created: {}", itemNumber, result);
             return result;
         }

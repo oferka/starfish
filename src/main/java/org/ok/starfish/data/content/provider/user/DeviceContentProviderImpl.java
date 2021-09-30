@@ -7,10 +7,12 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.time.ZonedDateTime.now;
 import static java.util.Arrays.asList;
 
 @Service
@@ -70,7 +72,7 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
         String id = UUID.randomUUID().toString();
         Optional<User> user = userService.findRandom();
         if(user.isPresent()) {
-            return new Device(id, name, user.get());
+            return new Device(id, name, now(ZoneOffset.UTC), user.get());
         }
         throw new RuntimeException("Failed to create device. Could not find a valid user");
     }
