@@ -7,10 +7,12 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.time.ZonedDateTime.now;
 import static java.util.Arrays.asList;
 
 @Service
@@ -52,7 +54,7 @@ public class UserContentProviderImpl implements UserContentProvider {
         String id = UUID.randomUUID().toString();
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            return new User(id, name, account.get());
+            return new User(id, name, now(ZoneOffset.UTC), account.get());
         }
         throw new RuntimeException("Failed to create user. Could not find a valid account");
     }

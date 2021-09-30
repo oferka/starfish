@@ -8,10 +8,12 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
@@ -41,7 +43,7 @@ public class MockSampleUserProvider implements SampleUserProvider {
     private @NotNull User getItem(int itemNumber) {
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            User result = new User(getUniqueId(), getRandomUserName(), account.get());
+            User result = new User(getUniqueId(), getRandomUserName(), now(ZoneOffset.UTC), account.get());
             log.info("User {} created: {}", itemNumber, result);
             return result;
         }
