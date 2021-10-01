@@ -1,20 +1,25 @@
 package org.ok.starfish.data.content.provider.application;
 
 import lombok.extern.slf4j.Slf4j;
+import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 
-import static java.time.ZonedDateTime.now;
 import static java.util.Arrays.asList;
 
 @Service
 @Slf4j
 public class ApplicationCategoryContentProviderImpl implements ApplicationCategoryContentProvider {
+
+    private final CreationDateProvider creationDateProvider;
+
+    public ApplicationCategoryContentProviderImpl(CreationDateProvider creationDateProvider) {
+        this.creationDateProvider = creationDateProvider;
+    }
 
     @Override
     public List<ApplicationCategory> get() {
@@ -31,6 +36,6 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
 
     private @NotNull ApplicationCategory getApplicationCategory(@NotNull String name) {
         String id = UUID.randomUUID().toString();
-        return new ApplicationCategory(id, name, now(ZoneOffset.UTC));
+        return new ApplicationCategory(id, name, creationDateProvider.getNow());
     }
 }
