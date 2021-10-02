@@ -2,6 +2,7 @@ package org.ok.starfish.data.content.provider.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
+import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.service.user.UserService;
 import org.ok.starfish.model.user.Device;
 import org.ok.starfish.model.user.User;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static java.util.Arrays.asList;
 
@@ -20,10 +20,13 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
 
     private final UserService userService;
 
+    private final IdProvider idProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public DeviceContentProviderImpl(UserService userService, CreationDateProvider creationDateProvider) {
+    public DeviceContentProviderImpl(UserService userService, IdProvider idProvider, CreationDateProvider creationDateProvider) {
         this.userService = userService;
+        this.idProvider = idProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -71,10 +74,9 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
     }
 
     private @NotNull Device getDevice(@NotNull String name) {
-        String id = UUID.randomUUID().toString();
         Optional<User> user = userService.findRandom();
         if(user.isPresent()) {
-            return new Device(id, name, creationDateProvider.getNow(), user.get());
+            return new Device(idProvider.getRandom(), name, creationDateProvider.getNow(), user.get());
         }
         throw new RuntimeException("Failed to create device. Could not find a valid user");
     }

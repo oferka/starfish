@@ -2,12 +2,12 @@ package org.ok.starfish.data.content.provider.account;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
+import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.Arrays.asList;
 
@@ -15,9 +15,12 @@ import static java.util.Arrays.asList;
 @Slf4j
 public class AccountContentProviderImpl implements AccountContentProvider {
 
+    private final IdProvider idProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public AccountContentProviderImpl(CreationDateProvider creationDateProvider) {
+    public AccountContentProviderImpl(IdProvider idProvider, CreationDateProvider creationDateProvider) {
+        this.idProvider = idProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -40,7 +43,6 @@ public class AccountContentProviderImpl implements AccountContentProvider {
     }
 
     private @NotNull Account getAccount(@NotNull String name) {
-        String id = UUID.randomUUID().toString();
-        return new Account(id, name, creationDateProvider.getNow());
+        return new Account(idProvider.getRandom(), name, creationDateProvider.getNow());
     }
 }

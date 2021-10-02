@@ -2,6 +2,7 @@ package org.ok.starfish.data.content.provider.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
+import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.User;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static java.util.Arrays.asList;
 
@@ -20,10 +20,13 @@ public class UserContentProviderImpl implements UserContentProvider {
 
     private final AccountService accountService;
 
+    private final IdProvider idProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public UserContentProviderImpl(AccountService accountService, CreationDateProvider creationDateProvider) {
+    public UserContentProviderImpl(AccountService accountService, IdProvider idProvider, CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
+        this.idProvider = idProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -53,10 +56,9 @@ public class UserContentProviderImpl implements UserContentProvider {
     }
 
     private @NotNull User getUser(@NotNull String name) {
-        String id = UUID.randomUUID().toString();
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            return new User(id, name, creationDateProvider.getNow(), account.get());
+            return new User(idProvider.getRandom(), name, creationDateProvider.getNow(), account.get());
         }
         throw new RuntimeException("Failed to create user. Could not find a valid account");
     }

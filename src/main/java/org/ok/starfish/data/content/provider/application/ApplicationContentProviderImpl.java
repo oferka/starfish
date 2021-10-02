@@ -2,6 +2,7 @@ package org.ok.starfish.data.content.provider.application;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
+import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.service.application.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
 import org.ok.starfish.model.application.ApplicationCategory;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static java.util.Arrays.asList;
 
@@ -20,10 +20,13 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
 
     private final ApplicationCategoryService applicationCategoryService;
 
+    private final IdProvider idProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService, CreationDateProvider creationDateProvider) {
+    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService, IdProvider idProvider, CreationDateProvider creationDateProvider) {
         this.applicationCategoryService = applicationCategoryService;
+        this.idProvider = idProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -48,10 +51,9 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
     }
 
     private @NotNull Application getApplication(@NotNull String name) {
-        String id = UUID.randomUUID().toString();
         Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
         if(applicationCategory.isPresent()) {
-            return new Application(id, name, creationDateProvider.getNow(), applicationCategory.get());
+            return new Application(idProvider.getRandom(), name, creationDateProvider.getNow(), applicationCategory.get());
         }
         throw new RuntimeException("Failed to create application. Could not find a valid application category");
     }
