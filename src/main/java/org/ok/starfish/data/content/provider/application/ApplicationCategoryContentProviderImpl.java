@@ -7,9 +7,8 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Service
 @Slf4j
@@ -17,27 +16,27 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
 
     private final IdProvider idProvider;
 
+    private final ApplicationCategoryNameProvider applicationCategoryNameProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationCategoryContentProviderImpl(IdProvider idProvider, CreationDateProvider creationDateProvider) {
+    public ApplicationCategoryContentProviderImpl(IdProvider idProvider, ApplicationCategoryNameProvider applicationCategoryNameProvider, CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
+        this.applicationCategoryNameProvider = applicationCategoryNameProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
     @Override
-    public List<ApplicationCategory> get() {
-        List<ApplicationCategory> result =  asList(
-            getApplicationCategory("Application Category 1"),
-            getApplicationCategory("Application Category 2"),
-            getApplicationCategory("Application Category 3"),
-            getApplicationCategory("Application Category 4"),
-            getApplicationCategory("Application Category 5")
-        );
+    public List<ApplicationCategory> get(int numberOfItems) {
+        List<ApplicationCategory> result =  new ArrayList<>();
+        for(int i=0; i<numberOfItems; i++) {
+            result.add(getApplicationCategory());
+        }
         log.info("{} application categories provided", result.size());
         return result;
     }
 
-    private @NotNull ApplicationCategory getApplicationCategory(@NotNull String name) {
-        return new ApplicationCategory(idProvider.getRandom(), name, creationDateProvider.getNow());
+    private @NotNull ApplicationCategory getApplicationCategory() {
+        return new ApplicationCategory(idProvider.getRandom(), applicationCategoryNameProvider.get(), creationDateProvider.getNow());
     }
 }

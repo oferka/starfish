@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ApplicationCategoryContentProvider {
 
-    @NotNull List<ApplicationCategory> get();
+    @NotNull List<ApplicationCategory> get(int numberOfItems);
 }

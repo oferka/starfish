@@ -16,14 +16,14 @@ public class AccountContentProviderImpl implements AccountContentProvider {
 
     private final IdProvider idProvider;
 
-    private final CreationDateProvider creationDateProvider;
-
     private final AccountNameProvider accountNameProvider;
 
-    public AccountContentProviderImpl(IdProvider idProvider, CreationDateProvider creationDateProvider, AccountNameProvider accountNameProvider) {
+    private final CreationDateProvider creationDateProvider;
+
+    public AccountContentProviderImpl(IdProvider idProvider, AccountNameProvider accountNameProvider, CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
-        this.creationDateProvider = creationDateProvider;
         this.accountNameProvider = accountNameProvider;
+        this.creationDateProvider = creationDateProvider;
     }
 
     @Override
