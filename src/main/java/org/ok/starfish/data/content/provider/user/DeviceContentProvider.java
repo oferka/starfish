@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DeviceContentProvider {
 
-    @NotNull List<Device> get();
+    @NotNull List<Device> get(int numberOfItems);
 }
