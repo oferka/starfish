@@ -9,10 +9,9 @@ import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.Arrays.asList;
 
 @Service
 @Slf4j
@@ -22,43 +21,31 @@ public class UserContentProviderImpl implements UserContentProvider {
 
     private final IdProvider idProvider;
 
+    private final UserNameProvider userNameProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public UserContentProviderImpl(AccountService accountService, IdProvider idProvider, CreationDateProvider creationDateProvider) {
+    public UserContentProviderImpl(AccountService accountService, IdProvider idProvider, UserNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
+        this.userNameProvider = userNameProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
     @Override
-    public List<User> get() {
-        List<User> result = asList(
-                getUser("User 1"),
-                getUser("User 2"),
-                getUser("User 3"),
-                getUser("User 4"),
-                getUser("User 5"),
-                getUser("User 6"),
-                getUser("User 7"),
-                getUser("User 8"),
-                getUser("User 9"),
-                getUser("User 10"),
-                getUser("User 11"),
-                getUser("User 12"),
-                getUser("User 13"),
-                getUser("User 14"),
-                getUser("User 15"),
-                getUser("User 16"),
-                getUser("User 17")
-        );
+    public List<User> get(int numberOfItems) {
+        List<User> result =  new ArrayList<>();
+        for(int i=0; i<numberOfItems; i++) {
+            result.add(getUser());
+        }
         log.info("{} users provided", result.size());
         return result;
     }
 
-    private @NotNull User getUser(@NotNull String name) {
+    private @NotNull User getUser() {
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            return new User(idProvider.getRandom(), name, creationDateProvider.getNow(), account.get());
+            return new User(idProvider.getRandom(), userNameProvider.get(), creationDateProvider.getNow(), account.get());
         }
         throw new RuntimeException("Failed to create user. Could not find a valid account");
     }

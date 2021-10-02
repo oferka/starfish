@@ -27,7 +27,7 @@ public class UserContentLoaderImpl implements UserContentLoader {
 
     @Override
     public @NotNull Iterable<User> ensureContentLoaded() {
-        List<User> content = userContentProvider.get();
+        List<User> content = userContentProvider.get(100);
         Iterable<User> unloadedContent = userContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<User> saved = userService.saveAll(unloadedContent);

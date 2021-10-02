@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserContentProvider {
 
-    @NotNull List<User> get();
+    @NotNull List<User> get(int numberOfItems);
 }
