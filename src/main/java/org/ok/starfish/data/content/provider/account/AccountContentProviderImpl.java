@@ -7,9 +7,8 @@ import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Service
 @Slf4j
@@ -19,30 +18,25 @@ public class AccountContentProviderImpl implements AccountContentProvider {
 
     private final CreationDateProvider creationDateProvider;
 
-    public AccountContentProviderImpl(IdProvider idProvider, CreationDateProvider creationDateProvider) {
+    private final AccountNameProvider accountNameProvider;
+
+    public AccountContentProviderImpl(IdProvider idProvider, CreationDateProvider creationDateProvider, AccountNameProvider accountNameProvider) {
         this.idProvider = idProvider;
         this.creationDateProvider = creationDateProvider;
+        this.accountNameProvider = accountNameProvider;
     }
 
     @Override
-    public List<Account> get() {
-        List<Account> result =  asList(
-                getAccount("Account 1"),
-                getAccount("Account 2"),
-                getAccount("Account 3"),
-                getAccount("Account 4"),
-                getAccount("Account 5"),
-                getAccount("Account 6"),
-                getAccount("Account 7"),
-                getAccount("Account 8"),
-                getAccount("Account 9"),
-                getAccount("Account 10")
-        );
+    public List<Account> get(int numberOfItems) {
+        List<Account> result =  new ArrayList<>();
+        for(int i=0; i<numberOfItems; i++) {
+            result.add(getAccount());
+        }
         log.info("{} accounts provided", result.size());
         return result;
     }
 
-    private @NotNull Account getAccount(@NotNull String name) {
-        return new Account(idProvider.getRandom(), name, creationDateProvider.getNow());
+    private @NotNull Account getAccount() {
+        return new Account(idProvider.getRandom(), accountNameProvider.get(), creationDateProvider.getNow());
     }
 }
