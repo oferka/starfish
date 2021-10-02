@@ -27,7 +27,7 @@ public class DeviceContentLoaderImpl implements DeviceContentLoader {
 
     @Override
     public @NotNull Iterable<Device> ensureContentLoaded() {
-        List<Device> content = deviceContentProvider.get(60);
+        List<Device> content = deviceContentProvider.get(100);
         Iterable<Device> unloadedContent = deviceContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<Device> saved = deviceService.saveAll(unloadedContent);
