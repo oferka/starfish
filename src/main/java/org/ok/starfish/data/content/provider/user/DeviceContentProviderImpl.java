@@ -21,14 +21,14 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
 
     private final IdProvider idProvider;
 
-    private final UserNameProvider userNameProvider;
+    private final DeviceNameProvider deviceNameProvider;
 
     private final CreationDateProvider creationDateProvider;
 
-    public DeviceContentProviderImpl(UserService userService, IdProvider idProvider, UserNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
+    public DeviceContentProviderImpl(UserService userService, IdProvider idProvider, DeviceNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
         this.userService = userService;
         this.idProvider = idProvider;
-        this.userNameProvider = userNameProvider;
+        this.deviceNameProvider = userNameProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -45,7 +45,7 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
     private @NotNull Device getDevice() {
         Optional<User> user = userService.findRandom();
         if(user.isPresent()) {
-            return new Device(idProvider.getRandom(), userNameProvider.get(), creationDateProvider.getNow(), user.get());
+            return new Device(idProvider.getRandom(), deviceNameProvider.get(), creationDateProvider.getNow(), user.get());
         }
             throw new RuntimeException("Failed to create device. Could not find a valid user");
     }
