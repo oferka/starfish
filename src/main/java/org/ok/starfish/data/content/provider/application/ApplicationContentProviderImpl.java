@@ -9,10 +9,9 @@ import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.Arrays.asList;
 
 @Service
 @Slf4j
@@ -22,38 +21,31 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
 
     private final IdProvider idProvider;
 
+    private final ApplicationNameProvider applicationNameProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService, IdProvider idProvider, CreationDateProvider creationDateProvider) {
+    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService, IdProvider idProvider, ApplicationNameProvider applicationNameProvider, CreationDateProvider creationDateProvider) {
         this.applicationCategoryService = applicationCategoryService;
         this.idProvider = idProvider;
+        this.applicationNameProvider = applicationNameProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
     @Override
-    public List<Application> get() {
-        List<Application> result = asList(
-                getApplication("Application 1"),
-                getApplication("Application 2"),
-                getApplication("Application 3"),
-                getApplication("Application 4"),
-                getApplication("Application 5"),
-                getApplication("Application 6"),
-                getApplication("Application 7"),
-                getApplication("Application 8"),
-                getApplication("Application 9"),
-                getApplication("Application 10"),
-                getApplication("Application 11"),
-                getApplication("Application 12")
-        );
+    public List<Application> get(int numberOfItems) {
+        List<Application> result =  new ArrayList<>();
+        for(int i=0; i<numberOfItems; i++) {
+            result.add(getApplication());
+        }
         log.info("{} applications provided", result.size());
         return result;
     }
 
-    private @NotNull Application getApplication(@NotNull String name) {
+    private @NotNull Application getApplication() {
         Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
         if(applicationCategory.isPresent()) {
-            return new Application(idProvider.getRandom(), name, creationDateProvider.getNow(), applicationCategory.get());
+            return new Application(idProvider.getRandom(), applicationNameProvider.get(), creationDateProvider.getNow(), applicationCategory.get());
         }
         throw new RuntimeException("Failed to create application. Could not find a valid application category");
     }

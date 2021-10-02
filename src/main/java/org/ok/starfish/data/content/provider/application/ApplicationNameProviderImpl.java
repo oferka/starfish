@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Service
-public class ApplicationCategoryNameProviderImpl implements ApplicationCategoryNameProvider {
+public class ApplicationNameProviderImpl implements ApplicationNameProvider {
 
     @Override
     public @NotNull @Size(min = 2, max = 64) @NotBlank String get() {
-        return new Faker().country().name();
+        return new Faker().app().name();
     }
 }

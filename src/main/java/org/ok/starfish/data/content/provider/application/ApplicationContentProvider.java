@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ApplicationContentProvider {
 
-    @NotNull List<Application> get();
+    @NotNull List<Application> get(int numberOfItems);
 }
