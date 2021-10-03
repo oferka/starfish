@@ -40,6 +40,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public @NotNull List<Account> findBySector(@NotNull String sector) {
+        return accountElasticsearchRepository.findBySector(sector);
+    }
+
+    @Override
     public List<Account> findByCreatedDate(ZonedDateTime createdDate) {
         return accountElasticsearchRepository.findByCreatedDate(createdDate);
     }

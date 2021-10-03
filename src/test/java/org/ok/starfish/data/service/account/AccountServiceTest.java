@@ -87,6 +87,23 @@ public class AccountServiceTest {
     }
 
     @Test
+    public void shouldFindBySector() {
+        List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
+        Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
+        String sector = items.get(0).getSector();
+        List<Account> found = accountService.findBySector(sector);
+        assertFalse(found.isEmpty());
+        assertEquals(sector, found.get(0).getSector());
+        accountElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindBySector() {
+        List<Account> found = accountService.findBySector(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
         Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);

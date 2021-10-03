@@ -15,6 +15,8 @@ public interface AccountService {
 
     @NotNull List<Account> findByName(@NotNull String name);
 
+    @NotNull List<Account> findBySector(@NotNull String sector);
+
     @NotNull List<Account> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 
     @NotNull Optional<Account> findRandom();
