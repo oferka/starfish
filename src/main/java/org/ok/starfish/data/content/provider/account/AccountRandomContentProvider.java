@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class AccountContentProviderImpl implements AccountContentProvider {
+public class AccountRandomContentProvider implements AccountContentProvider {
 
     private final IdProvider idProvider;
 
@@ -20,7 +20,7 @@ public class AccountContentProviderImpl implements AccountContentProvider {
 
     private final CreationDateProvider creationDateProvider;
 
-    public AccountContentProviderImpl(IdProvider idProvider, AccountNameProvider accountNameProvider, CreationDateProvider creationDateProvider) {
+    public AccountRandomContentProvider(IdProvider idProvider, AccountNameProvider accountNameProvider, CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
         this.accountNameProvider = accountNameProvider;
         this.creationDateProvider = creationDateProvider;
