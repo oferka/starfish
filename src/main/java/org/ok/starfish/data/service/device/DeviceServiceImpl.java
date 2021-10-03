@@ -1,8 +1,8 @@
-package org.ok.starfish.data.service.user;
+package org.ok.starfish.data.service.device;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.ok.starfish.data.repository.es.user.DeviceElasticsearchRepository;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.repository.es.device.DeviceElasticsearchRepository;
+import org.ok.starfish.model.device.Device;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;

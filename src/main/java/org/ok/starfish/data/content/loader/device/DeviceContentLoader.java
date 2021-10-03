@@ -1,6 +1,6 @@
-package org.ok.starfish.data.content.loader.user;
+package org.ok.starfish.data.content.loader.device;
 
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.model.device.Device;
 
 import javax.validation.constraints.NotNull;
 

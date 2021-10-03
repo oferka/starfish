@@ -1,6 +1,6 @@
-package org.ok.starfish.data.content.health.user;
+package org.ok.starfish.data.content.health.device;
 
-import org.ok.starfish.data.service.user.DeviceService;
+import org.ok.starfish.data.service.device.DeviceService;
 import org.springframework.boot.actuate.autoconfigure.health.ConditionalOnEnabledHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;

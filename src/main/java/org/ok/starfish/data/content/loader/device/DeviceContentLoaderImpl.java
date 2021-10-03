@@ -1,11 +1,11 @@
-package org.ok.starfish.data.content.loader.user;
+package org.ok.starfish.data.content.loader.device;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.IterableUtils;
-import org.ok.starfish.data.content.provider.user.DeviceContentProvider;
-import org.ok.starfish.data.content.verifier.user.DeviceContentVerifier;
-import org.ok.starfish.data.service.user.DeviceService;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.content.provider.device.DeviceContentProvider;
+import org.ok.starfish.data.content.verifier.device.DeviceContentVerifier;
+import org.ok.starfish.data.service.device.DeviceService;
+import org.ok.starfish.model.device.Device;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;

@@ -1,9 +1,9 @@
-package org.ok.starfish.data.sample.user;
+package org.ok.starfish.data.sample.device;
 
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.service.user.UserService;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.model.device.Device;
 import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 

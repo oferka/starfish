@@ -5,12 +5,12 @@ import org.apache.commons.collections4.IterableUtils;
 import org.ok.starfish.data.content.loader.account.AccountContentLoader;
 import org.ok.starfish.data.content.loader.application.ApplicationCategoryContentLoader;
 import org.ok.starfish.data.content.loader.application.ApplicationContentLoader;
-import org.ok.starfish.data.content.loader.user.DeviceContentLoader;
+import org.ok.starfish.data.content.loader.device.DeviceContentLoader;
 import org.ok.starfish.data.content.loader.user.UserContentLoader;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.application.Application;
 import org.ok.starfish.model.application.ApplicationCategory;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.model.device.Device;
 import org.ok.starfish.model.user.User;
 import org.springframework.stereotype.Service;
 

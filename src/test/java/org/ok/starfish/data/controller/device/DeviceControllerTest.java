@@ -1,13 +1,13 @@
-package org.ok.starfish.data.controller.user;
+package org.ok.starfish.data.controller.device;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ok.starfish.StarfishApplication;
-import org.ok.starfish.data.repository.es.user.DeviceElasticsearchRepository;
-import org.ok.starfish.data.sample.user.SampleDeviceProvider;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.repository.es.device.DeviceElasticsearchRepository;
+import org.ok.starfish.data.sample.device.SampleDeviceProvider;
+import org.ok.starfish.model.device.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;

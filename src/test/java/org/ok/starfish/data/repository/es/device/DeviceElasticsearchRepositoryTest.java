@@ -1,10 +1,10 @@
-package org.ok.starfish.data.repository.es.user;
+package org.ok.starfish.data.repository.es.device;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.ok.starfish.data.sample.user.SampleDeviceProvider;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.sample.device.SampleDeviceProvider;
+import org.ok.starfish.model.device.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;

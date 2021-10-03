@@ -1,4 +1,4 @@
-package org.ok.starfish.data.controller.user;
+package org.ok.starfish.data.controller.device;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -8,8 +8,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.ok.starfish.data.controller.application.ApplicationCategoryController;
-import org.ok.starfish.data.service.user.DeviceService;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.service.device.DeviceService;
+import org.ok.starfish.model.device.Device;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

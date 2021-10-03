@@ -1,6 +1,6 @@
-package org.ok.starfish.data.sample.user;
+package org.ok.starfish.data.sample.device;
 
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.model.device.Device;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

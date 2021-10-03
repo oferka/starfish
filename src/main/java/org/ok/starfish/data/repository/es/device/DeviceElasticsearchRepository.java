@@ -1,6 +1,6 @@
-package org.ok.starfish.data.repository.es.user;
+package org.ok.starfish.data.repository.es.device;
 
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.model.device.Device;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

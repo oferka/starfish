@@ -27,7 +27,7 @@ public class AccountContentLoaderImpl implements AccountContentLoader {
 
     @Override
     public @NotNull Iterable<Account> ensureContentLoaded() {
-        List<Account> content = accountContentProvider.get(100);
+        List<Account> content = accountContentProvider.get(500);
         Iterable<Account> unloadedContent = accountContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<Account> saved = accountService.saveAll(unloadedContent);

@@ -1,8 +1,8 @@
-package org.ok.starfish.data.content.verifier.user;
+package org.ok.starfish.data.content.verifier.device;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.service.user.DeviceService;
-import org.ok.starfish.model.user.Device;
+import org.ok.starfish.data.service.device.DeviceService;
+import org.ok.starfish.model.device.Device;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
