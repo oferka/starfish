@@ -12,5 +12,7 @@ public interface AccountElasticsearchRepository extends ElasticsearchRepository<
 
     List<Account> findByName(String name);
 
+    List<Account> findBySector(String sector);
+
     List<Account> findByCreatedDate(ZonedDateTime createdDate);
 }

@@ -92,6 +92,23 @@ public class AccountElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindItemBySector() {
+        Account item = sampleAccountProvider.getItem();
+        Account saved = accountElasticsearchRepository.save(item);
+        List<Account> foundItems = accountElasticsearchRepository.findBySector(item.getSector());
+        assertFalse(foundItems.isEmpty());
+        Account foundItem = foundItems.get(0);
+        assertEquals(item.getId(), foundItem.getId());
+        accountElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemBySector() {
+        List<Account> foundItems = accountElasticsearchRepository.findByName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
     void shouldFindItemByCreatedDate() {
         Account item = sampleAccountProvider.getItem();
         Account saved = accountElasticsearchRepository.save(item);
@@ -118,6 +135,15 @@ public class AccountElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindAllItemsSortedById() {
+        List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
+        Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
+        Iterable<Account> found = accountElasticsearchRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        assertNotNull(found);
+        accountElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
     void shouldFindAllItemsSortedByName() {
         List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
         Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
@@ -127,10 +153,10 @@ public class AccountElasticsearchRepositoryTest {
     }
 
     @Test
-    void shouldFindAllItemsSortedById() {
+    void shouldFindAllItemsSortedBySector() {
         List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
         Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
-        Iterable<Account> found = accountElasticsearchRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        Iterable<Account> found = accountElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "sector"));
         assertNotNull(found);
         accountElasticsearchRepository.deleteAll(saved);
     }
