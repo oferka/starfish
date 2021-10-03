@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.model.account.Account;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+@Profile("random-accounts-provider")
 public class AccountRandomContentProvider implements AccountContentProvider {
 
     private final IdProvider idProvider;

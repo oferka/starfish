@@ -1,6 +1,8 @@
 spring:
   application:
     name: "starfish"
+  profiles:
+    active: "csv-accounts-provider"
 
 server:
   port: 0
