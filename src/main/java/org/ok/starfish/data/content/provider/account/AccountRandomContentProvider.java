@@ -20,11 +20,14 @@ public class AccountRandomContentProvider implements AccountContentProvider {
 
     private final AccountNameProvider accountNameProvider;
 
+    private final AccountSectorProvider accountSectorProvider;
+
     private final CreationDateProvider creationDateProvider;
 
-    public AccountRandomContentProvider(IdProvider idProvider, AccountNameProvider accountNameProvider, CreationDateProvider creationDateProvider) {
+    public AccountRandomContentProvider(IdProvider idProvider, AccountNameProvider accountNameProvider, AccountSectorProvider accountSectorProvider, CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
         this.accountNameProvider = accountNameProvider;
+        this.accountSectorProvider = accountSectorProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -39,6 +42,11 @@ public class AccountRandomContentProvider implements AccountContentProvider {
     }
 
     private @NotNull Account getAccount() {
-        return new Account(idProvider.getRandom(), accountNameProvider.get(), creationDateProvider.getNow());
+        return new Account(
+                idProvider.getRandom(),
+                accountNameProvider.get(),
+                accountSectorProvider.get(),
+                creationDateProvider.getNow()
+        );
     }
 }

@@ -39,6 +39,13 @@ public class Account {
     @Field(type = Keyword)
     private final String name;
 
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String sector;
+
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter
     @NotNull

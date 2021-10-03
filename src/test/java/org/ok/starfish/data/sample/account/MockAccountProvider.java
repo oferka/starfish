@@ -32,12 +32,21 @@ public class MockAccountProvider implements SampleAccountProvider {
     }
 
     private @NotNull Account getItem(int itemNumber) {
-        Account result = new Account(getUniqueId(), getRandomAccountName(), now(ZoneOffset.UTC));
+        Account result = new Account(
+                getUniqueId(),
+                getRandomAccountName(),
+                getRandomAccountSector(),
+                now(ZoneOffset.UTC)
+        );
         log.info("Account {} created: {}", itemNumber, result);
         return result;
     }
 
     private @NotNull String getRandomAccountName() {
         return new Faker().company().name();
+    }
+
+    private @NotNull String getRandomAccountSector() {
+        return new Faker().company().industry();
     }
 }
