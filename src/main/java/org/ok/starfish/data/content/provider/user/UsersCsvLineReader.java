@@ -22,27 +22,29 @@ public class UsersCsvLineReader {
         String latitude = line[10];
         String longitude = line[11];
         String timezoneOffset = line[12];
-        String timezoneDescription = line[12];
-        String email = line[13];
-        String dateOfBirth = line[14];
-        String dateOfRegistration = line[15];
-        String phone = line[16];
-        String cell = line[17];
-        String largePicture = line[17];
-        String mediumPicture = line[18];
-        String thumbnailPicture = line[19];
-        String nationality = line[20];
+        String timezoneDescription = line[13];
+        String email = line[14];
+        String dateOfBirth = line[15];
+        String age = line[16];
+        String dateOfRegistration = line[17];
+        String registrationAge = line[18];
+        String phone = line[19];
+        String cell = line[20];
+        String largePicture = line[21];
+        String mediumPicture = line[22];
+        String thumbnailPicture = line[23];
+        String nationality = line[24];
         return new UserLine(
                 gender,
                 title,
                 firstName,
                 lastName,
-                Integer.getInteger(streetNumber),
+                Integer.parseInt(streetNumber),
                 streetName,
                 city,
                 state,
                 country,
-                Integer.getInteger(postcode),
+                postcode,
                 Double.parseDouble(latitude),
                 Double.parseDouble(longitude),
                 timezoneOffset,

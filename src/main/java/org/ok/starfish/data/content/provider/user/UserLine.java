@@ -40,7 +40,7 @@ public class UserLine {
     private String country;
 
     @Getter
-    private int postcode;
+    private String postcode;
 
     @Getter
     private double latitude;
