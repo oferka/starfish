@@ -70,6 +70,23 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByGender() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String gender = items.get(0).getGender();
+        List<User> found = userService.findByGender(gender);
+        assertFalse(found.isEmpty());
+        assertEquals(gender, found.get(0).getGender());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByGender() {
+        List<User> found = userService.findByGender(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByFirstName() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);

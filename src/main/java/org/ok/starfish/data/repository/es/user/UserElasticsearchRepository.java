@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface UserElasticsearchRepository extends ElasticsearchRepository<User, String> {
 
+    List<User> findByGender(String gender);
+
     List<User> findByFirstName(String firstName);
 
     List<User> findByCreatedDate(ZonedDateTime createdDate);

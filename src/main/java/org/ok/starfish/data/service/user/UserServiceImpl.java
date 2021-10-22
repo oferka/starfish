@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public @NotNull List<User> findByGender(@NotNull String gender) {
+        return userElasticsearchRepository.findByGender(gender);
+    }
+
+    @Override
     public @NotNull List<User> findByFirstName(@NotNull String name) {
         return userElasticsearchRepository.findByFirstName(name);
     }

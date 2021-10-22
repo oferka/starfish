@@ -75,6 +75,23 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindItemByGender() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByGender(item.getGender());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getGender(), foundItem.getGender());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByGender() {
+        List<User> foundItems = userElasticsearchRepository.findByGender(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
     void shouldFindItemByFirstName() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);
