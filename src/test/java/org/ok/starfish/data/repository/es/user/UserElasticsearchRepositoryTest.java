@@ -75,10 +75,10 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
-    void shouldFindItemByName() {
+    void shouldFindItemByFirstName() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);
-        List<User> foundItems = userElasticsearchRepository.findByName(item.getName());
+        List<User> foundItems = userElasticsearchRepository.findByFirstName(item.getFirstName());
         assertFalse(foundItems.isEmpty());
         User foundItem = foundItems.get(0);
         assertEquals(item.getId(), foundItem.getId());
@@ -86,8 +86,8 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
-    void shouldNotFindItemByName() {
-        List<User> foundItems = userElasticsearchRepository.findByName(getNonExistingName());
+    void shouldNotFindItemByFirstName() {
+        List<User> foundItems = userElasticsearchRepository.findByFirstName(getNonExistingName());
         assertTrue(foundItems.isEmpty());
     }
 
@@ -121,7 +121,7 @@ public class UserElasticsearchRepositoryTest {
     void shouldFindAllItemsSortedByName() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
-        Iterable<User> found = userElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+        Iterable<User> found = userElasticsearchRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
         assertNotNull(found);
         userElasticsearchRepository.deleteAll(saved);
     }
@@ -148,7 +148,7 @@ public class UserElasticsearchRepositoryTest {
     void shouldFindAllItemsPagedAndSorted() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
-        Page<User> found = userElasticsearchRepository.findAll(PageRequest.of(0, 4, Sort.by(Sort.Direction.ASC, "name")));
+        Page<User> found = userElasticsearchRepository.findAll(PageRequest.of(0, 4, Sort.by(Sort.Direction.ASC, "firstName")));
         assertNotNull(found);
         userElasticsearchRepository.deleteAll(saved);
     }

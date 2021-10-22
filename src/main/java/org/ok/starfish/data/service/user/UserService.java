@@ -13,7 +13,7 @@ public interface UserService {
 
     @NotNull Optional<User> findById(@NotNull String id);
 
-    @NotNull List<User> findByName(@NotNull String name);
+    @NotNull List<User> findByFirstName(@NotNull String firstName);
 
     @NotNull List<User> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 

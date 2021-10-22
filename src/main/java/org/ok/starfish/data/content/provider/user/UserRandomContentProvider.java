@@ -25,11 +25,11 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserGenderProvider userGenderProvider;
 
-    private final UserNameProvider userNameProvider;
+    private final UserFirstNameProvider userNameProvider;
 
     private final CreationDateProvider creationDateProvider;
 
-    public UserRandomContentProvider(AccountService accountService, IdProvider idProvider, UserGenderProvider userGenderProvider, UserNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
+    public UserRandomContentProvider(AccountService accountService, IdProvider idProvider, UserGenderProvider userGenderProvider, UserFirstNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
         this.userGenderProvider = userGenderProvider;

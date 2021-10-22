@@ -2,7 +2,7 @@ package org.ok.starfish.data.sample.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.user.UserGenderProvider;
-import org.ok.starfish.data.content.provider.user.UserNameProvider;
+import org.ok.starfish.data.content.provider.user.UserFirstNameProvider;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.User;
@@ -25,12 +25,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserGenderProvider userGenderProvider;
 
-    private final UserNameProvider userNameProvider;
+    private final UserFirstNameProvider userFirstNameProvider;
 
-    public MockSampleUserProvider(AccountService accountService, UserGenderProvider userGenderProvider, UserNameProvider userNameProvider) {
+    public MockSampleUserProvider(AccountService accountService, UserGenderProvider userGenderProvider, UserFirstNameProvider userFirstNameProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
-        this.userNameProvider = userNameProvider;
+        this.userFirstNameProvider = userFirstNameProvider;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class MockSampleUserProvider implements SampleUserProvider {
     private @NotNull User getItem(int itemNumber) {
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            User result = new User(getUniqueId(), userGenderProvider.get(), userNameProvider.get(), now(ZoneOffset.UTC), account.get());
+            User result = new User(getUniqueId(), userGenderProvider.get(), userFirstNameProvider.get(), now(ZoneOffset.UTC), account.get());
             log.info("User {} created: {}", itemNumber, result);
             return result;
         }
