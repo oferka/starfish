@@ -1,8 +1,8 @@
 package org.ok.starfish.data.sample.user;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.content.provider.user.UserGenderProvider;
 import org.ok.starfish.data.content.provider.user.UserFirstNameProvider;
+import org.ok.starfish.data.content.provider.user.UserGenderProvider;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.User;

@@ -3,6 +3,7 @@ package org.ok.starfish.model.account;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
@@ -21,6 +22,7 @@ import static org.springframework.data.elasticsearch.annotations.FieldType.Keywo
 
 @ToString
 @AllArgsConstructor
+@EqualsAndHashCode
 @Document(indexName = "starfish_account")
 public class Account {
 
