@@ -25,14 +25,17 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserGenderProvider userGenderProvider;
 
+    private final UserTitleProvider userTitleProvider;
+
     private final UserFirstNameProvider userNameProvider;
 
     private final CreationDateProvider creationDateProvider;
 
-    public UserRandomContentProvider(AccountService accountService, IdProvider idProvider, UserGenderProvider userGenderProvider, UserFirstNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
+    public UserRandomContentProvider(AccountService accountService, IdProvider idProvider, UserGenderProvider userGenderProvider, UserTitleProvider userTitleProvider, UserFirstNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
         this.userGenderProvider = userGenderProvider;
+        this.userTitleProvider = userTitleProvider;
         this.userNameProvider = userNameProvider;
         this.creationDateProvider = creationDateProvider;
     }
@@ -50,7 +53,7 @@ public class UserRandomContentProvider implements UserContentProvider {
     private @NotNull User getUser() {
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
-            return new User(idProvider.getRandom(), userGenderProvider.get(), userNameProvider.get(), creationDateProvider.getNow(), account.get());
+            return new User(idProvider.getRandom(), userGenderProvider.get(), userTitleProvider.get(), userNameProvider.get(), creationDateProvider.getNow(), account.get());
         }
         throw new RuntimeException("Failed to create user. Could not find a valid account");
     }

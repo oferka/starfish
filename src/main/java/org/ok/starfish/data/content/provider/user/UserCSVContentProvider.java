@@ -51,6 +51,7 @@ public class UserCSVContentProvider implements UserContentProvider {
             return new User(
                     idProvider.getRandom(),
                     userLine.getGender(),
+                    userLine.getTitle(),
                     userLine.getFirstName(),
                     creationDateProvider.getNow(),
                     account.get()
