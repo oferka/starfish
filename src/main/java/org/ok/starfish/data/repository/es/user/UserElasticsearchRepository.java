@@ -12,6 +12,8 @@ public interface UserElasticsearchRepository extends ElasticsearchRepository<Use
 
     List<User> findByGender(String gender);
 
+    List<User> findByTitle(String title);
+
     List<User> findByFirstName(String firstName);
 
     List<User> findByCreatedDate(ZonedDateTime createdDate);

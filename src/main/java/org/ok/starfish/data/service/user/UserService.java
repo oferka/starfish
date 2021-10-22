@@ -15,6 +15,8 @@ public interface UserService {
 
     @NotNull List<User> findByGender(@NotNull String gender);
 
+    @NotNull List<User> findByTitle(@NotNull String title);
+
     @NotNull List<User> findByFirstName(@NotNull String firstName);
 
     @NotNull List<User> findByCreatedDate(@NotNull ZonedDateTime createdDate);
