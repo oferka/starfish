@@ -23,37 +23,40 @@ public class UserCSVContentProvider implements UserContentProvider {
 
     private final IdProvider idProvider;
 
-    private final UsersCsvReader usersCsvReader;
+    private final UsersCsvReader csvReader;
 
     private final CreationDateProvider creationDateProvider;
 
-    public UserCSVContentProvider(AccountService accountService, IdProvider idProvider, UsersCsvReader usersCsvReader, CreationDateProvider creationDateProvider) {
+    public UserCSVContentProvider(AccountService accountService,
+                                  IdProvider idProvider,
+                                  UsersCsvReader usersCsvReader,
+                                  CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
-        this.usersCsvReader = usersCsvReader;
+        this.csvReader = usersCsvReader;
         this.creationDateProvider = creationDateProvider;
     }
 
     @Override
     public List<User> get(int numberOfItems) {
-        List<UserLine> userLines = usersCsvReader.read();
+        List<UserLine> lines = csvReader.read();
         List<User> result =  new ArrayList<>();
         for(int i=0; i<numberOfItems; i++) {
-            result.add(getUser(userLines.get(i)));
+            result.add(getUser(lines.get(i)));
         }
         log.info("{} users provided", result.size());
         return result;
     }
 
-    private @NotNull User getUser(@NotNull UserLine userLine) {
+    private @NotNull User getUser(@NotNull UserLine line) {
         Optional<Account> account = accountService.findRandom();
         if(account.isPresent()) {
             return new User(
                     idProvider.getRandom(),
-                    userLine.getGender(),
-                    userLine.getTitle(),
-                    userLine.getFirstName(),
-                    userLine.getLastName(),
+                    line.getGender(),
+                    line.getTitle(),
+                    line.getFirstName(),
+                    line.getLastName(),
                     creationDateProvider.getNow(),
                     account.get()
             );

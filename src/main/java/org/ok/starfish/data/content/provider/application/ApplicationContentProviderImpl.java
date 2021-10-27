@@ -25,7 +25,10 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
 
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService, IdProvider idProvider, ApplicationNameProvider applicationNameProvider, CreationDateProvider creationDateProvider) {
+    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService,
+                                          IdProvider idProvider,
+                                          ApplicationNameProvider applicationNameProvider,
+                                          CreationDateProvider creationDateProvider) {
         this.applicationCategoryService = applicationCategoryService;
         this.idProvider = idProvider;
         this.applicationNameProvider = applicationNameProvider;

@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.provider.user;
+package org.ok.starfish.data.content.provider.application;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -16,19 +16,19 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class UsersCsvReader {
+public class ApplicationCategoriesCsvReader {
 
-    private final UsersCsvLineReader usersCsvLineReader;
+    private final ApplicationCategoriesCsvLineReader csvLineReader;
 
-    @Value("classpath:data/users.csv")
+    @Value("classpath:data/application_categories.csv")
     private Resource file;
 
-    public UsersCsvReader(UsersCsvLineReader usersCsvLineReader) {
-        this.usersCsvLineReader = usersCsvLineReader;
+    public ApplicationCategoriesCsvReader(ApplicationCategoriesCsvLineReader csvLineReader) {
+        this.csvLineReader = csvLineReader;
     }
 
-    public @NotNull List<UserLine> read() {
-        List<UserLine> result = new ArrayList<>();
+    public @NotNull List<ApplicationCategoryLine> read() {
+        List<ApplicationCategoryLine> result = new ArrayList<>();
         try {
             Reader reader = new FileReader(file.getFile());
             CSVReader csvReader = new CSVReaderBuilder(reader)
@@ -37,13 +37,13 @@ public class UsersCsvReader {
                     .build();
             List<String[]> lines = csvReader.readAll();
             for (String[] line : lines) {
-                result.add(usersCsvLineReader.read(line));
+                result.add(csvLineReader.read(line));
             }
             reader.close();
             csvReader.close();
         }
         catch (Exception e) {
-            log.error(String.format("Failed to read users from CSV file %s", file.getFilename()), e);
+            log.error(String.format("Failed to read application categories from CSV file %s", file.getFilename()), e);
         }
         return result;
     }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.model.application.ApplicationCategory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ApplicationCategoryContentProviderImpl implements ApplicationCategoryContentProvider {
+@Profile("random-application-categories-provider")
+public class ApplicationCategoryRandomContentProvider implements ApplicationCategoryContentProvider {
 
     private final IdProvider idProvider;
 
@@ -20,7 +22,9 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
 
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationCategoryContentProviderImpl(IdProvider idProvider, ApplicationCategoryNameProvider applicationCategoryNameProvider, CreationDateProvider creationDateProvider) {
+    public ApplicationCategoryRandomContentProvider(IdProvider idProvider,
+                                                    ApplicationCategoryNameProvider applicationCategoryNameProvider,
+                                                    CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
         this.applicationCategoryNameProvider = applicationCategoryNameProvider;
         this.creationDateProvider = creationDateProvider;
@@ -37,6 +41,10 @@ public class ApplicationCategoryContentProviderImpl implements ApplicationCatego
     }
 
     private @NotNull ApplicationCategory getApplicationCategory() {
-        return new ApplicationCategory(idProvider.getRandom(), applicationCategoryNameProvider.get(), creationDateProvider.getNow());
+        return new ApplicationCategory(
+                idProvider.getRandom(),
+                applicationCategoryNameProvider.get(),
+                creationDateProvider.getNow()
+        );
     }
 }

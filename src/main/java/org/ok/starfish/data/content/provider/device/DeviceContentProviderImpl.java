@@ -25,7 +25,10 @@ public class DeviceContentProviderImpl implements DeviceContentProvider {
 
     private final CreationDateProvider creationDateProvider;
 
-    public DeviceContentProviderImpl(UserService userService, IdProvider idProvider, DeviceNameProvider userNameProvider, CreationDateProvider creationDateProvider) {
+    public DeviceContentProviderImpl(UserService userService,
+                                     IdProvider idProvider,
+                                     DeviceNameProvider userNameProvider,
+                                     CreationDateProvider creationDateProvider) {
         this.userService = userService;
         this.idProvider = idProvider;
         this.deviceNameProvider = userNameProvider;

@@ -18,33 +18,35 @@ public class AccountCSVContentProvider implements AccountContentProvider {
 
     private final IdProvider idProvider;
 
-    private final AccountsCsvReader accountsCsvReader;
+    private final AccountsCsvReader csvReader;
 
     private final CreationDateProvider creationDateProvider;
 
-    public AccountCSVContentProvider(IdProvider idProvider, AccountsCsvReader accountsCsvReader, CreationDateProvider creationDateProvider) {
+    public AccountCSVContentProvider(IdProvider idProvider,
+                                     AccountsCsvReader accountsCsvReader,
+                                     CreationDateProvider creationDateProvider) {
         this.idProvider = idProvider;
-        this.accountsCsvReader = accountsCsvReader;
+        this.csvReader = accountsCsvReader;
         this.creationDateProvider = creationDateProvider;
     }
 
     @Override
     public List<Account> get(int numberOfItems) {
-        List<AccountLine> accountLines = accountsCsvReader.read();
+        List<AccountLine> lines = csvReader.read();
         List<Account> result =  new ArrayList<>();
         for(int i=0; i<numberOfItems; i++) {
-            result.add(getAccount(accountLines.get(i)));
+            result.add(getAccount(lines.get(i)));
         }
         log.info("{} accounts provided", result.size());
         return result;
     }
 
-    private @NotNull Account getAccount(@NotNull AccountLine accountLine) {
+    private @NotNull Account getAccount(@NotNull AccountLine line) {
         return new Account(
                 idProvider.getRandom(),
-                accountLine.getSymbol(),
-                accountLine.getName(),
-                accountLine.getSector(),
+                line.getSymbol(),
+                line.getName(),
+                line.getSector(),
                 creationDateProvider.getNow()
         );
     }

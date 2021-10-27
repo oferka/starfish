@@ -8,13 +8,13 @@ import javax.validation.constraints.NotNull;
 public class AccountsCsvLineReader {
 
     public @NotNull AccountLine read(@NotNull String[] line) {
-        String accountSymbol = line[0];
-        String accountName = line[1];
-        String accountSector = line[2];
+        String symbol = line[0];
+        String name = line[1];
+        String sector = line[2];
         return new AccountLine(
-                accountSymbol,
-                accountName,
-                accountSector
+                symbol,
+                name,
+                sector
         );
     }
 }
