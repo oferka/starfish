@@ -39,6 +39,13 @@ public class Account {
     @Size(min = 2, max = 64)
     @NotBlank
     @Field(type = Keyword)
+    private final String symbol;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
     private final String name;
 
     @Getter

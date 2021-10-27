@@ -1,7 +1,9 @@
 package org.ok.starfish.data.sample.account;
 
-import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
+import org.ok.starfish.data.content.provider.account.AccountNameProvider;
+import org.ok.starfish.data.content.provider.account.AccountSectorProvider;
+import org.ok.starfish.data.content.provider.account.AccountSymbolProvider;
 import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,19 @@ import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 
 @Service
 @Slf4j
-public class MockAccountProvider implements SampleAccountProvider {
+public class MockSampleAccountProvider implements SampleAccountProvider {
+
+    private final AccountSymbolProvider accountSymbolProvider;
+
+    private final AccountNameProvider accountNameProvider;
+
+    private final AccountSectorProvider accountSectorProvider;
+
+    public MockSampleAccountProvider(AccountSymbolProvider accountSymbolProvider, AccountNameProvider accountNameProvider, AccountSectorProvider accountSectorProvider) {
+        this.accountSymbolProvider = accountSymbolProvider;
+        this.accountNameProvider = accountNameProvider;
+        this.accountSectorProvider = accountSectorProvider;
+    }
 
     @Override
     public @NotNull Account getItem() {
@@ -34,19 +48,12 @@ public class MockAccountProvider implements SampleAccountProvider {
     private @NotNull Account getItem(int itemNumber) {
         Account result = new Account(
                 getUniqueId(),
-                getRandomAccountName(),
-                getRandomAccountSector(),
+                accountSymbolProvider.get(),
+                accountNameProvider.get(),
+                accountSectorProvider.get(),
                 now(ZoneOffset.UTC)
         );
         log.info("Account {} created: {}", itemNumber, result);
         return result;
-    }
-
-    private @NotNull String getRandomAccountName() {
-        return new Faker().company().name();
-    }
-
-    private @NotNull String getRandomAccountSector() {
-        return new Faker().company().industry();
     }
 }

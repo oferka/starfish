@@ -11,11 +11,11 @@ import lombok.ToString;
 public class AccountLine {
 
     @Getter
-    private String accountSymbol;
+    private String symbol;
 
     @Getter
-    private String accountName;
+    private String name;
 
     @Getter
-    private String accountSector;
+    private String sector;
 }

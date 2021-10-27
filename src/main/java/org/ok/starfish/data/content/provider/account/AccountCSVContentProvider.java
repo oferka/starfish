@@ -42,8 +42,9 @@ public class AccountCSVContentProvider implements AccountContentProvider {
     private @NotNull Account getAccount(@NotNull AccountLine accountLine) {
         return new Account(
                 idProvider.getRandom(),
-                accountLine.getAccountName(),
-                accountLine.getAccountSector(),
+                accountLine.getSymbol(),
+                accountLine.getName(),
+                accountLine.getSector(),
                 creationDateProvider.getNow()
         );
     }
