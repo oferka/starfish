@@ -53,6 +53,7 @@ public class UserCSVContentProvider implements UserContentProvider {
                     userLine.getGender(),
                     userLine.getTitle(),
                     userLine.getFirstName(),
+                    userLine.getLastName(),
                     creationDateProvider.getNow(),
                     account.get()
             );

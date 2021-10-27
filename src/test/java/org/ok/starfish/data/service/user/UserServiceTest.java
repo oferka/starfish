@@ -121,6 +121,23 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByLastName() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String lastName = items.get(0).getLastName();
+        List<User> found = userService.findByLastName(lastName);
+        assertFalse(found.isEmpty());
+        assertEquals(lastName, found.get(0).getLastName());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByLastName() {
+        List<User> found = userService.findByLastName(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);

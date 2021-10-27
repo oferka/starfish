@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Service
-public class UserFirstNameProviderImpl implements UserFirstNameProvider {
+public class UserLastNameProviderImpl implements UserLastNameProvider {
 
     @Override
     public @NotNull @Size(min = 2, max = 64) @NotBlank String get() {
-        return new Faker().name().firstName();
+        return new Faker().name().lastName();
     }
 }

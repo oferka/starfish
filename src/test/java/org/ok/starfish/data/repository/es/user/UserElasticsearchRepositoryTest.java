@@ -115,13 +115,30 @@ public class UserElasticsearchRepositoryTest {
         List<User> foundItems = userElasticsearchRepository.findByFirstName(item.getFirstName());
         assertFalse(foundItems.isEmpty());
         User foundItem = foundItems.get(0);
-        assertEquals(item.getId(), foundItem.getId());
+        assertEquals(item.getFirstName(), foundItem.getFirstName());
         userElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemByFirstName() {
         List<User> foundItems = userElasticsearchRepository.findByFirstName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByLastName() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByLastName(item.getLastName());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getLastName(), foundItem.getLastName());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByLastName() {
+        List<User> foundItems = userElasticsearchRepository.findByLastName(getNonExistingName());
         assertTrue(foundItems.isEmpty());
     }
 

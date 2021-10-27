@@ -54,6 +54,13 @@ public class User {
     @Field(type = Keyword)
     private final String firstName;
 
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String lastName;
+
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter
     @NotNull
