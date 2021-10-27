@@ -35,6 +35,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public @NotNull List<Account> findBySymbol(@NotNull String symbol) {
+        return accountElasticsearchRepository.findBySymbol(symbol);
+    }
+
+    @Override
     public @NotNull List<Account> findByName(@NotNull String name) {
         return accountElasticsearchRepository.findByName(name);
     }

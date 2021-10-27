@@ -70,6 +70,23 @@ public class AccountServiceTest {
     }
 
     @Test
+    public void shouldFindBySymbol() {
+        List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
+        Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);
+        String symbol = items.get(0).getSymbol();
+        List<Account> found = accountService.findBySymbol(symbol);
+        assertFalse(found.isEmpty());
+        assertEquals(symbol, found.get(0).getSymbol());
+        accountElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindBySymbol() {
+        List<Account> found = accountService.findBySymbol(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByName() {
         List<Account> items = sampleAccountProvider.getItems(numberOfItemsToLoad);
         Iterable<Account> saved = accountElasticsearchRepository.saveAll(items);

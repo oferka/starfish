@@ -13,6 +13,8 @@ public interface AccountService {
 
     @NotNull Optional<Account> findById(@NotNull String id);
 
+    @NotNull List<Account> findBySymbol(@NotNull String symbol);
+
     @NotNull List<Account> findByName(@NotNull String name);
 
     @NotNull List<Account> findBySector(@NotNull String sector);

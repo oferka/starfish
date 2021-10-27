@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface AccountElasticsearchRepository extends ElasticsearchRepository<Account, String> {
 
+    List<Account> findBySymbol(String symbol);
+
     List<Account> findByName(String name);
 
     List<Account> findBySector(String sector);
