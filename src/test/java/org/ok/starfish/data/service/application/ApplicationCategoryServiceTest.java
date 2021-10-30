@@ -112,6 +112,15 @@ public class ApplicationCategoryServiceTest {
     }
 
     @Test
+    public void shouldFindRandomMultiple() {
+        List<ApplicationCategory> items = sampleApplicationCategoryProvider.getItems(numberOfItemsToLoad);
+        Iterable<ApplicationCategory> saved = applicationCategoryElasticsearchRepository.saveAll(items);
+        List<ApplicationCategory> found = applicationCategoryService.findRandom(2);
+        assertFalse(found.isEmpty());
+        applicationCategoryElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
     public void shouldSave() {
         ApplicationCategory item = sampleApplicationCategoryProvider.getItem();
         ApplicationCategory saved = applicationCategoryService.save(item);
