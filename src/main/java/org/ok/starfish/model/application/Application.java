@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Keyword;
 
@@ -49,5 +50,5 @@ public class Application {
     @Getter
     @NotNull
     @Field(type = FieldType.Object)
-    private ApplicationCategory applicationCategory;
+    private List<ApplicationCategory> applicationCategories;
 }

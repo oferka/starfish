@@ -1,7 +1,7 @@
 package org.ok.starfish.data.sample.application;
 
-import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
+import org.ok.starfish.data.content.provider.application.ApplicationCategoryNameProvider;
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,12 @@ import static org.ok.starfish.data.TestDataUtils.getUniqueId;
 @Service
 @Slf4j
 public class MockApplicationCategoryProvider implements SampleApplicationCategoryProvider {
+
+    private final ApplicationCategoryNameProvider applicationCategoryNameProvider;
+
+    public MockApplicationCategoryProvider(ApplicationCategoryNameProvider applicationCategoryNameProvider) {
+        this.applicationCategoryNameProvider = applicationCategoryNameProvider;
+    }
 
     @Override
     public @NotNull ApplicationCategory getItem() {
@@ -32,12 +38,8 @@ public class MockApplicationCategoryProvider implements SampleApplicationCategor
     }
 
     private @NotNull ApplicationCategory getItem(int itemNumber) {
-        ApplicationCategory result = new ApplicationCategory(getUniqueId(), getRandomApplicationCategoryName(), now(ZoneOffset.UTC));
+        ApplicationCategory result = new ApplicationCategory(getUniqueId(), applicationCategoryNameProvider.get(), now(ZoneOffset.UTC));
         log.info("Application category {} created: {}", itemNumber, result);
         return result;
-    }
-
-    private @NotNull String getRandomApplicationCategoryName() {
-        return new Faker().name().name();
     }
 }

@@ -2,16 +2,15 @@ package org.ok.starfish.data.sample.application;
 
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 import org.ok.starfish.data.service.application.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
-import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static java.time.ZonedDateTime.now;
 import static org.ok.starfish.data.TestDataUtils.getUniqueId;
@@ -41,13 +40,10 @@ public class MockSampleApplicationProvider implements SampleApplicationProvider 
     }
 
     private @NotNull Application getItem(int itemNumber) {
-        Optional<ApplicationCategory> applicationCategory = applicationCategoryService.findRandom();
-        if(applicationCategory.isPresent()) {
-            Application result = new Application(getUniqueId(), getRandomApplicationName(), now(ZoneOffset.UTC), applicationCategory.get());
-            log.info("Application {} created: {}", itemNumber, result);
-            return result;
-        }
-        throw new RuntimeException("Failed to create application. Could not find a valid application category");
+        int numberOfCategories = RandomUtils.nextInt(1, 6);
+        Application result = new Application(getUniqueId(), getRandomApplicationName(), now(ZoneOffset.UTC), applicationCategoryService.findRandom(numberOfCategories));
+        log.info("Application {} created: {}", itemNumber, result);
+        return result;
     }
 
     private @NotNull String getRandomApplicationName() {

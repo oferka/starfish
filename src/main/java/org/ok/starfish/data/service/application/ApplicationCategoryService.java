@@ -19,6 +19,8 @@ public interface ApplicationCategoryService {
 
     @NotNull Optional<ApplicationCategory> findRandom();
 
+    @NotNull List<ApplicationCategory> findRandom(int count);
+
     long count();
 
     @NotNull ApplicationCategory save(@NotNull ApplicationCategory applicationCategory);

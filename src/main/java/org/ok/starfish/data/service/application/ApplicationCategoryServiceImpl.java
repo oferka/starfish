@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +53,21 @@ public class ApplicationCategoryServiceImpl implements ApplicationCategoryServic
         }
         ApplicationCategory item = items.get(RandomUtils.nextInt(0, items.size()));
         return Optional.of(item);
+    }
+
+    @Override
+    public List<ApplicationCategory> findRandom(int count) {
+        List<ApplicationCategory> result = new ArrayList<>();
+        for(int i=0; i<count; i++) {
+            Optional<ApplicationCategory> applicationCategory = findRandom();
+            if(applicationCategory.isPresent()) {
+                result.add(applicationCategory.get());
+            }
+            else {
+                throw new RuntimeException("Failed to create a random list of application categories");
+            }
+        }
+        return result;
     }
 
     @Override
