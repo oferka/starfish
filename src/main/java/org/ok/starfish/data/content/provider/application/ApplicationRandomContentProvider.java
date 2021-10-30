@@ -6,6 +6,7 @@ import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.service.application.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ApplicationContentProviderImpl implements ApplicationContentProvider {
+@Profile("random-applications-provider")
+public class ApplicationRandomContentProvider implements ApplicationContentProvider {
 
     private final ApplicationCategoryService applicationCategoryService;
 
@@ -24,10 +26,10 @@ public class ApplicationContentProviderImpl implements ApplicationContentProvide
 
     private final CreationDateProvider creationDateProvider;
 
-    public ApplicationContentProviderImpl(ApplicationCategoryService applicationCategoryService,
-                                          IdProvider idProvider,
-                                          ApplicationNameProvider applicationNameProvider,
-                                          CreationDateProvider creationDateProvider) {
+    public ApplicationRandomContentProvider(ApplicationCategoryService applicationCategoryService,
+                                            IdProvider idProvider,
+                                            ApplicationNameProvider applicationNameProvider,
+                                            CreationDateProvider creationDateProvider) {
         this.applicationCategoryService = applicationCategoryService;
         this.idProvider = idProvider;
         this.applicationNameProvider = applicationNameProvider;
