@@ -58,6 +58,18 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserDateOfRegistrationProvider userDateOfRegistrationProvider;
 
+    private final UserPhoneProvider userPhoneProvider;
+
+    private final UserCellProvider userCellProvider;
+
+    private final UserLargePictureProvider userLargePictureProvider;
+
+    private final UserMediumPictureProvider userMediumPictureProvider;
+
+    private final UserThumbnailPictureProvider userThumbnailPictureProvider;
+
+    private final UserNationalityProvider userNationalityProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -79,6 +91,12 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserEmailProvider userEmailProvider,
                                      UserDateOfBirthProvider userDateOfBirthProvider,
                                      UserDateOfRegistrationProvider userDateOfRegistrationProvider,
+                                     UserPhoneProvider userPhoneProvider,
+                                     UserCellProvider userCellProvider,
+                                     UserLargePictureProvider userLargePictureProvider,
+                                     UserMediumPictureProvider userMediumPictureProvider,
+                                     UserThumbnailPictureProvider userThumbnailPictureProvider,
+                                     UserNationalityProvider userNationalityProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -99,6 +117,12 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userEmailProvider = userEmailProvider;
         this.userDateOfBirthProvider = userDateOfBirthProvider;
         this.userDateOfRegistrationProvider = userDateOfRegistrationProvider;
+        this.userPhoneProvider = userPhoneProvider;
+        this.userCellProvider = userCellProvider;
+        this.userLargePictureProvider = userLargePictureProvider;
+        this.userMediumPictureProvider = userMediumPictureProvider;
+        this.userThumbnailPictureProvider = userThumbnailPictureProvider;
+        this.userNationalityProvider = userNationalityProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -134,6 +158,12 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userEmailProvider.get(),
                     userDateOfBirthProvider.get(),
                     userDateOfRegistrationProvider.get(),
+                    userPhoneProvider.get(),
+                    userCellProvider.get(),
+                    userLargePictureProvider.get(),
+                    userMediumPictureProvider.get(),
+                    userThumbnailPictureProvider.get(),
+                    userNationalityProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );

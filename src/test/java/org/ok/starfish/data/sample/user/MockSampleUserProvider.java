@@ -56,6 +56,18 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserDateOfRegistrationProvider userDateOfRegistrationProvider;
 
+    private final UserPhoneProvider userPhoneProvider;
+
+    private final UserCellProvider userCellProvider;
+
+    private final UserLargePictureProvider userLargePictureProvider;
+
+    private final UserMediumPictureProvider userMediumPictureProvider;
+
+    private final UserThumbnailPictureProvider userThumbnailPictureProvider;
+
+    private final UserNationalityProvider userNationalityProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
@@ -73,7 +85,13 @@ public class MockSampleUserProvider implements SampleUserProvider {
                                   UserTimezoneDescriptionProvider userTimezoneDescriptionProvider,
                                   UserEmailProvider userEmailProvider,
                                   UserDateOfBirthProvider userDateOfBirthProvider,
-                                  UserDateOfRegistrationProvider userDateOfRegistrationProvider) {
+                                  UserDateOfRegistrationProvider userDateOfRegistrationProvider,
+                                  UserPhoneProvider userPhoneProvider,
+                                  UserCellProvider userCellProvider,
+                                  UserLargePictureProvider userLargePictureProvider,
+                                  UserMediumPictureProvider userMediumPictureProvider,
+                                  UserThumbnailPictureProvider userThumbnailPictureProvider,
+                                  UserNationalityProvider userNationalityProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
@@ -92,6 +110,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
         this.userEmailProvider = userEmailProvider;
         this.userDateOfBirthProvider = userDateOfBirthProvider;
         this.userDateOfRegistrationProvider = userDateOfRegistrationProvider;
+        this.userPhoneProvider = userPhoneProvider;
+        this.userCellProvider = userCellProvider;
+        this.userLargePictureProvider = userLargePictureProvider;
+        this.userMediumPictureProvider = userMediumPictureProvider;
+        this.userThumbnailPictureProvider = userThumbnailPictureProvider;
+        this.userNationalityProvider = userNationalityProvider;
     }
 
     @Override
@@ -130,6 +154,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userEmailProvider.get(),
                     userDateOfBirthProvider.get(),
                     userDateOfRegistrationProvider.get(),
+                    userPhoneProvider.get(),
+                    userCellProvider.get(),
+                    userLargePictureProvider.get(),
+                    userMediumPictureProvider.get(),
+                    userThumbnailPictureProvider.get(),
+                    userNationalityProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );

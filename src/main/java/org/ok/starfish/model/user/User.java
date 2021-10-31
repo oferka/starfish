@@ -142,6 +142,48 @@ public class User {
     @Field(type = FieldType.Date, format = DateFormat.date_time)
     private ZonedDateTime dateOfRegistration;
 
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String phone;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String cell;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String largePicture;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 512)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String mediumPicture;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 512)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String thumbnailPicture;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 512)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String nationality;
+
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter
     @NotNull

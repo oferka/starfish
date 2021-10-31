@@ -70,6 +70,12 @@ public class UserCSVContentProvider implements UserContentProvider {
                     line.getEmail(),
                     line.getDateOfBirth(),
                     line.getDateOfRegistration(),
+                    line.getPhone(),
+                    line.getCell(),
+                    line.getLargePicture(),
+                    line.getMediumPicture(),
+                    line.getThumbnailPicture(),
+                    line.getNationality(),
                     creationDateProvider.getNow(),
                     account.get()
             );
