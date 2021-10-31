@@ -1,6 +1,6 @@
 package org.ok.starfish.data.content.verifier.application;
 
-import org.ok.starfish.model.application.ApplicationCategory;
+import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 
 import javax.validation.constraints.NotNull;
 

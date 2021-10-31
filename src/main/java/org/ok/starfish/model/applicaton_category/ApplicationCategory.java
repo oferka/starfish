@@ -1,11 +1,10 @@
-package org.ok.starfish.model.application;
+package org.ok.starfish.model.applicaton_category;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -17,14 +16,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Keyword;
 
 @ToString
 @AllArgsConstructor
-@Document(indexName = "starfish_application")
-public class Application {
+@Document(indexName = "starfish_application_category")
+public class ApplicationCategory {
 
     @Id
     @Getter
@@ -47,9 +45,4 @@ public class Application {
     @Past
     @Field(type = FieldType.Date, format = DateFormat.date_time)
     private ZonedDateTime createdDate;
-
-    @Getter
-    @NotNull
-    @Field(type = FieldType.Object)
-    private List<ApplicationCategory> applicationCategories;
 }

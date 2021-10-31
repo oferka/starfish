@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.content.provider.application.properties.ApplicationNameProvider;
-import org.ok.starfish.data.service.application.ApplicationCategoryService;
+import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;

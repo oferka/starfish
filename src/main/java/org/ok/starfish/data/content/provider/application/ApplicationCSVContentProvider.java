@@ -3,9 +3,9 @@ package org.ok.starfish.data.content.provider.application;
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
-import org.ok.starfish.data.service.application.ApplicationCategoryService;
+import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
-import org.ok.starfish.model.application.ApplicationCategory;
+import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 

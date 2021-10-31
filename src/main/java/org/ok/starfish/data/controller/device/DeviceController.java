@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.ok.starfish.data.controller.application.ApplicationCategoryController;
+import org.ok.starfish.data.controller.applicaton_category.ApplicationCategoryController;
 import org.ok.starfish.data.service.device.DeviceService;
 import org.ok.starfish.model.device.Device;
 import org.springframework.http.HttpHeaders;

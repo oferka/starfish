@@ -3,7 +3,7 @@ package org.ok.starfish.data.sample.application;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
-import org.ok.starfish.data.service.application.ApplicationCategoryService;
+import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
 import org.springframework.stereotype.Service;
 

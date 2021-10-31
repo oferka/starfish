@@ -1,8 +1,8 @@
 package org.ok.starfish.data.content.verifier.application;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.service.application.ApplicationCategoryService;
-import org.ok.starfish.model.application.ApplicationCategory;
+import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
+import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
