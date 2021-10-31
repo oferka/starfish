@@ -54,6 +54,10 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserEmailProvider userEmailProvider;
 
+    private final UserDateOfBirthProvider userDateOfBirthProvider;
+
+    private final UserDateOfRegistrationProvider userDateOfRegistrationProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -73,6 +77,8 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserTimezoneOffsetProvider userTimezoneOffsetProvider,
                                      UserTimezoneDescriptionProvider userTimezoneDescriptionProvider,
                                      UserEmailProvider userEmailProvider,
+                                     UserDateOfBirthProvider userDateOfBirthProvider,
+                                     UserDateOfRegistrationProvider userDateOfRegistrationProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -91,6 +97,8 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userTimezoneOffsetProvider = userTimezoneOffsetProvider;
         this.userTimezoneDescriptionProvider = userTimezoneDescriptionProvider;
         this.userEmailProvider = userEmailProvider;
+        this.userDateOfBirthProvider = userDateOfBirthProvider;
+        this.userDateOfRegistrationProvider = userDateOfRegistrationProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -124,6 +132,8 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userTimezoneOffsetProvider.get(),
                     userTimezoneDescriptionProvider.get(),
                     userEmailProvider.get(),
+                    userDateOfBirthProvider.get(),
+                    userDateOfRegistrationProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );

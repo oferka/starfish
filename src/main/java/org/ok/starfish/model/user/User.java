@@ -133,6 +133,20 @@ public class User {
     @NotNull
     @Past
     @Field(type = FieldType.Date, format = DateFormat.date_time)
+    private ZonedDateTime dateOfBirth;
+
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    @Getter
+    @NotNull
+    @Past
+    @Field(type = FieldType.Date, format = DateFormat.date_time)
+    private ZonedDateTime dateOfRegistration;
+
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    @Getter
+    @NotNull
+    @Past
+    @Field(type = FieldType.Date, format = DateFormat.date_time)
     private ZonedDateTime createdDate;
 
     @Getter

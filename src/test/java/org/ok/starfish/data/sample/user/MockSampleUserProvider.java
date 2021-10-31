@@ -52,6 +52,10 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserEmailProvider userEmailProvider;
 
+    private final UserDateOfBirthProvider userDateOfBirthProvider;
+
+    private final UserDateOfRegistrationProvider userDateOfRegistrationProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
@@ -64,7 +68,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
                                   UserCountryProvider userCountryProvider,
                                   UserPostcodeProvider userPostcodeProvider,
                                   UserLatitudeProvider userLatitudeProvider,
-                                  UserLongitudeProvider userLongitudeProvider, UserTimezoneOffsetProvider userTimezoneOffsetProvider, UserTimezoneDescriptionProvider userTimezoneDescriptionProvider, UserEmailProvider userEmailProvider) {
+                                  UserLongitudeProvider userLongitudeProvider,
+                                  UserTimezoneOffsetProvider userTimezoneOffsetProvider,
+                                  UserTimezoneDescriptionProvider userTimezoneDescriptionProvider,
+                                  UserEmailProvider userEmailProvider,
+                                  UserDateOfBirthProvider userDateOfBirthProvider,
+                                  UserDateOfRegistrationProvider userDateOfRegistrationProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
@@ -81,6 +90,8 @@ public class MockSampleUserProvider implements SampleUserProvider {
         this.userTimezoneOffsetProvider = userTimezoneOffsetProvider;
         this.userTimezoneDescriptionProvider = userTimezoneDescriptionProvider;
         this.userEmailProvider = userEmailProvider;
+        this.userDateOfBirthProvider = userDateOfBirthProvider;
+        this.userDateOfRegistrationProvider = userDateOfRegistrationProvider;
     }
 
     @Override
@@ -117,6 +128,8 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userTimezoneOffsetProvider.get(),
                     userTimezoneDescriptionProvider.get(),
                     userEmailProvider.get(),
+                    userDateOfBirthProvider.get(),
+                    userDateOfRegistrationProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );

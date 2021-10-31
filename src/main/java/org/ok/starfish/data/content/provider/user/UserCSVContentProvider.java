@@ -68,6 +68,8 @@ public class UserCSVContentProvider implements UserContentProvider {
                     line.getTimezoneOffset(),
                     line.getTimezoneDescription(),
                     line.getEmail(),
+                    line.getDateOfBirth(),
+                    line.getDateOfRegistration(),
                     creationDateProvider.getNow(),
                     account.get()
             );
