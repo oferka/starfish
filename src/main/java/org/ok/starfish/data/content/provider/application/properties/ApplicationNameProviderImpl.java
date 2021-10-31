@@ -1,6 +1,6 @@
-package org.ok.starfish.data.content.provider.user;
+package org.ok.starfish.data.content.provider.application.properties;
 
-import org.apache.commons.lang3.RandomUtils;
+import com.github.javafaker.Faker;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Service
-public class UserGenderProviderImpl implements UserGenderProvider {
+public class ApplicationNameProviderImpl implements ApplicationNameProvider {
 
     @Override
     public @NotNull @Size(min = 2, max = 64) @NotBlank String get() {
-        return RandomUtils.nextBoolean()? "male" : "female";
+        return new Faker().app().name();
     }
 }

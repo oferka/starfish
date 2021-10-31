@@ -12,10 +12,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.ZonedDateTime;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Keyword;
@@ -60,6 +57,11 @@ public class User {
     @NotBlank
     @Field(type = Keyword)
     private final String lastName;
+
+    @Getter
+    @Field(type = FieldType.Integer)
+    @Positive
+    private final int streetNumber;
 
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter

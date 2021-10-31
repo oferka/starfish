@@ -1,9 +1,9 @@
 package org.ok.starfish.data.sample.account;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.content.provider.account.AccountNameProvider;
-import org.ok.starfish.data.content.provider.account.AccountSectorProvider;
-import org.ok.starfish.data.content.provider.account.AccountSymbolProvider;
+import org.ok.starfish.data.content.provider.account.properties.AccountNameProvider;
+import org.ok.starfish.data.content.provider.account.properties.AccountSectorProvider;
+import org.ok.starfish.data.content.provider.account.properties.AccountSymbolProvider;
 import org.ok.starfish.model.account.Account;
 import org.springframework.stereotype.Service;
 

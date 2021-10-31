@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.provider.account;
+package org.ok.starfish.data.content.provider.account.properties;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

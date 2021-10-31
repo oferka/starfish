@@ -1,7 +1,7 @@
 package org.ok.starfish.data.sample.application;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.content.provider.application.ApplicationCategoryNameProvider;
+import org.ok.starfish.data.content.provider.application.properties.ApplicationCategoryNameProvider;
 import org.ok.starfish.model.application.ApplicationCategory;
 import org.springframework.stereotype.Service;
 

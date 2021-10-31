@@ -1,10 +1,7 @@
 package org.ok.starfish.data.sample.user;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ok.starfish.data.content.provider.user.UserFirstNameProvider;
-import org.ok.starfish.data.content.provider.user.UserGenderProvider;
-import org.ok.starfish.data.content.provider.user.UserLastNameProvider;
-import org.ok.starfish.data.content.provider.user.UserTitleProvider;
+import org.ok.starfish.data.content.provider.user.properties.*;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.User;
@@ -33,16 +30,20 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserLastNameProvider userLastNameProvider;
 
+    private final UserStreetNumberProvider userStreetNumberProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
                                   UserFirstNameProvider userFirstNameProvider,
-                                  UserLastNameProvider userLastNameProvider) {
+                                  UserLastNameProvider userLastNameProvider,
+                                  UserStreetNumberProvider userStreetNumberProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
         this.userFirstNameProvider = userFirstNameProvider;
         this.userLastNameProvider = userLastNameProvider;
+        this.userStreetNumberProvider = userStreetNumberProvider;
     }
 
     @Override
@@ -68,6 +69,7 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userTitleProvider.get(),
                     userFirstNameProvider.get(),
                     userLastNameProvider.get(),
+                    userStreetNumberProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );

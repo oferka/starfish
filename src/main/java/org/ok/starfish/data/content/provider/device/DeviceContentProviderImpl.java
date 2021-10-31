@@ -3,6 +3,7 @@ package org.ok.starfish.data.content.provider.device;
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
+import org.ok.starfish.data.content.provider.device.properties.DeviceNameProvider;
 import org.ok.starfish.data.service.user.UserService;
 import org.ok.starfish.model.device.Device;
 import org.ok.starfish.model.user.User;

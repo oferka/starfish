@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
+import org.ok.starfish.data.content.provider.application.properties.ApplicationNameProvider;
 import org.ok.starfish.data.service.application.ApplicationCategoryService;
 import org.ok.starfish.model.application.Application;
 import org.springframework.context.annotation.Profile;

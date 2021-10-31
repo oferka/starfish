@@ -3,6 +3,7 @@ package org.ok.starfish.data.content.provider.user;
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
+import org.ok.starfish.data.content.provider.user.properties.*;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.user.User;
@@ -31,6 +32,8 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserLastNameProvider userLastNameProvider;
 
+    private final UserStreetNumberProvider userStreetNumberProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -39,6 +42,7 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserTitleProvider userTitleProvider,
                                      UserFirstNameProvider userFirstNameProvider,
                                      UserLastNameProvider userLastNameProvider,
+                                     UserStreetNumberProvider userStreetNumberProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -46,6 +50,7 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userTitleProvider = userTitleProvider;
         this.userFirstNameProvider = userFirstNameProvider;
         this.userLastNameProvider = userLastNameProvider;
+        this.userStreetNumberProvider = userStreetNumberProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -68,6 +73,7 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userTitleProvider.get(),
                     userFirstNameProvider.get(),
                     userLastNameProvider.get(),
+                    userStreetNumberProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );

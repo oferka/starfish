@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.provider.user;
+package org.ok.starfish.data.content.provider.user.properties;
 
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Service;

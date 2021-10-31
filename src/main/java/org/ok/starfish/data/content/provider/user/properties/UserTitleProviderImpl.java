@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.provider.user;
+package org.ok.starfish.data.content.provider.user.properties;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Service;
