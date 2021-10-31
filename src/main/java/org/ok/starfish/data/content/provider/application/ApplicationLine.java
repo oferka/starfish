@@ -14,5 +14,5 @@ public class ApplicationLine {
     private String name;
 
     @Getter
-    private String categories;
+    private String categoryNames;
 }

@@ -52,7 +52,7 @@ public class ApplicationCSVContentProvider implements ApplicationContentProvider
                 idProvider.getRandom(),
                 line.getName(),
                 creationDateProvider.getNow(),
-                getApplicationCategories(line.getCategories())
+                getApplicationCategories(line.getCategoryNames())
         );
     }
 
