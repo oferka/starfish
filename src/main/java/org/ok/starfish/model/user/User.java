@@ -63,6 +63,34 @@ public class User {
     @Positive
     private final int streetNumber;
 
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String streetName;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String city;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String state;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String country;
+
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter
     @NotNull

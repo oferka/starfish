@@ -34,6 +34,14 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserStreetNumberProvider userStreetNumberProvider;
 
+    private final UserStreetNameProvider userStreetNameProvider;
+
+    private final UserCityProvider userCityProvider;
+
+    private final UserStateProvider userStateProvider;
+
+    private final UserCountryProvider userCountryProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -43,6 +51,10 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserFirstNameProvider userFirstNameProvider,
                                      UserLastNameProvider userLastNameProvider,
                                      UserStreetNumberProvider userStreetNumberProvider,
+                                     UserStreetNameProvider userStreetNameProvider,
+                                     UserCityProvider userCityProvider,
+                                     UserStateProvider userStateProvider,
+                                     UserCountryProvider userCountryProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -51,6 +63,10 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userFirstNameProvider = userFirstNameProvider;
         this.userLastNameProvider = userLastNameProvider;
         this.userStreetNumberProvider = userStreetNumberProvider;
+        this.userStreetNameProvider = userStreetNameProvider;
+        this.userCityProvider = userCityProvider;
+        this.userStateProvider = userStateProvider;
+        this.userCountryProvider = userCountryProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -74,6 +90,10 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userFirstNameProvider.get(),
                     userLastNameProvider.get(),
                     userStreetNumberProvider.get(),
+                    userStreetNameProvider.get(),
+                    userCityProvider.get(),
+                    userStateProvider.get(),
+                    userCountryProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );

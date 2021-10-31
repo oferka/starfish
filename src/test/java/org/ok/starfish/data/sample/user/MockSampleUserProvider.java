@@ -32,18 +32,34 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserStreetNumberProvider userStreetNumberProvider;
 
+    private final UserStreetNameProvider userStreetNameProvider;
+
+    private final UserCityProvider userCityProvider;
+
+    private final UserStateProvider userStateProvider;
+
+    private final UserCountryProvider userCountryProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
                                   UserFirstNameProvider userFirstNameProvider,
                                   UserLastNameProvider userLastNameProvider,
-                                  UserStreetNumberProvider userStreetNumberProvider) {
+                                  UserStreetNumberProvider userStreetNumberProvider,
+                                  UserStreetNameProvider userStreetNameProvider,
+                                  UserCityProvider userCityProvider,
+                                  UserStateProvider userStateProvider,
+                                  UserCountryProvider userCountryProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
         this.userFirstNameProvider = userFirstNameProvider;
         this.userLastNameProvider = userLastNameProvider;
         this.userStreetNumberProvider = userStreetNumberProvider;
+        this.userStreetNameProvider = userStreetNameProvider;
+        this.userCityProvider = userCityProvider;
+        this.userStateProvider = userStateProvider;
+        this.userCountryProvider = userCountryProvider;
     }
 
     @Override
@@ -70,6 +86,10 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userFirstNameProvider.get(),
                     userLastNameProvider.get(),
                     userStreetNumberProvider.get(),
+                    userStreetNameProvider.get(),
+                    userCityProvider.get(),
+                    userStateProvider.get(),
+                    userCountryProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );
