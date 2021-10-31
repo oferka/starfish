@@ -40,6 +40,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserCountryProvider userCountryProvider;
 
+    private final UserPostcodeProvider userPostcodeProvider;
+
+    private final UserLatitudeProvider userLatitudeProvider;
+
+    private final UserLongitudeProvider userLongitudeProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
@@ -49,7 +55,10 @@ public class MockSampleUserProvider implements SampleUserProvider {
                                   UserStreetNameProvider userStreetNameProvider,
                                   UserCityProvider userCityProvider,
                                   UserStateProvider userStateProvider,
-                                  UserCountryProvider userCountryProvider) {
+                                  UserCountryProvider userCountryProvider,
+                                  UserPostcodeProvider userPostcodeProvider,
+                                  UserLatitudeProvider userLatitudeProvider,
+                                  UserLongitudeProvider userLongitudeProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
@@ -60,6 +69,9 @@ public class MockSampleUserProvider implements SampleUserProvider {
         this.userCityProvider = userCityProvider;
         this.userStateProvider = userStateProvider;
         this.userCountryProvider = userCountryProvider;
+        this.userPostcodeProvider = userPostcodeProvider;
+        this.userLatitudeProvider = userLatitudeProvider;
+        this.userLongitudeProvider = userLongitudeProvider;
     }
 
     @Override
@@ -90,6 +102,9 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userCityProvider.get(),
                     userStateProvider.get(),
                     userCountryProvider.get(),
+                    userPostcodeProvider.get(),
+                    userLatitudeProvider.get(),
+                    userLongitudeProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );

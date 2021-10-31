@@ -91,6 +91,21 @@ public class User {
     @Field(type = Keyword)
     private final String country;
 
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 64)
+    @NotBlank
+    @Field(type = Keyword)
+    private final String postcode;
+
+    @Getter
+    @Field(type = FieldType.Double)
+    private final double latitude;
+
+    @Getter
+    @Field(type = FieldType.Double)
+    private final double longitude;
+
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter
     @NotNull

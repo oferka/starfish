@@ -62,6 +62,9 @@ public class UserCSVContentProvider implements UserContentProvider {
                     line.getCity(),
                     line.getState(),
                     line.getCountry(),
+                    line.getPostcode(),
+                    line.getLatitude(),
+                    line.getLongitude(),
                     creationDateProvider.getNow(),
                     account.get()
             );

@@ -42,6 +42,12 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserCountryProvider userCountryProvider;
 
+    private final UserPostcodeProvider userPostcodeProvider;
+
+    private final UserLatitudeProvider userLatitudeProvider;
+
+    private final UserLongitudeProvider userLongitudeProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -55,6 +61,9 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserCityProvider userCityProvider,
                                      UserStateProvider userStateProvider,
                                      UserCountryProvider userCountryProvider,
+                                     UserPostcodeProvider userPostcodeProvider,
+                                     UserLatitudeProvider userLatitudeProvider,
+                                     UserLongitudeProvider userLongitudeProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -67,6 +76,9 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userCityProvider = userCityProvider;
         this.userStateProvider = userStateProvider;
         this.userCountryProvider = userCountryProvider;
+        this.userPostcodeProvider = userPostcodeProvider;
+        this.userLatitudeProvider = userLatitudeProvider;
+        this.userLongitudeProvider = userLongitudeProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -94,6 +106,9 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userCityProvider.get(),
                     userStateProvider.get(),
                     userCountryProvider.get(),
+                    userPostcodeProvider.get(),
+                    userLatitudeProvider.get(),
+                    userLongitudeProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );
