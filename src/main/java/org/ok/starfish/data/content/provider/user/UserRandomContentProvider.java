@@ -48,6 +48,12 @@ public class UserRandomContentProvider implements UserContentProvider {
 
     private final UserLongitudeProvider userLongitudeProvider;
 
+    private final UserTimezoneOffsetProvider userTimezoneOffsetProvider;
+
+    private final UserTimezoneDescriptionProvider userTimezoneDescriptionProvider;
+
+    private final UserEmailProvider userEmailProvider;
+
     private final CreationDateProvider creationDateProvider;
 
     public UserRandomContentProvider(AccountService accountService,
@@ -64,6 +70,9 @@ public class UserRandomContentProvider implements UserContentProvider {
                                      UserPostcodeProvider userPostcodeProvider,
                                      UserLatitudeProvider userLatitudeProvider,
                                      UserLongitudeProvider userLongitudeProvider,
+                                     UserTimezoneOffsetProvider userTimezoneOffsetProvider,
+                                     UserTimezoneDescriptionProvider userTimezoneDescriptionProvider,
+                                     UserEmailProvider userEmailProvider,
                                      CreationDateProvider creationDateProvider) {
         this.accountService = accountService;
         this.idProvider = idProvider;
@@ -79,6 +88,9 @@ public class UserRandomContentProvider implements UserContentProvider {
         this.userPostcodeProvider = userPostcodeProvider;
         this.userLatitudeProvider = userLatitudeProvider;
         this.userLongitudeProvider = userLongitudeProvider;
+        this.userTimezoneOffsetProvider = userTimezoneOffsetProvider;
+        this.userTimezoneDescriptionProvider = userTimezoneDescriptionProvider;
+        this.userEmailProvider = userEmailProvider;
         this.creationDateProvider = creationDateProvider;
     }
 
@@ -109,6 +121,9 @@ public class UserRandomContentProvider implements UserContentProvider {
                     userPostcodeProvider.get(),
                     userLatitudeProvider.get(),
                     userLongitudeProvider.get(),
+                    userTimezoneOffsetProvider.get(),
+                    userTimezoneDescriptionProvider.get(),
+                    userEmailProvider.get(),
                     creationDateProvider.getNow(),
                     account.get()
             );

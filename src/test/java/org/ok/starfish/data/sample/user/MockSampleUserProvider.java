@@ -46,6 +46,12 @@ public class MockSampleUserProvider implements SampleUserProvider {
 
     private final UserLongitudeProvider userLongitudeProvider;
 
+    private final UserTimezoneOffsetProvider userTimezoneOffsetProvider;
+
+    private final UserTimezoneDescriptionProvider userTimezoneDescriptionProvider;
+
+    private final UserEmailProvider userEmailProvider;
+
     public MockSampleUserProvider(AccountService accountService,
                                   UserGenderProvider userGenderProvider,
                                   UserTitleProvider userTitleProvider,
@@ -58,7 +64,7 @@ public class MockSampleUserProvider implements SampleUserProvider {
                                   UserCountryProvider userCountryProvider,
                                   UserPostcodeProvider userPostcodeProvider,
                                   UserLatitudeProvider userLatitudeProvider,
-                                  UserLongitudeProvider userLongitudeProvider) {
+                                  UserLongitudeProvider userLongitudeProvider, UserTimezoneOffsetProvider userTimezoneOffsetProvider, UserTimezoneDescriptionProvider userTimezoneDescriptionProvider, UserEmailProvider userEmailProvider) {
         this.accountService = accountService;
         this.userGenderProvider = userGenderProvider;
         this.userTitleProvider = userTitleProvider;
@@ -72,6 +78,9 @@ public class MockSampleUserProvider implements SampleUserProvider {
         this.userPostcodeProvider = userPostcodeProvider;
         this.userLatitudeProvider = userLatitudeProvider;
         this.userLongitudeProvider = userLongitudeProvider;
+        this.userTimezoneOffsetProvider = userTimezoneOffsetProvider;
+        this.userTimezoneDescriptionProvider = userTimezoneDescriptionProvider;
+        this.userEmailProvider = userEmailProvider;
     }
 
     @Override
@@ -105,6 +114,9 @@ public class MockSampleUserProvider implements SampleUserProvider {
                     userPostcodeProvider.get(),
                     userLatitudeProvider.get(),
                     userLongitudeProvider.get(),
+                    userTimezoneOffsetProvider.get(),
+                    userTimezoneDescriptionProvider.get(),
+                    userEmailProvider.get(),
                     now(ZoneOffset.UTC),
                     account.get()
             );
