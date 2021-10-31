@@ -143,6 +143,23 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindItemByStreetNumber() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByStreetNumber(item.getStreetNumber());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getStreetNumber(), foundItem.getStreetNumber());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByStreetNumber() {
+        List<User> foundItems = userElasticsearchRepository.findByStreetNumber(getNonExistingNumber());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
     void shouldFindItemByCreatedDate() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);

@@ -18,6 +18,10 @@ public class TestDataUtils {
         return "No Such Name";
     }
 
+    public static @NotNull int getNonExistingNumber() {
+        return 13457452;
+    }
+
     public static @NotNull ZonedDateTime getNonExistingCreatedDate() {
         return ZonedDateTime.now().plusSeconds(1234567L);
     }

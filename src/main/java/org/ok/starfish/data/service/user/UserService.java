@@ -21,6 +21,8 @@ public interface UserService {
 
     @NotNull List<User> findByLastName(@NotNull String lastName);
 
+    @NotNull List<User> findByStreetNumber(int streetNumber);
+
     @NotNull List<User> findByCreatedDate(@NotNull ZonedDateTime createdDate);
 
     @NotNull Optional<User> findRandom();

@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public @NotNull List<User> findByStreetNumber(int streetNumber) {
+        return userElasticsearchRepository.findByStreetNumber(streetNumber);
+    }
+
+    @Override
     public List<User> findByCreatedDate(ZonedDateTime createdDate) {
         return userElasticsearchRepository.findByCreatedDate(createdDate);
     }

@@ -138,6 +138,23 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByStreetNumber() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        int streetNumber = items.get(0).getStreetNumber();
+        List<User> found = userService.findByStreetNumber(streetNumber);
+        assertFalse(found.isEmpty());
+        assertEquals(streetNumber, found.get(0).getStreetNumber());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByStreetNumber() {
+        List<User> found = userService.findByStreetNumber(getNonExistingNumber());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);

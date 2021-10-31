@@ -18,5 +18,7 @@ public interface UserElasticsearchRepository extends ElasticsearchRepository<Use
 
     List<User> findByLastName(String lastName);
 
+    List<User> findByStreetNumber(int streetNumber);
+
     List<User> findByCreatedDate(ZonedDateTime createdDate);
 }
