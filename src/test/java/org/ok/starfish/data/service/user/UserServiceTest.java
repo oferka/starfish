@@ -223,6 +223,108 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByPostcode() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String postcode = items.get(0).getPostcode();
+        List<User> found = userService.findByPostcode(postcode);
+        assertFalse(found.isEmpty());
+        assertEquals(postcode, found.get(0).getPostcode());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByPostcode() {
+        List<User> found = userService.findByPostcode(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByLatitude() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        double latitude = items.get(0).getLatitude();
+        List<User> found = userService.findByLatitude(latitude);
+        assertFalse(found.isEmpty());
+        assertEquals(latitude, found.get(0).getLatitude());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByLatitude() {
+        List<User> found = userService.findByLatitude(getNonExistingDouble());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByLongitude() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        double longitude = items.get(0).getLongitude();
+        List<User> found = userService.findByLongitude(longitude);
+        assertFalse(found.isEmpty());
+        assertEquals(longitude, found.get(0).getLongitude());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByLongitude() {
+        List<User> found = userService.findByLongitude(getNonExistingDouble());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByTimezoneOffset() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String timezoneOffset = items.get(0).getTimezoneOffset();
+        List<User> found = userService.findByTimezoneOffset(timezoneOffset);
+        assertFalse(found.isEmpty());
+        assertEquals(timezoneOffset, found.get(0).getTimezoneOffset());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByTimezoneOffset() {
+        List<User> found = userService.findByTimezoneOffset(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByTimezoneDescription() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String timezoneDescription = items.get(0).getTimezoneDescription();
+        List<User> found = userService.findByTimezoneDescription(timezoneDescription);
+        assertFalse(found.isEmpty());
+        assertEquals(timezoneDescription, found.get(0).getTimezoneDescription());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByTimezoneDescription() {
+        List<User> found = userService.findByTimezoneDescription(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByEmail() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String email = items.get(0).getEmail();
+        List<User> found = userService.findByEmail(email);
+        assertFalse(found.isEmpty());
+        assertEquals(email, found.get(0).getEmail());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByEmail() {
+        List<User> found = userService.findByEmail(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
