@@ -325,6 +325,38 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByDateOfBirth() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        ZonedDateTime dateOfBirth = items.get(0).getDateOfBirth();
+        List<User> found = userService.findByDateOfBirth(dateOfBirth);
+        assertFalse(found.isEmpty());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByDateOfBirth() {
+        List<User> found = userService.findByDateOfBirth(getNonExistingDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByDateOfRegistration() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        ZonedDateTime dateOfRegistration = items.get(0).getDateOfRegistration();
+        List<User> found = userService.findByDateOfRegistration(dateOfRegistration);
+        assertFalse(found.isEmpty());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByDateOfRegistration() {
+        List<User> found = userService.findByDateOfRegistration(getNonExistingDate());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
