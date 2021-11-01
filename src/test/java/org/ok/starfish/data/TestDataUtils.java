@@ -18,8 +18,12 @@ public class TestDataUtils {
         return "No Such Name";
     }
 
-    public static @NotNull int getNonExistingNumber() {
+    public static @NotNull int getNonExistingInteger() {
         return 13457452;
+    }
+
+    public static @NotNull double getNonExistingDouble() {
+        return 134.57452D;
     }
 
     public static @NotNull ZonedDateTime getNonExistingCreatedDate() {

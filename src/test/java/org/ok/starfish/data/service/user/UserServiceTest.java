@@ -150,7 +150,7 @@ public class UserServiceTest {
 
     @Test
     public void shouldNotFindByStreetNumber() {
-        List<User> found = userService.findByStreetNumber(getNonExistingNumber());
+        List<User> found = userService.findByStreetNumber(getNonExistingInteger());
         assertTrue(found.isEmpty());
     }
 

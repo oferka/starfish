@@ -155,7 +155,7 @@ public class UserElasticsearchRepositoryTest {
 
     @Test
     void shouldNotFindItemByStreetNumber() {
-        List<User> foundItems = userElasticsearchRepository.findByStreetNumber(getNonExistingNumber());
+        List<User> foundItems = userElasticsearchRepository.findByStreetNumber(getNonExistingInteger());
         assertTrue(foundItems.isEmpty());
     }
 
@@ -241,6 +241,40 @@ public class UserElasticsearchRepositoryTest {
     @Test
     void shouldNotFindItemByPostcode() {
         List<User> foundItems = userElasticsearchRepository.findByPostcode(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByLatitude() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByLatitude(item.getLatitude());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getLatitude(), foundItem.getLatitude());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByLatitude() {
+        List<User> foundItems = userElasticsearchRepository.findByLatitude(getNonExistingDouble());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByLongitude() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByLongitude(item.getLongitude());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getLongitude(), foundItem.getLongitude());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByLongitude() {
+        List<User> foundItems = userElasticsearchRepository.findByLongitude(getNonExistingDouble());
         assertTrue(foundItems.isEmpty());
     }
 
