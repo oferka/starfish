@@ -60,6 +60,96 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findByStreetName(String streetName) {
+        return userElasticsearchRepository.findByStreetName(streetName);
+    }
+
+    @Override
+    public List<User> findByCity(String city) {
+        return userElasticsearchRepository.findByCity(city);
+    }
+
+    @Override
+    public List<User> findByState(String state) {
+        return userElasticsearchRepository.findByState(state);
+    }
+
+    @Override
+    public List<User> findByCountry(String country) {
+        return userElasticsearchRepository.findByCountry(country);
+    }
+
+    @Override
+    public List<User> findByPostcode(String postcode) {
+        return userElasticsearchRepository.findByPostcode(postcode);
+    }
+
+    @Override
+    public List<User> findByLatitude(double latitude) {
+        return userElasticsearchRepository.findByLatitude(latitude);
+    }
+
+    @Override
+    public List<User> findByLongitude(double longitude) {
+        return userElasticsearchRepository.findByLongitude(longitude);
+    }
+
+    @Override
+    public List<User> findByTimezoneOffset(String timezoneOffset) {
+        return userElasticsearchRepository.findByTimezoneOffset(timezoneOffset);
+    }
+
+    @Override
+    public List<User> findByTimezoneDescription(String timezoneDescription) {
+        return userElasticsearchRepository.findByTimezoneDescription(timezoneDescription);
+    }
+
+    @Override
+    public List<User> findByEmail(String email) {
+        return userElasticsearchRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> findByDateOfBirth(ZonedDateTime dateOfBirth) {
+        return userElasticsearchRepository.findByDateOfBirth(dateOfBirth);
+    }
+
+    @Override
+    public List<User> findByDateOfRegistration(ZonedDateTime dateOfRegistration) {
+        return userElasticsearchRepository.findByDateOfRegistration(dateOfRegistration);
+    }
+
+    @Override
+    public List<User> findByPhone(String phone) {
+        return userElasticsearchRepository.findByPhone(phone);
+    }
+
+    @Override
+    public List<User> findByCell(String cell) {
+        return userElasticsearchRepository.findByCell(cell);
+    }
+
+    @Override
+    public List<User> findByLargePicture(String largePicture) {
+        return userElasticsearchRepository.findByLargePicture(largePicture);
+    }
+
+    @Override
+    public List<User> findByMediumPicture(String mediumPicture) {
+        return userElasticsearchRepository.findByMediumPicture(mediumPicture);
+    }
+
+    @Override
+    public List<User> findByThumbnailPicture(String thumbnailPicture) {
+        return userElasticsearchRepository.findByThumbnailPicture(thumbnailPicture);
+    }
+
+    @Override
+    public List<User> findByNationality(String nationality) {
+        return userElasticsearchRepository.findByNationality(nationality);
+    }
+
+    @Override
     public List<User> findByCreatedDate(ZonedDateTime createdDate) {
         return userElasticsearchRepository.findByCreatedDate(createdDate);
     }
