@@ -336,13 +336,30 @@ public class UserElasticsearchRepositoryTest {
         List<User> foundItems = userElasticsearchRepository.findByDateOfBirth(item.getDateOfBirth());
         assertFalse(foundItems.isEmpty());
         User foundItem = foundItems.get(0);
-        assertEquals(item.getDateOfBirth(), foundItem.getDateOfBirth());
+        assertNotNull(foundItem);
         userElasticsearchRepository.delete(saved);
     }
 
     @Test
     void shouldNotFindItemBDateOfBirth() {
         List<User> foundItems = userElasticsearchRepository.findByDateOfBirth(getNonExistingDate());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByDateOfRegistration() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByDateOfRegistration(item.getDateOfRegistration());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertNotNull(foundItem);
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemBDateOfRegistration() {
+        List<User> foundItems = userElasticsearchRepository.findByDateOfRegistration(getNonExistingDate());
         assertTrue(foundItems.isEmpty());
     }
 
