@@ -104,7 +104,7 @@ public class DeviceElasticsearchRepositoryTest {
 
     @Test
     void shouldNotFindItemByCreatedDate() {
-        List<Device> foundItems = deviceElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
+        List<Device> foundItems = deviceElasticsearchRepository.findByCreatedDate(getNonExistingDate());
         assertTrue(foundItems.isEmpty());
     }
 

@@ -138,7 +138,7 @@ public class AccountElasticsearchRepositoryTest {
 
     @Test
     void shouldNotFindItemByCreatedDate() {
-        List<Account> foundItems = accountElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
+        List<Account> foundItems = accountElasticsearchRepository.findByCreatedDate(getNonExistingDate());
         assertTrue(foundItems.isEmpty());
     }
 

@@ -98,7 +98,7 @@ public class ApplicationServiceTest {
 
     @Test
     public void shouldNotFindByCreatedDate() {
-        List<Application> found = applicationService.findByCreatedDate(getNonExistingCreatedDate());
+        List<Application> found = applicationService.findByCreatedDate(getNonExistingDate());
         assertTrue(found.isEmpty());
     }
 

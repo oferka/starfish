@@ -132,7 +132,7 @@ public class AccountServiceTest {
 
     @Test
     public void shouldNotFindByCreatedDate() {
-        List<Account> found = accountService.findByCreatedDate(getNonExistingCreatedDate());
+        List<Account> found = accountService.findByCreatedDate(getNonExistingDate());
         assertTrue(found.isEmpty());
     }
 

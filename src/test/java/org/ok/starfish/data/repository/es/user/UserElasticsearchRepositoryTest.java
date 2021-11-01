@@ -279,6 +279,74 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindItemByTimezoneOffset() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByTimezoneOffset(item.getTimezoneOffset());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getTimezoneOffset(), foundItem.getTimezoneOffset());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByTimezoneOffset() {
+        List<User> foundItems = userElasticsearchRepository.findByTimezoneOffset(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByTimezoneDescription() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByTimezoneDescription(item.getTimezoneDescription());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getTimezoneDescription(), foundItem.getTimezoneDescription());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByTimezoneDescription() {
+        List<User> foundItems = userElasticsearchRepository.findByTimezoneDescription(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByEmail() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByEmail(item.getEmail());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getEmail(), foundItem.getEmail());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByEmail() {
+        List<User> foundItems = userElasticsearchRepository.findByEmail(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByDateOfBirth() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByDateOfBirth(item.getDateOfBirth());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getDateOfBirth(), foundItem.getDateOfBirth());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemBDateOfBirth() {
+        List<User> foundItems = userElasticsearchRepository.findByDateOfBirth(getNonExistingDate());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
     void shouldFindItemByCreatedDate() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);
@@ -291,7 +359,7 @@ public class UserElasticsearchRepositoryTest {
 
     @Test
     void shouldNotFindItemByCreatedDate() {
-        List<User> foundItems = userElasticsearchRepository.findByCreatedDate(getNonExistingCreatedDate());
+        List<User> foundItems = userElasticsearchRepository.findByCreatedDate(getNonExistingDate());
         assertTrue(foundItems.isEmpty());
     }
 

@@ -98,7 +98,7 @@ public class DeviceServiceTest {
 
     @Test
     public void shouldNotFindByCreatedDate() {
-        List<Device> found = deviceService.findByCreatedDate(getNonExistingCreatedDate());
+        List<Device> found = deviceService.findByCreatedDate(getNonExistingDate());
         assertTrue(found.isEmpty());
     }
 

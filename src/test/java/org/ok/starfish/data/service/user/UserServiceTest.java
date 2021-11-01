@@ -166,7 +166,7 @@ public class UserServiceTest {
 
     @Test
     public void shouldNotFindByCreatedDate() {
-        List<User> found = userService.findByCreatedDate(getNonExistingCreatedDate());
+        List<User> found = userService.findByCreatedDate(getNonExistingDate());
         assertTrue(found.isEmpty());
     }
 
