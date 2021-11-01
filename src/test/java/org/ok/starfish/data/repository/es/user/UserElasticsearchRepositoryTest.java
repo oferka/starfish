@@ -160,6 +160,91 @@ public class UserElasticsearchRepositoryTest {
     }
 
     @Test
+    void shouldFindItemByStreetName() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByStreetName(item.getStreetName());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getStreetName(), foundItem.getStreetName());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByStreetName() {
+        List<User> foundItems = userElasticsearchRepository.findByStreetName(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByCity() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByCity(item.getCity());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getCity(), foundItem.getCity());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByCity() {
+        List<User> foundItems = userElasticsearchRepository.findByCity(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByState() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByState(item.getState());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getState(), foundItem.getState());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByState() {
+        List<User> foundItems = userElasticsearchRepository.findByState(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByCountry() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByCountry(item.getCountry());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getCountry(), foundItem.getCountry());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByCountry() {
+        List<User> foundItems = userElasticsearchRepository.findByCountry(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
+    void shouldFindItemByPostcode() {
+        User item = sampleUserProvider.getItem();
+        User saved = userElasticsearchRepository.save(item);
+        List<User> foundItems = userElasticsearchRepository.findByPostcode(item.getPostcode());
+        assertFalse(foundItems.isEmpty());
+        User foundItem = foundItems.get(0);
+        assertEquals(item.getPostcode(), foundItem.getPostcode());
+        userElasticsearchRepository.delete(saved);
+    }
+
+    @Test
+    void shouldNotFindItemByPostcode() {
+        List<User> foundItems = userElasticsearchRepository.findByPostcode(getNonExistingName());
+        assertTrue(foundItems.isEmpty());
+    }
+
+    @Test
     void shouldFindItemByCreatedDate() {
         User item = sampleUserProvider.getItem();
         User saved = userElasticsearchRepository.save(item);

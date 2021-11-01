@@ -158,7 +158,7 @@ public class User {
 
     @Getter
     @NotNull
-    @Size(min = 2, max = 64)
+    @Size(min = 2, max = 512)
     @NotBlank
     @Field(type = Keyword)
     private final String largePicture;
@@ -179,7 +179,7 @@ public class User {
 
     @Getter
     @NotNull
-    @Size(min = 2, max = 512)
+    @Size(min = 2, max = 64)
     @NotBlank
     @Field(type = Keyword)
     private final String nationality;
