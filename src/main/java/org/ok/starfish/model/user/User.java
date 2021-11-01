@@ -5,6 +5,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.URL;
 import org.ok.starfish.model.account.Account;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -160,6 +161,7 @@ public class User {
     @NotNull
     @Size(min = 2, max = 512)
     @NotBlank
+    @URL
     @Field(type = Keyword)
     private final String largePicture;
 
@@ -167,6 +169,7 @@ public class User {
     @NotNull
     @Size(min = 2, max = 512)
     @NotBlank
+    @URL
     @Field(type = Keyword)
     private final String mediumPicture;
 
@@ -174,6 +177,7 @@ public class User {
     @NotNull
     @Size(min = 2, max = 512)
     @NotBlank
+    @URL
     @Field(type = Keyword)
     private final String thumbnailPicture;
 
