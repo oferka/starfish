@@ -357,6 +357,108 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByPhone() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String phone = items.get(0).getPhone();
+        List<User> found = userService.findByPhone(phone);
+        assertFalse(found.isEmpty());
+        assertEquals(phone, found.get(0).getPhone());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByPhone() {
+        List<User> found = userService.findByPhone(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCell() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String cell = items.get(0).getCell();
+        List<User> found = userService.findByCell(cell);
+        assertFalse(found.isEmpty());
+        assertEquals(cell, found.get(0).getCell());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCell() {
+        List<User> found = userService.findByCell(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByLargePicture() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String largePicture = items.get(0).getLargePicture();
+        List<User> found = userService.findByLargePicture(largePicture);
+        assertFalse(found.isEmpty());
+        assertEquals(largePicture, found.get(0).getLargePicture());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByLargePicture() {
+        List<User> found = userService.findByLargePicture(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByMediumPicture() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String mediumPicture = items.get(0).getMediumPicture();
+        List<User> found = userService.findByMediumPicture(mediumPicture);
+        assertFalse(found.isEmpty());
+        assertEquals(mediumPicture, found.get(0).getMediumPicture());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByMediumPicture() {
+        List<User> found = userService.findByMediumPicture(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByThumbnailPicture() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String thumbnailPicture = items.get(0).getThumbnailPicture();
+        List<User> found = userService.findByThumbnailPicture(thumbnailPicture);
+        assertFalse(found.isEmpty());
+        assertEquals(thumbnailPicture, found.get(0).getThumbnailPicture());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByThumbnailPicture() {
+        List<User> found = userService.findByThumbnailPicture(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByNationality() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String nationality = items.get(0).getNationality();
+        List<User> found = userService.findByNationality(nationality);
+        assertFalse(found.isEmpty());
+        assertEquals(nationality, found.get(0).getNationality());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByNationality() {
+        List<User> found = userService.findByNationality(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
