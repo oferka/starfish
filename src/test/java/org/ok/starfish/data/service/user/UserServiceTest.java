@@ -172,6 +172,57 @@ public class UserServiceTest {
     }
 
     @Test
+    public void shouldFindByCity() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String city = items.get(0).getCity();
+        List<User> found = userService.findByCity(city);
+        assertFalse(found.isEmpty());
+        assertEquals(city, found.get(0).getCity());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCity() {
+        List<User> found = userService.findByCity(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByState() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String state = items.get(0).getState();
+        List<User> found = userService.findByState(state);
+        assertFalse(found.isEmpty());
+        assertEquals(state, found.get(0).getState());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByState() {
+        List<User> found = userService.findByState(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
+    public void shouldFindByCountry() {
+        List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
+        Iterable<User> saved = userElasticsearchRepository.saveAll(items);
+        String country = items.get(0).getCountry();
+        List<User> found = userService.findByCountry(country);
+        assertFalse(found.isEmpty());
+        assertEquals(country, found.get(0).getCountry());
+        userElasticsearchRepository.deleteAll(saved);
+    }
+
+    @Test
+    public void shouldNotFindByCountry() {
+        List<User> found = userService.findByCountry(getNonExistingName());
+        assertTrue(found.isEmpty());
+    }
+
+    @Test
     public void shouldFindByCreatedDate() {
         List<User> items = sampleUserProvider.getItems(numberOfItemsToLoad);
         Iterable<User> saved = userElasticsearchRepository.saveAll(items);
