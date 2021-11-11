@@ -51,6 +51,7 @@ public class ApplicationCSVContentProvider implements ApplicationContentProvider
         return new Application(
                 idProvider.getRandom(),
                 line.getName(),
+                line.getLogo(),
                 creationDateProvider.getNow(),
                 getApplicationCategories(line.getCategoryNames())
         );

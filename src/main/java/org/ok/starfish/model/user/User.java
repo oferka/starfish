@@ -159,24 +159,18 @@ public class User {
 
     @Getter
     @NotNull
-    @Size(min = 2, max = 512)
-    @NotBlank
     @URL
     @Field(type = Keyword)
     private final String largePicture;
 
     @Getter
     @NotNull
-    @Size(min = 2, max = 512)
-    @NotBlank
     @URL
     @Field(type = Keyword)
     private final String mediumPicture;
 
     @Getter
     @NotNull
-    @Size(min = 2, max = 512)
-    @NotBlank
     @URL
     @Field(type = Keyword)
     private final String thumbnailPicture;

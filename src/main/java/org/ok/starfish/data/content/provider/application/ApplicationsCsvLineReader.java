@@ -9,7 +9,8 @@ public class ApplicationsCsvLineReader {
 
     public @NotNull ApplicationLine read(@NotNull String[] line) {
         String name = line[0];
-        String categories = line[1];
-        return new ApplicationLine(name, categories);
+        String logo = line[1];
+        String categories = line[2];
+        return new ApplicationLine(name, logo, categories);
     }
 }

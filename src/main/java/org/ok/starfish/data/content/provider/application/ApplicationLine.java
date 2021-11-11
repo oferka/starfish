@@ -14,5 +14,8 @@ public class ApplicationLine {
     private String name;
 
     @Getter
+    private String logo;
+
+    @Getter
     private String categoryNames;
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.URL;
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -40,6 +41,14 @@ public class Application {
     @NotBlank
     @Field(type = Keyword)
     private final String name;
+
+    @Getter
+    @NotNull
+    @Size(min = 2, max = 512)
+    @NotBlank
+    @URL
+    @Field(type = Keyword)
+    private final String logo;
 
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @Getter

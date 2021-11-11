@@ -1,10 +1,10 @@
 package org.ok.starfish.data.content.provider.user.properties;
 
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public interface UserMediumPictureProvider {
 
-    @NotNull @Size(min = 2, max = 64) @NotBlank String get();
+    @NotNull @URL String get();
 }
