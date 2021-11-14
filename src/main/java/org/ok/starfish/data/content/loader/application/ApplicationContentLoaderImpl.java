@@ -27,7 +27,7 @@ public class ApplicationContentLoaderImpl implements ApplicationContentLoader {
 
     @Override
     public @NotNull Iterable<Application> ensureContentLoaded() {
-        List<Application> content = applicationContentProvider.get(22);
+        List<Application> content = applicationContentProvider.get(23);
         Iterable<Application> unloadedContent = applicationContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<Application> saved = applicationService.saveAll(unloadedContent);

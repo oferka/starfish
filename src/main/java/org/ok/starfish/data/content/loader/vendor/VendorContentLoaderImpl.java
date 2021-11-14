@@ -29,7 +29,7 @@ public class VendorContentLoaderImpl implements VendorContentLoader {
 
     @Override
     public @NotNull Iterable<Vendor> ensureContentLoaded() {
-        List<Vendor> content = vendorContentProvider.get(5);
+        List<Vendor> content = vendorContentProvider.get(22);
         Iterable<Vendor> unloadedContent = vendorContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<Vendor> saved = vendorService.saveAll(unloadedContent);
