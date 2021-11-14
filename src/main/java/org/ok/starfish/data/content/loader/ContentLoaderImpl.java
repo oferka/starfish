@@ -7,11 +7,13 @@ import org.ok.starfish.data.content.loader.application.ApplicationContentLoader;
 import org.ok.starfish.data.content.loader.applicaton_category.ApplicationCategoryContentLoader;
 import org.ok.starfish.data.content.loader.device.DeviceContentLoader;
 import org.ok.starfish.data.content.loader.user.UserContentLoader;
+import org.ok.starfish.data.content.loader.vendor.VendorContentLoader;
 import org.ok.starfish.model.account.Account;
 import org.ok.starfish.model.application.Application;
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.ok.starfish.model.device.Device;
 import org.ok.starfish.model.user.User;
+import org.ok.starfish.model.vendor.Vendor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,13 +21,20 @@ import org.springframework.stereotype.Service;
 public class ContentLoaderImpl implements ContentLoader {
 
     private final ApplicationCategoryContentLoader applicationCategoryContentLoader;
+    private final VendorContentLoader vendorContentLoader;
     private final ApplicationContentLoader applicationContentLoader;
     private final AccountContentLoader accountContentLoader;
     private final UserContentLoader userContentLoader;
     private final DeviceContentLoader deviceContentLoader;
 
-    public ContentLoaderImpl(ApplicationCategoryContentLoader applicationCategoryContentLoader, ApplicationContentLoader applicationContentLoader, AccountContentLoader accountContentLoader, UserContentLoader userContentLoader, DeviceContentLoader deviceContentLoader) {
+    public ContentLoaderImpl(ApplicationCategoryContentLoader applicationCategoryContentLoader,
+                             VendorContentLoader vendorContentLoader,
+                             ApplicationContentLoader applicationContentLoader,
+                             AccountContentLoader accountContentLoader,
+                             UserContentLoader userContentLoader,
+                             DeviceContentLoader deviceContentLoader) {
         this.applicationCategoryContentLoader = applicationCategoryContentLoader;
+        this.vendorContentLoader = vendorContentLoader;
         this.applicationContentLoader = applicationContentLoader;
         this.accountContentLoader = accountContentLoader;
         this.userContentLoader = userContentLoader;
@@ -35,10 +44,11 @@ public class ContentLoaderImpl implements ContentLoader {
     @Override
     public void ensureContentLoaded() {
         Iterable<ApplicationCategory> applicationCategories = applicationCategoryContentLoader.ensureContentLoaded();
+        Iterable<Vendor> vendors = vendorContentLoader.ensureContentLoaded();
         Iterable<Application> applications = applicationContentLoader.ensureContentLoaded();
         Iterable<Account> accounts = accountContentLoader.ensureContentLoaded();
         Iterable<User> users = userContentLoader.ensureContentLoaded();
         Iterable<Device> devices = deviceContentLoader.ensureContentLoaded();
-        log.info("{} content entities ensured loaded", IterableUtils.size(applicationCategories) + IterableUtils.size(applications) + IterableUtils.size(accounts) + IterableUtils.size(users) + IterableUtils.size(devices));
+        log.info("{} content entities ensured loaded", IterableUtils.size(applicationCategories) + IterableUtils.size(vendors) + IterableUtils.size(applications) + IterableUtils.size(accounts) + IterableUtils.size(users) + IterableUtils.size(devices));
     }
 }

@@ -3,7 +3,7 @@ package org.ok.starfish.data.content.loader.applicaton_category;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.IterableUtils;
 import org.ok.starfish.data.content.provider.applicaton_category.ApplicationCategoryContentProvider;
-import org.ok.starfish.data.content.verifier.application.ApplicationCategoryContentVerifier;
+import org.ok.starfish.data.content.verifier.application_category.ApplicationCategoryContentVerifier;
 import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 import org.springframework.stereotype.Service;

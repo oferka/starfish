@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.verifier.application;
+package org.ok.starfish.data.content.verifier.application_category;
 
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
 

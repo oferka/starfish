@@ -1,4 +1,4 @@
-package org.ok.starfish.data.content.verifier.application;
+package org.ok.starfish.data.content.verifier.application_category;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
