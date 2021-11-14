@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.URL;
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
+import org.ok.starfish.model.vendor.Vendor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -61,4 +62,9 @@ public class Application {
     @NotNull
     @Field(type = FieldType.Object)
     private List<ApplicationCategory> applicationCategories;
+
+    @Getter
+    @NotNull
+    @Field(type = FieldType.Object)
+    private Vendor vendor;
 }

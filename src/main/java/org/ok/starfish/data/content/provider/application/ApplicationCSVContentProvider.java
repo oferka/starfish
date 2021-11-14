@@ -4,8 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.ok.starfish.data.content.provider.CreationDateProvider;
 import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
+import org.ok.starfish.data.service.vendor.VendorService;
 import org.ok.starfish.model.application.Application;
 import org.ok.starfish.model.applicaton_category.ApplicationCategory;
+import org.ok.starfish.model.vendor.Vendor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +28,18 @@ public class ApplicationCSVContentProvider implements ApplicationContentProvider
 
     private final ApplicationCategoryService applicationCategoryService;
 
+    private final VendorService vendorService;
+
     public ApplicationCSVContentProvider(IdProvider idProvider,
                                          ApplicationsCsvReader csvReader,
                                          CreationDateProvider creationDateProvider,
-                                         ApplicationCategoryService applicationCategoryService) {
+                                         ApplicationCategoryService applicationCategoryService,
+                                         VendorService vendorService) {
         this.idProvider = idProvider;
         this.csvReader = csvReader;
         this.creationDateProvider = creationDateProvider;
         this.applicationCategoryService = applicationCategoryService;
+        this.vendorService = vendorService;
     }
 
     @Override
@@ -53,7 +59,8 @@ public class ApplicationCSVContentProvider implements ApplicationContentProvider
                 line.getName(),
                 line.getLogo(),
                 creationDateProvider.getNow(),
-                getApplicationCategories(line.getCategoryNames())
+                getApplicationCategories(line.getCategoryNames()),
+                getVendor(line.getVendor())
         );
     }
 
@@ -63,6 +70,15 @@ public class ApplicationCSVContentProvider implements ApplicationContentProvider
         for(String categoryName : categoryNames) {
             List<ApplicationCategory> applicationCategories = applicationCategoryService.findByName(categoryName);
             result.addAll(applicationCategories);
+        }
+        return result;
+    }
+
+    private Vendor getVendor(@NotNull String vendorName) {
+        Vendor result = null;
+        List<Vendor> vendors = vendorService.findByName(vendorName);
+        if(!vendors.isEmpty()) {
+            result = vendors.get(0);
         }
         return result;
     }

@@ -14,6 +14,9 @@ public class ApplicationLine {
     private String name;
 
     @Getter
+    private String vendor;
+
+    @Getter
     private String logo;
 
     @Getter

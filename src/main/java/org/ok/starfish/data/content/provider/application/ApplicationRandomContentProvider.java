@@ -7,13 +7,16 @@ import org.ok.starfish.data.content.provider.IdProvider;
 import org.ok.starfish.data.content.provider.application.properties.ApplicationLogoProvider;
 import org.ok.starfish.data.content.provider.application.properties.ApplicationNameProvider;
 import org.ok.starfish.data.service.applicaton_category.ApplicationCategoryService;
+import org.ok.starfish.data.service.vendor.VendorService;
 import org.ok.starfish.model.application.Application;
+import org.ok.starfish.model.vendor.Vendor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,6 +24,8 @@ import java.util.List;
 public class ApplicationRandomContentProvider implements ApplicationContentProvider {
 
     private final ApplicationCategoryService applicationCategoryService;
+
+    private final VendorService vendorService;
 
     private final IdProvider idProvider;
 
@@ -31,11 +36,13 @@ public class ApplicationRandomContentProvider implements ApplicationContentProvi
     private final CreationDateProvider creationDateProvider;
 
     public ApplicationRandomContentProvider(ApplicationCategoryService applicationCategoryService,
+                                            VendorService vendorService,
                                             IdProvider idProvider,
                                             ApplicationNameProvider applicationNameProvider,
                                             ApplicationLogoProvider applicationLogoProvider,
                                             CreationDateProvider creationDateProvider) {
         this.applicationCategoryService = applicationCategoryService;
+        this.vendorService = vendorService;
         this.idProvider = idProvider;
         this.applicationNameProvider = applicationNameProvider;
         this.applicationLogoProvider = applicationLogoProvider;
@@ -53,13 +60,18 @@ public class ApplicationRandomContentProvider implements ApplicationContentProvi
     }
 
     private @NotNull Application getApplication() {
-        int numberOfCategories = RandomUtils.nextInt(1, 6);
-        return new Application(
-                idProvider.getRandom(),
-                applicationNameProvider.get(),
-                applicationLogoProvider.get(),
-                creationDateProvider.getNow(),
-                applicationCategoryService.findRandom(numberOfCategories)
-        );
+        Optional<Vendor> vendor = vendorService.findRandom();
+        if(vendor.isPresent()) {
+            int numberOfCategories = RandomUtils.nextInt(1, 6);
+            return new Application(
+                    idProvider.getRandom(),
+                    applicationNameProvider.get(),
+                    applicationLogoProvider.get(),
+                    creationDateProvider.getNow(),
+                    applicationCategoryService.findRandom(numberOfCategories),
+                    vendor.get()
+            );
+        }
+        throw new RuntimeException("Failed to create application. Could not find a valid vendor");
     }
 }
