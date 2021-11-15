@@ -1,27 +1,30 @@
 Name,Vendor, Logo, Category Names
+Asana,Asana,https://s.financesonline.com/uploads/2019/08/asana_logo1.png,Collaboration@Project Management@Task Management@Agile Project Management@Enterprise Project Management
 BitBucket,Atlassian,https://s.financesonline.com/uploads/2016/03/bucket.png,ADM - Application Development Management@IT Management
 Bluefish.ai,Bluefish.ai,https://financesonline.com/uploads/2021/07/Bluefish.ai-logo-1.png,Customer Service
 Bridge24,Bridge24,https://s.financesonline.com/uploads/2020/05/br24logo.png,Project Management@Agile Project Management@Productivity@PPM - Project Portfolio Management
 Clarizen,Clarizen,https://s.financesonline.com/uploads/2019/08/Clarizen-logo1.png,Collaboration@Project Management@Resource Management@Enterprise Project Management@Enterprise Social Networking@Task Management@Time Management
 Confluence,Atlassian,https://s.financesonline.com/uploads/2019/08/Atlassian-Confluence-logo1.png,Collaboration@KMS - Knowledge Management System
 ContractWorks,ContractWorks,https://s.financesonline.com/uploads/2019/11/ContractWorks-logo1.png,Contact Management@Document Management
-Datadog,Datadog,https://s.financesonline.com/uploads/2019/08/Datadog_Logo1.png,Application Performance Monitoring@IT Management@Business Intelligence
+Datadog,Datadog,https://s.financesonline.com/uploads/2019/08/Datadog_Logo1.png,APM - Application Performance Monitoring@IT Management@BI - Business Intelligence
 Flock,Flock,https://s.financesonline.com/uploads/2019/09/flock-logo1.png,Collaboration@Communications@Instant Messaging@Productivity
 Freshdesk,Freshdesk,https://s.financesonline.com/uploads/2019/08/freshdesk-logo1.png,Messaging@Collaboration@Communications
-Freshsales,Freshworks,https://s.financesonline.com/uploads/2019/08/freshsales-logo1.png,CRM@Sales Management@Lead Management
+Freshsales,Freshworks,https://s.financesonline.com/uploads/2019/08/freshsales-logo1.png,CRM - Customer Relationship Management@Sales Management@Lead Management
 Freshservice,Freshworks,https://s.financesonline.com/uploads/2014/11/fse.png,Contact Management@Help Desk@IT Management@Customer Support@IT Asset Management@Customer Service@ITSM - IT Service Management
+GitHub,Microsoft,https://s.financesonline.com/uploads/2016/03/ghub.png,VCS - Version Control System@IT Management
+GitLab,GitLab,https://s.financesonline.com/uploads/2018/02/GitLab-logo-1.png,VCS - Version Control System@IT Management
 Heroku,Salesforce,https://s.financesonline.com/uploads/2019/08/heroku-logo1.png,ADM - Application Development Management@PaaS - Platform as a Service
 HubSpot Sales,HubSpot,https://s.financesonline.com/uploads/2017/02/hslogo.png,Sales Management@Contact Management@Lead Management@Sales Automation
 HubSpot Service Hub,HubSpot,https://s.financesonline.com/uploads/2019/08/hubspot1.png,Customer Support@Help Desk@Customer Service
 Juro Contract Automation,Juro,https://s.financesonline.com/uploads/2021/05/Juro-main-thumbnail.png,Contact Management@E-Signature
-Microsoft Dynamics,Microsoft,https://s.financesonline.com/uploads/2020/11/dynamics365-thumbnail.png,CRM@ERP
+Microsoft Dynamics,Microsoft,https://s.financesonline.com/uploads/2020/11/dynamics365-thumbnail.png,CRM - Customer Relationship Management@ERP - Enterprise resource planning
 monday.com,monday.com,https://s.financesonline.com/uploads/2018/01/monday-1.png,Collaboration@Project Management@Task Management
 ngDesk,ngDesk,https://s.financesonline.com/uploads/2019/12/ngDesk-logo1.png,Customer Service
 PandaDoc,PandaDoc,https://s.financesonline.com/uploads/2019/08/pd-1.png,Contact Management@Sales Management@Document Management@E-Signature
 Salesforce Service Cloud,Salesforce,https://s.financesonline.com/uploads/2019/07/Salesforce-Logo1.png,Customer Support@Help Desk@Customer Service
-Slack,Salesforce,https://s.financesonline.com/uploads/2019/08/slack-logo1.png,Collaboration@Communications@Enterprise Social Networking@Instant Messaging@Productivity@VoIP
+Slack,Salesforce,https://s.financesonline.com/uploads/2019/08/slack-logo1.png,Collaboration@Communications@Enterprise Social Networking@Instant Messaging@Productivity@VoIP - Voice over Internet Protocol
 Smartsheet,Smartsheet,https://s.financesonline.com/uploads/2019/08/Smartsheet-logo1.png,Collaboration@Project Management@Resource Management@Agile Project Management@Enterprise Project Management@Task Management
-Workplace by Facebook,Facebook,https://s.financesonline.com/uploads/2019/08/Workplace_Logo1.png,Collaboration@Communications@Enterprise Social Networking@Instant Messaging@Video Conferencing@VoIP
+Workplace by Facebook,Facebook,https://s.financesonline.com/uploads/2019/08/Workplace_Logo1.png,Collaboration@Communications@Enterprise Social Networking@Instant Messaging@Video Conferencing@VoIP - Voice over Internet Protocol
 Wrike,Wrike,https://s.financesonline.com/uploads/2020/06/vp12e25e1e187a145330a6ee3e33f0d366.png,Collaboration@Project Management@Agile Project Management@Task Management
 Yammer,Microsoft,https://s.financesonline.com/uploads/2019/08/Yammer_logo1.png,Collaboration@Enterprise Social Networking
 Zendesk,Zendesk,https://s.financesonline.com/uploads/2019/07/zendesk-logo1.png,Customer Service
