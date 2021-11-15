@@ -27,7 +27,7 @@ public class ApplicationCategoryContentLoaderImpl implements ApplicationCategory
 
     @Override
     public @NotNull Iterable<ApplicationCategory> ensureContentLoaded() {
-        List<ApplicationCategory> content = applicationCategoryContentProvider.get(115);
+        List<ApplicationCategory> content = applicationCategoryContentProvider.get(116);
         Iterable<ApplicationCategory> unloadedContent = applicationCategoryContentVerifier.findNotLoaded(content);
         if(!IterableUtils.isEmpty(unloadedContent)) {
             Iterable<ApplicationCategory> saved = applicationCategoryService.saveAll(unloadedContent);
