@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.ok.starfish.data.controller.applicaton_category.ApplicationCategoryController;
 import org.ok.starfish.data.service.device.DeviceService;
 import org.ok.starfish.model.device.Device;
 import org.springframework.http.HttpHeaders;
@@ -74,7 +73,7 @@ public class DeviceController {
     @PostMapping
     public @NotNull ResponseEntity<Device> save(@Parameter(description = "Device to be saved") @RequestBody @Valid @NotNull Device device) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        URI location = linkTo(ApplicationCategoryController.class).slash(device.getId()).toUri();
+        URI location = linkTo(DeviceController.class).slash(device.getId()).toUri();
         httpHeaders.setLocation(location);
         Device saved = deviceService.save(device);
         return new ResponseEntity<>(saved, httpHeaders, HttpStatus.CREATED);

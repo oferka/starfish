@@ -1,12 +1,14 @@
 package org.ok.starfish.data.service.account;
 
 import org.ok.starfish.model.account.Account;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface AccountService {
 
     @NotNull List<Account> findAll();

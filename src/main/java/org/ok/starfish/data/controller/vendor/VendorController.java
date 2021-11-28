@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.ok.starfish.data.controller.applicaton_category.ApplicationCategoryController;
 import org.ok.starfish.data.service.vendor.VendorService;
 import org.ok.starfish.model.vendor.Vendor;
 import org.springframework.http.HttpHeaders;
@@ -74,7 +73,7 @@ public class VendorController {
     @PostMapping
     public @NotNull ResponseEntity<Vendor> save(@Parameter(description = "Vendor to be saved") @RequestBody @Valid @NotNull Vendor vendor) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        URI location = linkTo(ApplicationCategoryController.class).slash(vendor.getId()).toUri();
+        URI location = linkTo(VendorController.class).slash(vendor.getId()).toUri();
         httpHeaders.setLocation(location);
         Vendor saved = vendorService.save(vendor);
         return new ResponseEntity<>(saved, httpHeaders, HttpStatus.CREATED);

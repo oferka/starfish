@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.ok.starfish.data.controller.applicaton_category.ApplicationCategoryController;
 import org.ok.starfish.data.service.account.AccountService;
 import org.ok.starfish.model.account.Account;
 import org.springframework.http.HttpHeaders;
@@ -74,7 +73,7 @@ public class AccountController {
     @PostMapping
     public @NotNull ResponseEntity<Account> save(@Parameter(description = "Account to be saved") @RequestBody @Valid @NotNull Account account) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        URI location = linkTo(ApplicationCategoryController.class).slash(account.getId()).toUri();
+        URI location = linkTo(AccountController.class).slash(account.getId()).toUri();
         httpHeaders.setLocation(location);
         Account saved = accountService.save(account);
         return new ResponseEntity<>(saved, httpHeaders, HttpStatus.CREATED);

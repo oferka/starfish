@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.ok.starfish.data.controller.applicaton_category.ApplicationCategoryController;
 import org.ok.starfish.data.service.user.UserService;
 import org.ok.starfish.model.user.User;
 import org.springframework.http.HttpHeaders;
@@ -74,7 +73,7 @@ public class UserController {
     @PostMapping
     public @NotNull ResponseEntity<User> save(@Parameter(description = "User to be saved") @RequestBody @Valid @NotNull User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        URI location = linkTo(ApplicationCategoryController.class).slash(user.getId()).toUri();
+        URI location = linkTo(UserController.class).slash(user.getId()).toUri();
         httpHeaders.setLocation(location);
         User saved = userService.save(user);
         return new ResponseEntity<>(saved, httpHeaders, HttpStatus.CREATED);
