@@ -53,6 +53,6 @@ logging:
     org.springframework.web: INFO
     org.springframework.data.convert.CustomConversions: ERROR
     org.springframework.data.elasticsearch.support.VersionInfo: ERROR
-    org.elasticsearch.client: INFO
+    org.elasticsearch.client: ERROR
     org.apache.http: INFO
     org.ok.milki: INFO
