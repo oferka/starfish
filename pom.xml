@@ -16,8 +16,8 @@
     <properties>
         <java.version>17</java.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
-        <springdoc-openapi-ui.version>1.5.13</springdoc-openapi-ui.version>
-        <springdoc-openapi-data-rest.version>1.5.13</springdoc-openapi-data-rest.version>
+        <springdoc-openapi-ui.version>1.6.1</springdoc-openapi-ui.version>
+        <springdoc-openapi-data-rest.version>1.6.1</springdoc-openapi-data-rest.version>
         <javafaker.version>1.0.2</javafaker.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <opencsv.version>5.5.2</opencsv.version>

@@ -56,3 +56,6 @@ logging:
     org.elasticsearch.client: ERROR
     org.apache.http: INFO
     org.ok.milki: INFO
+
+springdoc:
+  show-actuator: true
